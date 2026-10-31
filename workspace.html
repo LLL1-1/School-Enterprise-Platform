@@ -1,0 +1,682 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>工作台 · 真题工场</title>
+<meta name="description" content="学生、导师、企业与运营的项目工作台。">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body class="app-body">
+<script src="assets/js/icons.js"></script>
+
+<div class="app-shell">
+  <div class="sidebar-scrim" data-sidebar-close></div>
+  <aside class="app-sidebar" id="appSidebar"></aside>
+  <div class="app-main">
+    <header class="app-topbar" id="appTopbar"></header>
+    <main class="page-body">
+      <div class="page-head">
+        <div>
+          <h1 id="pageTitle">下午好，林知远</h1>
+          <div class="sub" id="pageSub">2026 年 10 月 23 日 · 星期五 · 第一期第 6 周</div>
+        </div>
+        <div class="page-head-actions">
+          <span class="page-date" style="margin-right:2px">演示视角</span>
+          <div class="segmented" id="roleSwitch" aria-label="切换演示角色">
+            <button class="seg-btn is-active" type="button" data-role-switch="student">学生</button>
+            <button class="seg-btn" type="button" data-role-switch="mentor">导师</button>
+            <button class="seg-btn" type="button" data-role-switch="enterprise">企业</button>
+            <button class="seg-btn" type="button" data-role-switch="admin">运营</button>
+          </div>
+          <span id="primaryAction"></span>
+        </div>
+      </div>
+
+      <!-- 概览 -->
+      <section data-view-panel="overview">
+        <!-- 学生 -->
+        <div class="role-view is-active" data-role-view="student">
+          <div class="kpi-grid">
+            <div class="kpi-card"><div class="kpi-top"><span class="kpi-label">进行中项目</span><span class="kpi-ic"><svg class="ic"><use href="#i-layers"></use></svg></span></div><div class="kpi-value">1<small>个 · B 线</small></div><div class="kpi-foot"><span>第 6 周 / 共 12 周</span></div></div>
+            <div class="kpi-card"><div class="kpi-top"><span class="kpi-label">里程碑完成</span><span class="kpi-ic"><svg class="ic"><use href="#i-target"></use></svg></span></div><div class="kpi-value">2<small>/ 5</small></div><div class="kpi-foot"><span class="warn">M2 中期 MVP 进行中</span></div></div>
+            <div class="kpi-card"><div class="kpi-top"><span class="kpi-label">本期已结算</span><span class="kpi-ic"><svg class="ic"><use href="#i-wallet"></use></svg></span></div><div class="kpi-value">¥3,200</div><div class="kpi-foot"><span class="up">累计 ¥8,650 · 免手续费</span></div></div>
+            <div class="kpi-card"><div class="kpi-top"><span class="kpi-label">学生信用分</span><span class="kpi-ic"><svg class="ic"><use href="#i-award"></use></svg></span></div><div class="kpi-value">96<small>优秀</small></div><div class="kpi-foot"><span class="up">超过 88% 的同学</span></div></div>
+          </div>
+
+          <div class="workspace-grid">
+            <div>
+              <div class="panel project-card" id="project">
+                <div class="project-top">
+                  <div>
+                    <div class="flex gap-8">
+                      <span class="line-badge line-B">B 线 · 个人毕设</span>
+                      <span class="status-pill green">进行中</span>
+                      <span class="tag">导师 周明远</span>
+                    </div>
+                    <h2>化工园区设备巡检台账系统</h2>
+                    <div class="project-org">渤海新区某化工科技有限公司 · 企业对接人 张海宁 · RT-2609-021</div>
+                  </div>
+                  <div class="project-people">
+                    <div class="avatar-stack">
+                      <span class="avatar">林</span><span class="avatar">陈</span><span class="avatar">赵</span><span class="avatar">孙</span>
+                    </div>
+                    <small>4 人协作</small>
+                  </div>
+                </div>
+                <div class="project-progress">
+                  <div class="progress-head"><span>整体进度</span><b>40%</b></div>
+                  <div class="progress-track"><i style="width:40%"></i></div>
+                </div>
+                <div class="mile-stepper">
+                  <div class="mile done"><span class="mile-dot">M0</span><span class="mile-label">立项开题</span><span class="mile-date">09.22</span></div>
+                  <div class="mile done"><span class="mile-dot">M1</span><span class="mile-label">需求评审</span><span class="mile-date">10.08</span></div>
+                  <div class="mile active"><span class="mile-dot">M2</span><span class="mile-label">中期 MVP</span><span class="mile-date">10.31</span></div>
+                  <div class="mile"><span class="mile-dot">M3</span><span class="mile-label">公测交付</span><span class="mile-date">11.21</span></div>
+                  <div class="mile"><span class="mile-dot">M4</span><span class="mile-label">答辩验收</span><span class="mile-date">12.12</span></div>
+                </div>
+                <div class="project-foot">
+                  <div class="note"><svg class="ic"><use href="#i-clock"></use></svg>M2 中期 MVP · 距截止 5 天 · 导师已评注 1 次</div>
+                  <div class="project-actions">
+                    <button class="btn btn-ghost btn-sm" type="button" data-view-jump="projects">项目档案</button>
+                    <button class="btn btn-primary btn-sm" type="button" data-modal-open="submitModal">提交 M2 交付物</button>
+                  </div>
+                </div>
+              </div>
+
+              <div class="panel" style="margin-top:14px">
+                <div class="panel-head">
+                  <div class="panel-title">待办清单 <span class="count">4</span></div>
+                  <button class="more" type="button" data-toast="演示环境：已展示全部待办">查看全部 <svg class="ic tiny"><use href="#i-arrow-right"></use></svg></button>
+                </div>
+                <div class="panel-body" style="padding-top:4px;padding-bottom:8px">
+                  <div class="todo-item" data-todo>
+                    <button class="todo-check" type="button" aria-label="完成待办"><svg class="ic"><use href="#i-check"></use></svg></button>
+                    <div class="todo-text">提交 M2 中期 MVP 演示视频（8 分钟）<div class="todo-meta"><span class="tag">里程碑</span><span>截止 10-31</span></div></div>
+                  </div>
+                  <div class="todo-item" data-todo>
+                    <button class="todo-check" type="button" aria-label="完成待办"><svg class="ic"><use href="#i-check"></use></svg></button>
+                    <div class="todo-text">补充离线补传的异常处理说明<div class="todo-meta"><span class="tag">交付物</span><span>截止 10-27</span></div></div>
+                  </div>
+                  <div class="todo-item" data-todo>
+                    <button class="todo-check" type="button" aria-label="完成待办"><svg class="ic"><use href="#i-check"></use></svg></button>
+                    <div class="todo-text">更新《AI 使用过程记录表》v1.2<div class="todo-meta"><span class="tag">过程材料</span><span>截止 10-28</span></div></div>
+                  </div>
+                  <div class="todo-item done" data-todo>
+                    <button class="todo-check" type="button" aria-label="完成待办"><svg class="ic"><use href="#i-check"></use></svg></button>
+                    <div class="todo-text">与张海宁确认平板型号与系统版本<div class="todo-meta"><span class="tag">对接</span><span>已完成</span></div></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div>
+              <div class="panel">
+                <div class="panel-head">
+                  <div class="panel-title">动态与过程留痕</div>
+                  <a class="more" href="#" data-toast="演示环境：项目档案包含完整 Git、文档与验收记录">项目档案 <svg class="ic tiny"><use href="#i-arrow-up-right"></use></svg></a>
+                </div>
+                <div class="panel-body">
+                  <div class="activity-item"><span class="activity-ic"><svg class="ic"><use href="#i-git"></use></svg></span><div><b>Git 提交 12 次</b><small>feat: 离线巡检队列与补传重试</small><small>今天 10:24</small></div></div>
+                  <div class="activity-item"><span class="activity-ic"><svg class="ic"><use href="#i-file"></use></svg></span><div><b>文档库更新 v1.3</b><small>《异常闭环流程图》· 陈一鸣</small><small>昨天 18:02</small></div></div>
+                  <div class="activity-item"><span class="activity-ic"><svg class="ic"><use href="#i-shield"></use></svg></span><div><b>导师评注通过</b><small>周明远：需求边界清楚，继续推进</small><small>昨天 16:40</small></div></div>
+                  <div class="activity-item"><span class="activity-ic"><svg class="ic"><use href="#i-wallet"></use></svg></span><div><b>M1 阶段款已结算</b><small>¥3,200 · 招商银行 •••• 4821</small><small>10-10 14:20</small></div></div>
+                </div>
+              </div>
+              <div class="mini-fund">
+                <div><small>可提现余额</small><b>¥2,400</b><small>待结算 ¥4,800</small></div>
+                <a class="btn btn-light" href="payment.html?tab=wallet">资金中心</a>
+              </div>
+              <div class="panel" style="margin-top:14px">
+                <div class="panel-head">
+                  <div class="panel-title">推荐真题</div>
+                  <a class="more" href="tasks.html">更多 <svg class="ic tiny"><use href="#i-arrow-right"></use></svg></a>
+                </div>
+                <div class="panel-body" style="padding-top:6px;padding-bottom:8px">
+                  <a class="similar-item" href="task.html?id=RT-2609-053"><div><b>汽车零部件供应商质量追溯看板</b><small>B 线 · ¥22,000 · 14 周</small></div><svg class="ic"><use href="#i-arrow-up-right"></use></svg></a>
+                  <a class="similar-item" href="task.html?id=RT-2609-036"><div><b>港口物流车辆排队叫号系统</b><small>B 线 · ¥20,000 · 12 周</small></div><svg class="ic"><use href="#i-arrow-up-right"></use></svg></a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 导师 -->
+        <div class="role-view" data-role-view="mentor">
+          <div class="kpi-grid">
+            <div class="kpi-card"><div class="kpi-top"><span class="kpi-label">指导学生</span><span class="kpi-ic"><svg class="ic"><use href="#i-users"></use></svg></span></div><div class="kpi-value">6<small>人</small></div><div class="kpi-foot"><span>2 个小组 / 4 名个人</span></div></div>
+            <div class="kpi-card"><div class="kpi-top"><span class="kpi-label">待评审</span><span class="kpi-ic"><svg class="ic"><use href="#i-shield"></use></svg></span></div><div class="kpi-value">3<small>项</small></div><div class="kpi-foot"><span class="warn">最近提交 2 小时前</span></div></div>
+            <div class="kpi-card"><div class="kpi-top"><span class="kpi-label">风险预警</span><span class="kpi-ic"><svg class="ic"><use href="#i-alert"></use></svg></span></div><div class="kpi-value">1<small>项</small></div><div class="kpi-foot"><span class="warn">沉默 5 天 · 需约谈</span></div></div>
+            <div class="kpi-card"><div class="kpi-top"><span class="kpi-label">本周评注</span><span class="kpi-ic"><svg class="ic"><use href="#i-message"></use></svg></span></div><div class="kpi-value">12<small>条</small></div><div class="kpi-foot"><span class="up">较上周 +4</span></div></div>
+          </div>
+
+          <div class="workspace-grid">
+            <div>
+              <div class="panel" id="review">
+                <div class="panel-head">
+                  <div class="panel-title">待评审任务 <span class="count">3</span></div>
+                  <a class="more" href="workspace.html#projects">全部评审 <svg class="ic tiny"><use href="#i-arrow-right"></use></svg></a>
+                </div>
+                <div class="review-list" style="padding:0 18px">
+                  <div class="review-row" data-review-row>
+                    <span class="avatar">张</span>
+                    <div class="review-main"><b>冬枣合作社产销对接小程序 · M2 中期 MVP</b><div class="review-meta"><span>张一鸣 · A 线 4 人组</span><span>提交于 2 小时前</span><span>4 个交付物</span></div></div>
+                    <div class="review-actions"><button class="btn btn-ghost" type="button" data-review="back">退回</button><button class="btn btn-primary" type="button" data-review="pass">通过</button></div>
+                  </div>
+                  <div class="review-row" data-review-row>
+                    <span class="avatar">王</span>
+                    <div class="review-main"><b>县域养老机构照护记录平台 · M1 需求评审</b><div class="review-meta"><span>王思远 · A 线 4 人组</span><span>提交于昨天 16:20</span><span>2 个交付物</span></div></div>
+                    <div class="review-actions"><button class="btn btn-ghost" type="button" data-review="back">退回</button><button class="btn btn-primary" type="button" data-review="pass">通过</button></div>
+                  </div>
+                  <div class="review-row" data-review-row>
+                    <span class="avatar">李</span>
+                    <div class="review-main"><b>校园实验室预约系统 · M3 公测交付</b><div class="review-meta"><span>李可 · A 线 5 人组</span><span>提交于昨天 11:08</span><span>6 个交付物</span></div></div>
+                    <div class="review-actions"><button class="btn btn-ghost" type="button" data-review="back">退回</button><button class="btn btn-primary" type="button" data-review="pass">通过</button></div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="panel" style="margin-top:14px">
+                <div class="panel-head"><div class="panel-title">学生进度</div><a class="more" href="#" data-toast="演示环境：已展示全部 6 名学生">全部 6 人 <svg class="ic tiny"><use href="#i-arrow-right"></use></svg></a></div>
+                <div class="table-wrap">
+                  <table class="data-table">
+                    <thead><tr><th>学生</th><th>项目</th><th>当前节点</th><th>进度</th><th>状态</th></tr></thead>
+                    <tbody>
+                      <tr><td class="strong">林知远</td><td>化工巡检台账</td><td>M2 中期 MVP</td><td><div class="progress-track" style="width:90px;margin:0"><i style="width:40%"></i></div></td><td><span class="status-pill green">正常</span></td></tr>
+                      <tr><td class="strong">张一鸣</td><td>冬枣产销小程序</td><td>M2 中期 MVP</td><td><div class="progress-track" style="width:90px;margin:0"><i style="width:38%"></i></div></td><td><span class="status-pill amber">待评审</span></td></tr>
+                      <tr><td class="strong">王思远</td><td>养老照护平台</td><td>M1 需求评审</td><td><div class="progress-track" style="width:90px;margin:0"><i style="width:20%"></i></div></td><td><span class="status-pill amber">待评审</span></td></tr>
+                      <tr><td class="strong">赵晓</td><td>盐碱地数据采集</td><td>M1 需求评审</td><td><div class="progress-track" style="width:90px;margin:0"><i style="width:16%"></i></div></td><td><span class="status-pill red">沉默 5 天</span></td></tr>
+                      <tr><td class="strong">李可</td><td>实验室预约系统</td><td>M3 公测交付</td><td><div class="progress-track" style="width:90px;margin:0"><i style="width:72%"></i></div></td><td><span class="status-pill green">正常</span></td></tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+
+            <div>
+              <div class="panel">
+                <div class="panel-head"><div class="panel-title">风险预警 <span class="count">1</span></div></div>
+                <div class="panel-body">
+                  <div class="notice-box" style="border-color:#eed0c8;background:#fbf0ec;color:#8f3322">
+                    <svg class="ic" style="color:var(--red)"><use href="#i-alert"></use></svg>
+                    <span><b>赵晓 · 盐碱地数据采集</b><br>已连续 5 天无 Git 提交与文档更新，M1 截止还剩 3 天。<br><a href="#" data-toast="已发送约谈提醒（演示）" style="color:var(--red);border-bottom:1px solid currentColor">发送约谈提醒 →</a></span>
+                  </div>
+                  <div class="notice-box" style="margin-top:10px">
+                    <svg class="ic"><use href="#i-clock"></use></svg>
+                    <span><b>M2 评审窗口</b><br>本周五 17:00 前需完成 3 项评注，逾期将自动提醒。</span>
+                  </div>
+                </div>
+              </div>
+              <div class="panel" style="margin-top:14px">
+                <div class="panel-head"><div class="panel-title">本周安排</div></div>
+                <div class="panel-body">
+                  <div class="activity-item"><span class="activity-ic"><svg class="ic"><use href="#i-calendar"></use></svg></span><div><b>周五 15:00 · M2 评审会</b><small>线上 · 冬枣小组 / 养老小组</small></div></div>
+                  <div class="activity-item"><span class="activity-ic"><svg class="ic"><use href="#i-calendar"></use></svg></span><div><b>周五 19:00 · 毕设答疑</b><small>计算机学院 302 · 4 名学生</small></div></div>
+                  <div class="activity-item"><span class="activity-ic"><svg class="ic"><use href="#i-calendar"></use></svg></span><div><b>周六 10:00 · 企业验收</b><small>化工园区 · 张海宁到场</small></div></div>
+                </div>
+              </div>
+              <div class="panel" style="margin-top:14px">
+                <div class="panel-head"><div class="panel-title">快捷入口</div></div>
+                <div class="panel-body"><div class="quick-actions"><a class="quick-action" href="admin.html#review"><svg class="ic"><use href="#i-shield"></use></svg>任务复核</a><a class="quick-action" href="payment.html"><svg class="ic"><use href="#i-wallet"></use></svg>项目资金</a><a class="quick-action" href="tasks.html"><svg class="ic"><use href="#i-grid"></use></svg>任务市场</a><a class="quick-action" href="#" data-toast="演示环境：评分量表将在 V0.3 上线"><svg class="ic"><use href="#i-file"></use></svg>评分量表</a></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 企业 -->
+        <div class="role-view" data-role-view="enterprise">
+          <div class="kpi-grid">
+            <div class="kpi-card"><div class="kpi-top"><span class="kpi-label">在架任务</span><span class="kpi-ic"><svg class="ic"><use href="#i-briefcase"></use></svg></span></div><div class="kpi-value">2<small>道</small></div><div class="kpi-foot"><span>1 道待初审</span></div></div>
+            <div class="kpi-card"><div class="kpi-top"><span class="kpi-label">待验收</span><span class="kpi-ic"><svg class="ic"><use href="#i-check-circle"></use></svg></span></div><div class="kpi-value">1<small>项</small></div><div class="kpi-foot"><span class="warn">M2 中期 MVP 已提交</span></div></div>
+            <div class="kpi-card"><div class="kpi-top"><span class="kpi-label">托管资金</span><span class="kpi-ic"><svg class="ic"><use href="#i-wallet"></use></svg></span></div><div class="kpi-value">¥16,000</div><div class="kpi-foot"><span>已结算 ¥3,200</span></div></div>
+            <div class="kpi-card"><div class="kpi-top"><span class="kpi-label">合作团队</span><span class="kpi-ic"><svg class="ic"><use href="#i-users"></use></svg></span></div><div class="kpi-value">3<small>个</small></div><div class="kpi-foot"><span class="up">验收平均 4.8 / 5</span></div></div>
+          </div>
+
+          <div class="workspace-grid">
+            <div>
+              <div class="panel">
+                <div class="panel-head"><div class="panel-title">我的发布</div><a class="more" href="publish.html">发布新任务 <svg class="ic tiny"><use href="#i-plus"></use></svg></a></div>
+                <div class="table-wrap">
+                  <table class="data-table">
+                    <thead><tr><th>任务</th><th>任务线</th><th>认领</th><th>当前进度</th><th>状态</th><th>操作</th></tr></thead>
+                    <tbody>
+                      <tr><td class="strong">化工园区设备巡检台账系统（二期）<span class="sub">RT-2609-021 · 12 周</span></td><td><span class="line-badge line-B">B 线</span></td><td>1 / 1</td><td>M2 中期 MVP · 40%</td><td><span class="status-pill green">进行中</span></td><td><a class="btn btn-ghost" href="task.html?id=RT-2609-021">查看</a></td></tr>
+                      <tr><td class="strong">设备润滑管理台账（新）<span class="sub">RT-2610-061 · 待初审</span></td><td><span class="line-badge line-A">A 线</span></td><td>—</td><td>—</td><td><span class="status-pill amber">审核中</span></td><td><a class="btn btn-ghost" href="admin.html#review">进度</a></td></tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+
+              <div class="panel" style="margin-top:14px">
+                <div class="panel-head"><div class="panel-title">待你验收 · M2 中期 MVP</div><span class="status-pill amber">待处理</span></div>
+                <div class="panel-body">
+                  <div class="flex between" style="align-items:flex-start;gap:20px;flex-wrap:wrap">
+                    <div>
+                      <div style="font-size:13px;font-weight:600">化工园区设备巡检台账系统</div>
+                      <div style="font-size:10px;color:var(--muted);margin-top:3px">林知远 · 提交于今天 09:40 · 含 4 个交付物</div>
+                      <div class="flex gap-8" style="margin-top:10px;flex-wrap:wrap">
+                        <span class="tag">部署地址</span><span class="tag">演示视频 8:12</span><span class="tag">源码仓库</span><span class="tag">测试报告</span>
+                      </div>
+                    </div>
+                    <div class="flex gap-8">
+                      <button class="btn btn-ghost btn-sm" type="button" data-toast="演示环境：交付物预览将在正式版接入" data-toast-type="info">查看交付物</button>
+                      <button class="btn btn-primary btn-sm" type="button" data-accept>确认验收</button>
+                    </div>
+                  </div>
+                  <div class="notice-box" style="margin-top:14px">
+                    <svg class="ic"><use href="#i-info"></use></svg>
+                    <span>验收通过后，系统将释放 M2 阶段款 <b>¥4,800</b> 至学生账户。若需整改，请在 5 个工作日内填写具体意见。</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="panel" style="margin-top:14px">
+                <div class="panel-head"><div class="panel-title">近期交付节点</div><a class="more" href="payment.html?tab=bills">资金流水 <svg class="ic tiny"><use href="#i-arrow-right"></use></svg></a></div>
+                <div class="table-wrap">
+                  <table class="data-table">
+                    <thead><tr><th>节点</th><th>金额</th><th>状态</th><th>日期</th></tr></thead>
+                    <tbody>
+                      <tr><td>M1 需求评审 · 20%</td><td class="num">¥3,200</td><td><span class="status-pill green">已结算</span></td><td>10-10</td></tr>
+                      <tr><td>M2 中期 MVP · 30%</td><td class="num">¥4,800</td><td><span class="status-pill amber">待验收</span></td><td>10-31</td></tr>
+                      <tr><td>M3 公测交付 · 30%</td><td class="num">¥4,800</td><td><span class="status-pill gray">未开始</span></td><td>11-21</td></tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+
+            <div>
+              <div class="mini-fund"><div><small>托管账户余额</small><b>¥16,000</b><small>待释放 ¥12,800</small></div><a class="btn btn-light" href="payment.html">资金中心</a></div>
+              <div class="panel" style="margin-top:14px">
+                <div class="panel-head"><div class="panel-title">推荐合作团队</div><a class="more" href="tasks.html">更多 <svg class="ic tiny"><use href="#i-arrow-right"></use></svg></a></div>
+                <div class="panel-body" style="padding-top:6px;padding-bottom:8px">
+                  <a class="similar-item" href="#" data-toast="演示环境：团队主页将在 V0.3 上线"><span class="avatar">冬</span><div><b>冬枣小分队</b><small>A 线 · 4 人 · 信用 95 · 已完成 1 次验收</small></div><svg class="ic"><use href="#i-arrow-up-right"></use></svg></a>
+                  <a class="similar-item" href="#" data-toast="演示环境：团队主页将在 V0.3 上线"><span class="avatar">码</span><div><b>码上助农</b><small>A 线 · 5 人 · 信用 92 · 擅长小程序</small></div><svg class="ic"><use href="#i-arrow-up-right"></use></svg></a>
+                  <a class="similar-item" href="#" data-toast="演示环境：团队主页将在 V0.3 上线"><span class="avatar">林</span><div><b>林知远（个人）</b><small>B 线 · 信用 96 · Vue / FastAPI</small></div><svg class="ic"><use href="#i-arrow-up-right"></use></svg></a>
+                </div>
+              </div>
+              <div class="panel" style="margin-top:14px">
+                <div class="panel-head"><div class="panel-title">企业信用</div></div>
+                <div class="panel-body">
+                  <div class="flex between"><span style="font-size:10px;color:var(--muted)">出题方信用分</span><b style="font-family:var(--serif);font-size:26px">92</b></div>
+                  <div class="progress-track"><i style="width:92%"></i></div>
+                  <p style="font-size:9.5px;color:var(--muted);line-height:1.8;margin-top:10px">对接响应 48 小时内 · 验收完成率 100% · 学生反向评价 4.8/5。信用分将影响任务曝光优先级。</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 运营 -->
+        <div class="role-view" data-role-view="admin">
+          <div class="kpi-grid">
+            <div class="kpi-card"><div class="kpi-top"><span class="kpi-label">待审核</span><span class="kpi-ic"><svg class="ic"><use href="#i-shield"></use></svg></span></div><div class="kpi-value">7<small>条</small></div><div class="kpi-foot"><span class="warn">2 条涉及敏感数据</span></div></div>
+            <div class="kpi-card"><div class="kpi-top"><span class="kpi-label">在架任务</span><span class="kpi-ic"><svg class="ic"><use href="#i-grid"></use></svg></span></div><div class="kpi-value">26<small>道</small></div><div class="kpi-foot"><span class="up">本期新增 8 道</span></div></div>
+            <div class="kpi-card"><div class="kpi-top"><span class="kpi-label">本期托管</span><span class="kpi-ic"><svg class="ic"><use href="#i-wallet"></use></svg></span></div><div class="kpi-value">¥186,400</div><div class="kpi-foot"><span>已结算 ¥92,600</span></div></div>
+            <div class="kpi-card"><div class="kpi-top"><span class="kpi-label">活跃学生</span><span class="kpi-ic"><svg class="ic"><use href="#i-users"></use></svg></span></div><div class="kpi-value">312<small>人</small></div><div class="kpi-foot"><span>覆盖 5 个学院</span></div></div>
+          </div>
+          <div class="workspace-grid">
+            <div class="panel">
+              <div class="panel-head"><div class="panel-title">待审核队列 <span class="count">7</span></div><a class="more" href="admin.html#review">进入后台 <svg class="ic tiny"><use href="#i-arrow-right"></use></svg></a></div>
+              <div class="review-list" style="padding:0 18px">
+                <div class="review-row"><div class="review-main"><b>校园快递驿站智能分拣预约</b><div class="review-meta"><span>后勤服务中心 · A 线</span><span>今天 10:24</span><span class="review-risk warn"><svg class="ic"><use href="#i-alert"></use></svg>附件未勾选脱敏承诺</span></div></div><a class="btn btn-ghost" href="admin.html#review">处理</a></div>
+                <div class="review-row"><div class="review-main"><b>献县金丝小枣深加工溯源</b><div class="review-meta"><span>献县某食品有限公司 · B 线</span><span>今天 09:42</span><span class="review-risk warn"><svg class="ic"><use href="#i-alert"></use></svg>验收标准偏笼统</span></div></div><a class="btn btn-ghost" href="admin.html#review">处理</a></div>
+                <div class="review-row"><div class="review-main"><b>养老院智能药盒提醒服务</b><div class="review-meta"><span>某智慧养老公司 · B 线</span><span>昨天 17:10</span><span class="review-risk danger"><svg class="ic"><use href="#i-alert"></use></svg>涉及健康数据</span></div></div><a class="btn btn-ghost" href="admin.html#review">处理</a></div>
+              </div>
+            </div>
+            <div>
+              <div class="panel">
+                <div class="panel-head"><div class="panel-title">运营待办</div></div>
+                <div class="panel-body">
+                  <div class="todo-item"><button class="todo-check" type="button"><svg class="ic"><use href="#i-check"></use></svg></button><div class="todo-text">完成 7 条任务初审<div class="todo-meta"><span class="tag">审核</span><span>今天 18:00 前</span></div></div></div>
+                  <div class="todo-item"><button class="todo-check" type="button"><svg class="ic"><use href="#i-check"></use></svg></button><div class="todo-text">核对 10 月托管流水与发票<div class="todo-meta"><span class="tag">财务</span><span>10-25</span></div></div></div>
+                  <div class="todo-item"><button class="todo-check" type="button"><svg class="ic"><use href="#i-check"></use></svg></button><div class="todo-text">发布 M2 中期路演通知<div class="todo-meta"><span class="tag">运营</span><span>10-27</span></div></div></div>
+                </div>
+              </div>
+              <div class="panel" style="margin-top:14px">
+                <div class="panel-head"><div class="panel-title">平台动态</div></div>
+                <div class="panel-body">
+                  <div class="activity-item"><span class="activity-ic"><svg class="ic"><use href="#i-user"></use></svg></span><div><b>新增企业注册 2 家</b><small>齐家务冬枣合作社、南皮五金协会</small><small>今天 11:20</small></div></div>
+                  <div class="activity-item"><span class="activity-ic"><svg class="ic"><use href="#i-wallet"></use></svg></span><div><b>M2 阶段款结算 4 笔</b><small>合计 ¥14,600 · 全部 T+1 到账</small><small>今天 09:05</small></div></div>
+                  <div class="activity-item"><span class="activity-ic"><svg class="ic"><use href="#i-flag"></use></svg></span><div><b>期中教学检查材料导出</b><small>课程达成度报表 · 已归档</small><small>昨天 17:40</small></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 项目列表 -->
+      <section data-view-panel="projects" hidden>
+        <div class="panel">
+          <div class="panel-head">
+            <div class="panel-title" id="projectsTitle">我的项目</div>
+            <div class="flex gap-8">
+              <button class="btn btn-ghost btn-sm" type="button" data-toast="演示环境：报表导出将在 V0.3 接入" data-toast-type="info"><svg class="ic"><use href="#i-download"></use></svg>导出</button>
+              <a class="btn btn-primary btn-sm" href="tasks.html">浏览任务</a>
+            </div>
+          </div>
+          <div class="table-wrap" id="projectsTable"></div>
+        </div>
+      </section>
+
+      <!-- 消息中心 -->
+      <section data-view-panel="messages" hidden>
+        <div class="msg-layout">
+          <div class="msg-list" id="msgList"></div>
+          <div class="msg-thread">
+            <div class="msg-thread-head" id="msgThreadHead"></div>
+            <div class="msg-chat" id="msgChat"></div>
+            <form class="chat-input" id="chatForm">
+              <input type="text" id="chatInput" placeholder="输入消息，Enter 发送（演示环境）" aria-label="输入消息">
+              <button class="btn btn-primary btn-sm" type="submit">发送</button>
+            </form>
+          </div>
+        </div>
+      </section>
+
+      <!-- 设置 -->
+      <section data-view-panel="settings" hidden>
+        <div class="settings-grid">
+          <div class="panel settings-card">
+            <h3><svg class="ic"><use href="#i-user"></use></svg>个人资料</h3>
+            <div class="profile-head">
+              <span class="avatar" id="settingsAvatar">林</span>
+              <div><b id="settingsName">林知远</b><small id="settingsRole">学生 · 计算机学院</small><div style="margin-top:5px"><span class="tenant-badge"><svg class="ic"><use href="#i-shield"></use></svg>已实名认证</span></div></div>
+            </div>
+            <div class="form-row">
+              <div class="field"><label class="label">姓名</label><input class="input" id="setName" value="林知远"></div>
+              <div class="field"><label class="label">手机号</label><input class="input" value="138 0000 1234"></div>
+            </div>
+            <div class="field"><label class="label">学院 / 专业</label><input class="input" value="计算机学院 · 软件工程 2301"></div>
+            <div class="field"><label class="label">技能标签</label><input class="input" value="Vue 3 · FastAPI · PostgreSQL · 数据可视化"></div>
+            <button class="btn btn-primary btn-sm" type="button" data-toast="资料已保存（演示）" data-toast-type="success">保存修改</button>
+          </div>
+          <div>
+            <div class="panel settings-card">
+              <h3><svg class="ic"><use href="#i-bell"></use></svg>通知偏好</h3>
+              <label class="check" style="margin-bottom:12px"><input type="checkbox" checked> 里程碑截止前 72 小时提醒</label>
+              <label class="check" style="margin-bottom:12px"><input type="checkbox" checked> 审核结果与导师评注</label>
+              <label class="check" style="margin-bottom:12px"><input type="checkbox" checked> 资金结算与发票状态</label>
+              <label class="check"><input type="checkbox"> 每周一发送项目周报摘要</label>
+              <button class="btn btn-ghost btn-sm" type="button" style="margin-top:14px" data-toast="通知偏好已更新（演示）">更新偏好</button>
+            </div>
+            <div class="panel settings-card" style="margin-top:14px">
+              <h3><svg class="ic"><use href="#i-lock"></use></svg>账号与安全</h3>
+              <div class="flex between" style="padding:8px 0;border-bottom:1px solid var(--line)"><span style="font-size:10.5px">登录密码</span><button class="btn-link" type="button" data-toast="演示环境：密码修改需接入统一身份认证" data-toast-type="info">修改</button></div>
+              <div class="flex between" style="padding:8px 0;border-bottom:1px solid var(--line)"><span style="font-size:10.5px">统一身份认证</span><span class="status-pill green">已绑定</span></div>
+              <div class="flex between" style="padding:8px 0"><span style="font-size:10.5px">当前会话</span><span style="font-size:9.5px;color:var(--muted)">2026-10-23 · 本机</span></div>
+              <button class="btn btn-ghost btn-sm" type="button" data-logout style="margin-top:8px">退出登录</button>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+</div>
+
+<!-- 提交交付物 -->
+<div class="modal" id="submitModal" aria-hidden="true">
+  <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="submitTitle">
+    <div class="modal-head">
+      <div><h2 id="submitTitle">提交 M2 中期 MVP</h2><p>化工园区设备巡检台账系统 · 截止 10-31 23:59</p></div>
+      <button class="modal-close" type="button" data-modal-close aria-label="关闭"><svg class="ic"><use href="#i-close"></use></svg></button>
+    </div>
+    <div class="modal-body">
+      <div class="field"><label class="label">部署地址</label><input class="input" placeholder="https://demo.example.edu/inspection"></div>
+      <div class="field"><label class="label">源码仓库</label><input class="input" placeholder="https://git.example.edu/lin/patrol-system"></div>
+      <div class="field"><label class="label">提交说明</label><textarea class="textarea" style="min-height:80px" placeholder="本次完成的核心流程、已知问题与下一步计划"></textarea></div>
+      <label class="upload-zone" for="m2file">
+        <svg class="ic"><use href="#i-upload"></use></svg>
+        <b>上传演示视频与测试报告</b>
+        <small>MP4 / PDF / ZIP，单个不超过 100MB</small>
+        <input type="file" id="m2file">
+      </label>
+      <div class="modal-note"><svg class="ic"><use href="#i-info"></use></svg>提交后导师将收到评注提醒；截止前可多次提交，以最后一次为准。</div>
+    </div>
+    <div class="modal-foot">
+      <button class="btn btn-ghost" type="button" data-modal-close>取消</button>
+      <button class="btn btn-primary" type="button" id="submitDeliverable">提交并通知导师</button>
+    </div>
+  </div>
+</div>
+
+<script src="assets/js/data.js"></script>
+<script src="assets/js/app.js"></script>
+<script>
+(function () {
+  var session = RTW.ensureSession('student');
+  var currentView = 'overview';
+  var viewMeta = {
+    overview: { title: '概览', sub: '2026 年 10 月 23 日 · 星期五 · 第一期第 6 周' },
+    projects: { title: '我的项目', sub: '全部在研项目、里程碑与过程材料' },
+    messages: { title: '消息中心', sub: '导师、企业与平台运营的沟通记录' },
+    settings: { title: '账户设置', sub: '个人资料、通知偏好与账号安全' }
+  };
+  var roleLabels = { student: '学生', mentor: '导师', enterprise: '企业', admin: '运营' };
+  var roleProjects = {
+    student: [
+      { name: '化工园区设备巡检台账系统', meta: 'RT-2609-021 · B 线 · 12 周', node: 'M2 中期 MVP', progress: 40, status: '进行中', cls: 'green' },
+      { name: '校园实验室预约与耗材管理', meta: 'RT-2609-026 · A 线 · 已结题', node: 'M4 答辩验收', progress: 100, status: '优秀', cls: 'green' },
+      { name: '县域养老机构照护记录平台', meta: 'RT-2609-007 · A 线 · 已结题', node: 'M4 答辩验收', progress: 100, status: '已验收', cls: 'gray' }
+    ],
+    mentor: [
+      { name: '林知远 · 化工园区设备巡检台账系统', meta: 'B 线 · 第 6 周', node: 'M2 中期 MVP', progress: 40, status: '正常', cls: 'green' },
+      { name: '张一鸣 · 冬枣合作社产销小程序', meta: 'A 线 4 人组 · 第 6 周', node: 'M2 中期 MVP', progress: 38, status: '待评审', cls: 'amber' },
+      { name: '赵晓 · 盐碱地数据采集与可视化', meta: 'A 线 5 人组 · 第 6 周', node: 'M1 需求评审', progress: 16, status: '风险', cls: 'red' }
+    ],
+    enterprise: [
+      { name: '化工园区设备巡检台账系统（二期）', meta: 'RT-2609-021 · B 线 · 12 周', node: 'M2 中期 MVP', progress: 40, status: '进行中', cls: 'green' },
+      { name: '设备润滑管理台账（新）', meta: 'RT-2610-061 · A 线 · 待初审', node: '—', progress: 0, status: '审核中', cls: 'amber' }
+    ],
+    admin: [
+      { name: '校园快递驿站智能分拣预约', meta: '后勤服务中心 · A 线 · 待初审', node: '—', progress: 0, status: '待审核', cls: 'amber' },
+      { name: '化工园区设备巡检台账系统（二期）', meta: '企业任务 · B 线 · 进行中', node: 'M2 中期 MVP', progress: 40, status: '进行中', cls: 'green' }
+    ]
+  };
+
+  function greeting() {
+    var h = new Date().getHours();
+    return h < 6 ? '夜深了' : (h < 12 ? '早上好' : (h < 18 ? '下午好' : '晚上好'));
+  }
+
+  function renderHead() {
+    session = RTW.getSession() || session;
+    var name = session.name;
+    if (currentView === 'overview') {
+      RTW.qs('#pageTitle').textContent = greeting() + '，' + name;
+      RTW.qs('#pageSub').textContent = viewMeta.overview.sub;
+    } else {
+      RTW.qs('#pageTitle').textContent = viewMeta[currentView].title;
+      RTW.qs('#pageSub').textContent = viewMeta[currentView].sub;
+    }
+    var actions = {
+      student: '<a class="btn btn-primary btn-sm" href="tasks.html">浏览任务 <svg class="ic"><use href="#i-arrow-right"></use></svg></a>',
+      mentor: '<a class="btn btn-primary btn-sm" href="review.html">审核工作台 <svg class="ic"><use href="#i-arrow-right"></use></svg></a>',
+      enterprise: '<a class="btn btn-primary btn-sm" href="publish.html">发布任务 <svg class="ic"><use href="#i-plus"></use></svg></a>',
+      admin: '<a class="btn btn-primary btn-sm" href="admin.html">运营后台 <svg class="ic"><use href="#i-arrow-up-right"></use></svg></a>'
+    };
+    RTW.qs('#primaryAction').innerHTML = actions[session.role] || actions.student;
+    RTW.qsa('[data-role-switch]').forEach(function (b) {
+      b.classList.toggle('is-active', b.getAttribute('data-role-switch') === session.role);
+    });
+    RTW.qsa('[data-role-view]').forEach(function (v) {
+      v.classList.toggle('is-active', v.getAttribute('data-role-view') === session.role);
+    });
+    RTW.qs('#settingsAvatar').textContent = session.avatar;
+    RTW.qs('#settingsName').textContent = session.name;
+    RTW.qs('#settingsRole').textContent = session.label + ' · ' + (session.role === 'enterprise' ? '企业账户' : '计算机学院');
+    RTW.qs('#setName').value = session.name;
+  }
+
+  function renderShell() {
+    RTW.renderAppSidebar(currentView);
+    RTW.renderAppTopbar({ root: '工作台', title: currentView === 'overview' ? '概览' : viewMeta[currentView].title });
+    renderHead();
+  }
+
+  function renderProjects() {
+    var rows = roleProjects[session.role] || roleProjects.student;
+    RTW.qs('#projectsTitle').textContent = session.role === 'mentor' ? '指导学生项目' : (session.role === 'enterprise' ? '我的发布' : (session.role === 'admin' ? '待处理任务' : '我的项目'));
+    RTW.qs('#projectsTable').innerHTML = '<table class="data-table"><thead><tr><th>项目</th><th>当前节点</th><th>进度</th><th>状态</th><th>操作</th></tr></thead><tbody>' +
+      rows.map(function (r) {
+        return '<tr><td class="strong">' + r.name + '<span class="sub">' + r.meta + '</span></td><td>' + r.node + '</td>' +
+          '<td><div class="progress-track" style="width:110px;margin:0"><i style="width:' + r.progress + '%"></i></div><span class="sub">' + r.progress + '%</span></td>' +
+          '<td><span class="status-pill ' + r.cls + '">' + r.status + '</span></td>' +
+          '<td><button class="btn btn-ghost" type="button" data-toast="演示环境：项目档案将在正式版展开">查看档案</button></td></tr>';
+      }).join('') + '</tbody></table>';
+  }
+
+  function renderMessages() {
+    var msgs = window.RTW_DATA.messages;
+    RTW.qs('#msgList').innerHTML = msgs.map(function (m, i) {
+      return '<div class="msg-item ' + (i === 0 ? 'is-active' : '') + '" data-msg-index="' + i + '">' +
+        '<span class="avatar">' + m.avatar + '</span><div style="flex:1;min-width:0"><b>' + m.from + '<small>' + m.time + '</small></b>' +
+        '<p>' + m.text + '</p></div>' + (m.unread ? '<span class="msg-unread">' + m.unread + '</span>' : '') + '</div>';
+    }).join('');
+    openThread(0);
+    RTW.qsa('[data-msg-index]').forEach(function (el) {
+      el.addEventListener('click', function () {
+        RTW.qsa('[data-msg-index]').forEach(function (x) { x.classList.remove('is-active'); });
+        el.classList.add('is-active');
+        openThread(Number(el.getAttribute('data-msg-index')));
+      });
+    });
+  }
+
+  function openThread(i) {
+    var m = window.RTW_DATA.messages[i];
+    if (!m) return;
+    RTW.qs('#msgThreadHead').innerHTML = '<span class="avatar">' + m.avatar + '</span><div><b>' + m.from + '</b><small>' + m.role + '</small></div><span class="status-pill green" style="margin-left:auto">在线</span>';
+    var replies = [
+      { self: false, text: m.text, time: m.time },
+      { self: true, text: '收到，我下午整理一版发到文档库，重点补离线补传的异常处理。', time: '刚刚' }
+    ];
+    RTW.qs('#msgChat').innerHTML = replies.map(function (r) {
+      return '<div class="chat-line ' + (r.self ? 'self' : '') + '"><span class="avatar">' + (r.self ? session.avatar : m.avatar) + '</span><div><div class="chat-bubble">' + r.text + '</div><div class="chat-meta">' + r.time + '</div></div></div>';
+    }).join('');
+  }
+
+  function showView(view, push) {
+    if (!viewMeta[view]) view = 'overview';
+    currentView = view;
+    RTW.qsa('[data-view-panel]').forEach(function (p) {
+      p.hidden = p.getAttribute('data-view-panel') !== view;
+    });
+    if (view === 'projects') renderProjects();
+    if (view === 'messages') renderMessages();
+    renderShell();
+    if (push !== false) history.replaceState(null, '', view === 'overview' ? 'workspace.html' : 'workspace.html#' + view);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    document.body.classList.remove('sidebar-open');
+  }
+
+  /* 侧栏导航拦截 */
+  document.addEventListener('click', function (e) {
+    var link = e.target.closest('.side-link');
+    if (link) {
+      var href = link.getAttribute('href') || '';
+      if (href.indexOf('workspace.html') === 0) {
+        e.preventDefault();
+        var hash = href.split('#')[1] || 'overview';
+        showView(hash);
+        return;
+      }
+    }
+    var jump = e.target.closest('[data-view-jump]');
+    if (jump) {
+      e.preventDefault();
+      showView(jump.getAttribute('data-view-jump'));
+    }
+  });
+
+  /* 角色切换 */
+  RTW.qsa('[data-role-switch]').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var role = btn.getAttribute('data-role-switch');
+      RTW.switchRole(role);
+      session = RTW.getSession();
+      RTW.toast('已切换到' + roleLabels[role] + '视角（演示）', 'info');
+      renderShell();
+      if (currentView === 'projects') renderProjects();
+      if (currentView === 'messages') renderMessages();
+    });
+  });
+
+  /* 待办 */
+  RTW.qsa('[data-todo]').forEach(function (item) {
+    var btn = item.querySelector('.todo-check');
+    btn.addEventListener('click', function () {
+      item.classList.toggle('done');
+      RTW.toast(item.classList.contains('done') ? '待办已完成' : '已恢复待办', 'info');
+    });
+  });
+
+  /* 导师评审 */
+  RTW.qsa('[data-review]').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var row = btn.closest('[data-review-row]');
+      var pass = btn.getAttribute('data-review') === 'pass';
+      row.style.opacity = '.45';
+      row.querySelectorAll('button').forEach(function (b) { b.disabled = true; });
+      RTW.toast(pass ? '已通过评审，学生将收到通知' : '已退回整改，请填写评注', pass ? 'success' : 'info');
+    });
+  });
+
+  /* 企业验收 */
+  var acceptBtn = document.querySelector('[data-accept]');
+  if (acceptBtn) {
+    acceptBtn.addEventListener('click', function () {
+      acceptBtn.disabled = true;
+      acceptBtn.textContent = '已验收 · 待结算';
+      RTW.toast('M2 验收已确认，¥4,800 将在 T+1 结算', 'success');
+    });
+  }
+
+  /* 提交交付物 */
+  var submitBtn = RTW.qs('#submitDeliverable');
+  if (submitBtn) {
+    submitBtn.addEventListener('click', function () {
+      RTW.closeModal('submitModal');
+      RTW.toast('M2 交付物已提交，导师将收到评注提醒', 'success');
+      var projectBtn = RTW.qs('.project-actions [data-modal-open="submitModal"]');
+      if (projectBtn) {
+        projectBtn.textContent = '已提交 · 等待评注';
+        projectBtn.disabled = true;
+      }
+    });
+  }
+
+  /* 消息发送 */
+  RTW.qs('#chatForm').addEventListener('submit', function (e) {
+    e.preventDefault();
+    var input = RTW.qs('#chatInput');
+    var text = input.value.trim();
+    if (!text) return;
+    var line = document.createElement('div');
+    line.className = 'chat-line self';
+    line.innerHTML = '<span class="avatar">' + session.avatar + '</span><div><div class="chat-bubble">' + RTW.esc(text) + '</div><div class="chat-meta">刚刚</div></div>';
+    RTW.qs('#msgChat').appendChild(line);
+    input.value = '';
+    RTW.qs('#msgChat').scrollTop = RTW.qs('#msgChat').scrollHeight;
+  });
+
+  /* 初始化 */
+  var initial = (location.hash || '').replace('#', '');
+  currentView = viewMeta[initial] ? initial : 'overview';
+  RTW.qsa('[data-view-panel]').forEach(function (p) {
+    p.hidden = p.getAttribute('data-view-panel') !== currentView;
+  });
+  if (currentView === 'projects') renderProjects();
+  if (currentView === 'messages') renderMessages();
+  renderShell();
+  RTW.initUI();
+  window.addEventListener('hashchange', function () {
+    var v = (location.hash || '').replace('#', '');
+    showView(viewMeta[v] ? v : 'overview', false);
+  });
+})();
+</script>
+</body>
+</html>

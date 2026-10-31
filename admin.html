@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>运营后台 · 真题工场</title>
+<meta name="description" content="真题工场运营后台：任务审核、用户管理、财务对账与内容运营。">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body class="admin-body">
+<script src="assets/js/icons.js"></script>
+
+<div class="admin-shell">
+  <div class="sidebar-scrim" data-sidebar-close></div>
+  <aside class="admin-sidebar" id="adminSidebar"></aside>
+  <div class="admin-main">
+    <header class="app-topbar" id="appTopbar"></header>
+    <main class="admin-content">
+      <div class="page-head">
+        <div>
+          <h1 id="adminTitle">数据看板</h1>
+          <div class="sub" id="adminSub">2026 秋季学期 · 第一期 · 数据更新于今天 14:30</div>
+        </div>
+        <div class="page-head-actions">
+          <span class="status-pill green">运营中</span>
+          <a class="btn btn-ghost btn-sm" href="index.html">
+            <svg class="ic"><use href="#i-external"></use></svg>返回前台
+          </a>
+        </div>
+      </div>
+
+      <!-- 看板 -->
+      <section class="admin-view is-active" data-admin-view="dashboard">
+        <div class="admin-kpi">
+          <div class="kpi-card"><div class="kpi-top"><span class="kpi-label">在架任务</span><span class="kpi-ic"><svg class="ic"><use href="#i-grid"></use></svg></span></div><div class="kpi-value">26<small>道</small></div><div class="kpi-foot"><span class="up">本期新增 8 道</span></div></div>
+          <div class="kpi-card"><div class="kpi-top"><span class="kpi-label">待审核</span><span class="kpi-ic"><svg class="ic"><use href="#i-shield"></use></svg></span></div><div class="kpi-value">7<small>条</small></div><div class="kpi-foot"><span class="warn">2 条高风险 · 需今日处理</span></div></div>
+          <div class="kpi-card"><div class="kpi-top"><span class="kpi-label">本期托管</span><span class="kpi-ic"><svg class="ic"><use href="#i-wallet"></use></svg></span></div><div class="kpi-value">¥186,400</div><div class="kpi-foot"><span>已结算 ¥92,600 · 待释放 ¥93,800</span></div></div>
+          <div class="kpi-card"><div class="kpi-top"><span class="kpi-label">活跃学生</span><span class="kpi-ic"><svg class="ic"><use href="#i-users"></use></svg></span></div><div class="kpi-value">312<small>人</small></div><div class="kpi-foot"><span class="up">覆盖 5 个学院 · 较上月 +18</span></div></div>
+        </div>
+
+        <div class="chart-grid">
+          <div class="panel chart-card">
+            <div class="chart-head">
+              <div><h3>任务发布与认领趋势</h3><p>近 8 周 · 单位：道</p></div>
+              <div class="legend"><span><i></i>发布</span><span><i class="amber"></i>认领</span></div>
+            </div>
+            <svg class="line-chart" id="trendChart" viewBox="0 0 640 190" role="img" aria-label="近八周任务发布与认领趋势"></svg>
+          </div>
+          <div class="panel chart-card">
+            <div class="chart-head"><div><h3>真题领域分布</h3><p>按在架任务统计</p></div><span class="badge-soft">26 道</span></div>
+            <div class="domain-bars" id="domainBars"></div>
+          </div>
+        </div>
+
+        <div class="chart-grid" style="grid-template-columns:1.45fr .75fr">
+          <div class="panel">
+            <div class="panel-head"><div class="panel-title">待审核队列 <span class="count">7</span></div><a class="more" href="admin.html#review" data-admin-jump="review">全部审核 <svg class="ic tiny"><use href="#i-arrow-right"></use></svg></a></div>
+            <div class="review-list" id="dashboardReview"></div>
+          </div>
+          <div class="panel">
+            <div class="panel-head"><div class="panel-title">运营动态</div></div>
+            <div class="panel-body">
+              <div class="activity-item"><span class="activity-ic"><svg class="ic"><use href="#i-user"></use></svg></span><div><b>新增企业注册 2 家</b><small>齐家务冬枣合作社 · 南皮五金协会</small><small>今天 11:20</small></div></div>
+              <div class="activity-item"><span class="activity-ic"><svg class="ic"><use href="#i-wallet"></use></svg></span><div><b>M2 阶段款结算 4 笔</b><small>合计 ¥14,600 · 全部 T+1 到账</small><small>今天 09:05</small></div></div>
+              <div class="activity-item"><span class="activity-ic"><svg class="ic"><use href="#i-flag"></use></svg></span><div><b>期中教学检查材料导出</b><small>课程达成度报表 · 已归档</small><small>昨天 17:40</small></div></div>
+              <div class="activity-item"><span class="activity-ic"><svg class="ic"><use href="#i-message"></use></svg></span><div><b>导师评注 38 条</b><small>本周累计 · 较上周 +12%</small><small>昨天 16:00</small></div></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 审核 -->
+      <section class="admin-view" data-admin-view="review" hidden>
+        <div class="panel">
+          <div class="panel-head">
+            <div class="panel-title">任务审核队列 <span class="count" id="queueCount">7</span></div>
+            <div class="flex gap-8">
+              <select class="select-sm" id="reviewFilter" style="height:32px;font-size:10px" aria-label="筛选审核队列">
+                <option value="all">全部</option>
+                <option value="warn">有风险提示</option>
+                <option value="danger">高风险</option>
+              </select>
+              <button class="btn btn-ghost btn-sm" type="button" data-toast="演示环境：审核记录导出将在正式版接入" data-toast-type="info"><svg class="ic"><use href="#i-download"></use></svg>导出</button>
+            </div>
+          </div>
+          <div class="review-list" id="reviewList"></div>
+        </div>
+        <div class="notice-box" style="margin-top:14px">
+          <svg class="ic"><use href="#i-info"></use></svg>
+          <span>初审检查清单：真实性、六要素完整性、验收标准可测试性、附件脱敏承诺、工作量与课程匹配度。任一驳回均需在 48 小时内反馈出题方。</span>
+        </div>
+      </section>
+
+      <!-- 用户 -->
+      <section class="admin-view" data-admin-view="users" hidden>
+        <div class="panel">
+          <div class="panel-head">
+            <div class="panel-title">用户与角色 <span class="count" id="userCount">8</span></div>
+            <div class="flex gap-8">
+              <select class="select-sm" id="userFilter" style="height:32px;font-size:10px" aria-label="筛选用户角色">
+                <option value="all">全部角色</option>
+                <option>学生</option>
+                <option>校内导师</option>
+                <option>企业用户</option>
+                <option>校外导师</option>
+                <option>平台运营</option>
+              </select>
+              <button class="btn btn-ghost btn-sm" type="button" data-toast="演示环境：邀请链接已复制" data-toast-type="success"><svg class="ic"><use href="#i-plus"></use></svg>邀请用户</button>
+            </div>
+          </div>
+          <div class="table-wrap" id="userTable"></div>
+        </div>
+        <div class="notice-box" style="margin-top:14px">
+          <svg class="ic"><use href="#i-lock"></use></svg>
+          <span>平台执行五角色 RBAC 权限隔离。企业账号须完成资质审核；学生与导师使用统一身份认证；所有越权访问写入审计日志。</span>
+        </div>
+      </section>
+
+      <!-- 财务 -->
+      <section class="admin-view" data-admin-view="finance" hidden>
+        <div class="admin-kpi">
+          <div class="kpi-card"><div class="kpi-top"><span class="kpi-label">本期托管</span><span class="kpi-ic"><svg class="ic"><use href="#i-wallet"></use></svg></span></div><div class="kpi-value">¥186,400</div><div class="kpi-foot"><span>共 24 笔订单</span></div></div>
+          <div class="kpi-card"><div class="kpi-top"><span class="kpi-label">已结算</span><span class="kpi-ic"><svg class="ic"><use href="#i-check-circle"></use></svg></span></div><div class="kpi-value">¥92,600</div><div class="kpi-foot"><span class="up">全部 T+1 到账</span></div></div>
+          <div class="kpi-card"><div class="kpi-top"><span class="kpi-label">待结算</span><span class="kpi-ic"><svg class="ic"><use href="#i-clock"></use></svg></span></div><div class="kpi-value">¥93,800</div><div class="kpi-foot"><span class="warn">M2—M4 节点待验收</span></div></div>
+          <div class="kpi-card"><div class="kpi-top"><span class="kpi-label">退款/仲裁</span><span class="kpi-ic"><svg class="ic"><use href="#i-refresh"></use></svg></span></div><div class="kpi-value">¥5,940</div><div class="kpi-foot"><span>1 笔争议已原路退回</span></div></div>
+        </div>
+        <div class="panel">
+          <div class="panel-head">
+            <div class="panel-title">托管订单与对账</div>
+            <div class="flex gap-8">
+              <span class="badge-soft">对账日：每月 25 日</span>
+              <button class="btn btn-ghost btn-sm" type="button" data-toast="演示环境：对账单已生成（模拟）" data-toast-type="success"><svg class="ic"><use href="#i-download"></use></svg>导出对账单</button>
+            </div>
+          </div>
+          <div class="table-wrap" id="financeTable"></div>
+        </div>
+        <div class="notice-box" style="margin-top:14px">
+          <svg class="ic"><use href="#i-shield"></use></svg>
+          <span>平台服务费在校地公益期为 0。资金由持牌支付机构分账托管，平台仅下发结算指令，不经手现金；争议订单进入仲裁流程。</span>
+        </div>
+      </section>
+
+      <!-- 内容 -->
+      <section class="admin-view" data-admin-view="content" hidden>
+        <div class="chart-grid" style="grid-template-columns:1.1fr .9fr">
+          <div class="panel">
+            <div class="panel-head"><div class="panel-title">公告与运营位</div><button class="btn btn-ghost btn-sm" type="button" data-toast="演示环境：新公告编辑器中" data-toast-type="info">新建公告</button></div>
+            <div class="panel-body">
+              <div class="announce-list" id="announceList">
+                <div class="announce-item"><span class="pin"><svg class="ic"><use href="#i-flag"></use></svg></span><div><b>2026 秋季第一期真题池开放认领</b><p>本期共上架 26 道真题，覆盖 8 个领域。请各组在 11 月 2 日前完成认领。</p></div><span class="date">10-20</span></div>
+                <div class="announce-item"><span class="pin"><svg class="ic"><use href="#i-message"></use></svg></span><div><b>M2 中期路演安排</b><p>11 月 8 日 13:30，双创中心路演厅；现场演示为硬门槛，不接受纯 PPT。</p></div><span class="date">10-18</span></div>
+                <div class="announce-item"><span class="pin"><svg class="ic"><use href="#i-shield"></use></svg></span><div><b>数据脱敏自查提醒</b><p>所有企业附件须完成脱敏并勾选承诺；涉及健康、身份信息的任务转为校内环境交付。</p></div><span class="date">10-15</span></div>
+              </div>
+            </div>
+          </div>
+          <div class="panel">
+            <div class="panel-head"><div class="panel-title">发布新公告</div></div>
+            <div class="panel-body">
+              <div class="field"><label class="label">标题</label><input class="input" id="noticeTitle" placeholder="例如：M3 公测交付材料清单"></div>
+              <div class="field"><label class="label">正文</label><textarea class="textarea" id="noticeBody" style="min-height:110px" placeholder="公告正文，建议不超过 200 字"></textarea></div>
+              <button class="btn btn-primary btn-block" type="button" id="publishNotice">发布公告</button>
+              <p class="field-hint" style="margin-top:8px">发布后将出现在学生与导师工作台的消息中心。</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 日志 -->
+      <section class="admin-view" data-admin-view="logs" hidden>
+        <div class="panel">
+          <div class="panel-head"><div class="panel-title">操作日志</div><span class="badge-soft">保留 180 天</span></div>
+          <div class="table-wrap" id="logTable"></div>
+        </div>
+        <div class="notice-box" style="margin-top:14px">
+          <svg class="ic"><use href="#i-lock"></use></svg>
+          <span>所有审核、资金、权限与数据导出操作均写入审计日志，支持按操作人、对象与时间检索。日志只读，不可修改。</span>
+        </div>
+      </section>
+    </main>
+  </div>
+</div>
+
+<!-- 驳回弹窗 -->
+<div class="modal" id="rejectModal" aria-hidden="true">
+  <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="rejectTitle">
+    <div class="modal-head">
+      <div><h2 id="rejectTitle">驳回任务</h2><p id="rejectSub">请填写具体原因，出题方将收到通知。</p></div>
+      <button class="modal-close" type="button" data-modal-close aria-label="关闭"><svg class="ic"><use href="#i-close"></use></svg></button>
+    </div>
+    <div class="modal-body">
+      <div class="field"><label class="label">驳回原因</label><textarea class="textarea" id="rejectReason" style="min-height:100px" placeholder="例如：验收标准不可量化，请补充试用人数与性能指标。"></textarea></div>
+      <div class="notice-box"><svg class="ic"><use href="#i-info"></use></svg><span>驳回后任务退回出题方，48 小时内可修改后重新提交。</span></div>
+    </div>
+    <div class="modal-foot">
+      <button class="btn btn-ghost" type="button" data-modal-close>取消</button>
+      <button class="btn btn-primary" type="button" id="rejectSubmit" style="background:var(--red)">确认驳回</button>
+    </div>
+  </div>
+</div>
+
+<script src="assets/js/data.js"></script>
+<script src="assets/js/app.js"></script>
+<script>
+(function () {
+  var adminSession = RTW.loginDemo('admin', true);
+  var currentView = 'dashboard';
+  var queue = (RTW.read('rtw.published', [])).concat(window.RTW_DATA.reviewQueue || []);
+  var users = (window.RTW_DATA.users || []).slice();
+  var currentRejectId = null;
+
+  var meta = {
+    dashboard: { title: '数据看板', sub: '2026 秋季学期 · 第一期 · 数据更新于今天 14:30' },
+    review: { title: '任务审核', sub: '初审真实性、合规与脱敏 · 48 小时内反馈' },
+    users: { title: '用户管理', sub: '五角色权限隔离 · 企业资质与实名认证' },
+    finance: { title: '财务对账', sub: '托管、结算、退款与月度对账' },
+    content: { title: '内容运营', sub: '公告、运营位与课程材料' },
+    logs: { title: '操作日志', sub: '审核、资金与权限操作全留痕' }
+  };
+
+  function renderShell() {
+    RTW.renderAdminSidebar(currentView);
+    RTW.renderAppTopbar({ root: '运营后台', title: meta[currentView].title });
+    RTW.qs('#adminTitle').textContent = meta[currentView].title;
+    RTW.qs('#adminSub').textContent = meta[currentView].sub;
+  }
+
+  RTW.qsa('[data-admin-jump]').forEach(function (a) {
+    a.addEventListener('click', function (e) { e.preventDefault(); showView(a.getAttribute('data-admin-jump')); });
+  });
+
+  document.addEventListener('click', function (e) {
+    var link = e.target.closest('.side-link');
+    if (link) {
+      var href = link.getAttribute('href') || '';
+      if (href.indexOf('admin.html') === 0) {
+        e.preventDefault();
+        showView(href.split('#')[1] || 'dashboard');
+      }
+    }
+  });
+
+  function showView(view) {
+    if (!meta[view]) view = 'dashboard';
+    currentView = view;
+    RTW.qsa('[data-admin-view]').forEach(function (v) {
+      var on = v.getAttribute('data-admin-view') === view;
+      v.classList.toggle('is-active', on);
+      v.hidden = !on;
+    });
+    renderShell();
+    if (view === 'dashboard') { drawCharts(); renderDashboardReview(); }
+    if (view === 'review') renderQueue();
+    if (view === 'users') renderUsers();
+    if (view === 'finance') renderFinance();
+    if (view === 'logs') renderLogs();
+    history.replaceState(null, '', view === 'dashboard' ? 'admin.html' : 'admin.html#' + view);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    document.body.classList.remove('sidebar-open');
+  }
+
+  /* 趋势图 */
+  function drawCharts() {
+    var published = [3, 5, 4, 8, 6, 9, 7, 11];
+    var claimed = [1, 3, 2, 6, 5, 7, 6, 9];
+    var isMobile = window.innerWidth <= 720;
+    var W = isMobile ? 360 : 640, H = isMobile ? 200 : 190;
+    var left = isMobile ? 22 : 28, right = isMobile ? 6 : 12, top = 12, bottom = 28;
+    var max = 12;
+    var stepX = (W - left - right) / (published.length - 1);
+    function pt(arr, i) {
+      return [left + i * stepX, top + (H - top - bottom) * (1 - arr[i] / max)];
+    }
+    var svg = '';
+    for (var g = 0; g <= 4; g += 1) {
+      var y = top + (H - top - bottom) * g / 4;
+      svg += '<line x1="' + left + '" y1="' + y + '" x2="' + (W - right) + '" y2="' + y + '" stroke="#e4dfd2" stroke-width="1"/>';
+      svg += '<text x="' + (left - 6) + '" y="' + (y + 3) + '" text-anchor="end" font-size="' + (isMobile ? 7 : 8) + '" fill="#8b958f">' + (max - g * 3) + '</text>';
+    }
+    ['W1', 'W2', 'W3', 'W4', 'W5', 'W6', 'W7', 'W8'].forEach(function (w, i) {
+      if (isMobile && i % 2 === 1) return;
+      svg += '<text x="' + (left + i * stepX) + '" y="' + (H - 8) + '" text-anchor="middle" font-size="' + (isMobile ? 7 : 8) + '" fill="#8b958f">' + w + '</text>';
+    });
+    function line(arr, color) {
+      return '<polyline fill="none" stroke="' + color + '" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" points="' +
+        arr.map(function (v, i) { var p = pt(arr, i); return p[0] + ',' + p[1]; }).join(' ') + '"/>';
+    }
+    svg += '<polygon fill="rgba(14,74,67,.07)" points="' + left + ',' + (H - bottom) + ' ' +
+      published.map(function (v, i) { var p = pt(published, i); return p[0] + ',' + p[1]; }).join(' ') + ' ' + (W - right) + ',' + (H - bottom) + '"/>';
+    svg += line(published, '#0e4a43');
+    svg += line(claimed, '#d98b2b');
+    published.forEach(function (v, i) { var p = pt(published, i); svg += '<circle cx="' + p[0] + '" cy="' + p[1] + '" r="2.4" fill="#0e4a43"/>'; });
+    claimed.forEach(function (v, i) { var p = pt(claimed, i); svg += '<circle cx="' + p[0] + '" cy="' + p[1] + '" r="2.4" fill="#d98b2b"/>'; });
+    var chart = RTW.qs('#trendChart');
+    chart.setAttribute('viewBox', '0 0 ' + W + ' ' + H);
+    chart.innerHTML = svg;
+
+    RTW.qs('#domainBars').innerHTML = (window.RTW_DATA.domainStats || []).map(function (d) {
+      return '<div class="domain-bar"><span>' + d.name + '</span><div class="track"><i style="width:' + d.pct + '%"></i></div><b>' + d.value + '</b></div>';
+    }).join('');
+  }
+
+  function riskHTML(item) {
+    var cls = item.riskLevel === 'danger' ? 'danger' : (item.riskLevel === 'warn' ? 'warn' : 'ok');
+    var ic = item.riskLevel === 'ok' ? 'check-circle' : 'alert';
+    return '<span class="review-risk ' + cls + '"><svg class="ic"><use href="#i-' + ic + '"></use></svg>' + (item.risk || '无风险') + '</span>';
+  }
+
+  function reviewRow(item) {
+    return '<div class="review-row" data-review-id="' + item.id + '">' +
+      '<div class="review-main"><b>' + item.title + '</b>' +
+      '<div class="review-meta"><span>' + item.org + '</span><span>' + (item.line === 'A' ? 'A 线' : 'B 线') + ' · ' + item.domain + '</span><span>' + item.submitted + '</span>' + riskHTML(item) + '</div></div>' +
+      '<div class="review-actions"><button class="btn btn-ghost" type="button" data-reject="' + item.id + '">驳回</button><button class="btn btn-primary" type="button" data-pass="' + item.id + '">通过初审</button></div>' +
+      '</div>';
+  }
+
+  function bindReviewActions() {
+    RTW.qsa('[data-pass]').forEach(function (b) {
+      b.addEventListener('click', function () {
+        var id = b.getAttribute('data-pass');
+        var row = document.querySelector('[data-review-id="' + id + '"]');
+        row.style.opacity = '.55';
+        row.querySelector('.review-actions').innerHTML = '<span class="status-pill green">已通过 · 待导师复核</span>';
+        var item = queue.filter(function (q) { return q.id === id; })[0];
+        if (item) item.status = 'passed';
+        updateQueueCount();
+        RTW.toast('初审通过，已指派导师复核', 'success');
+      });
+    });
+    RTW.qsa('[data-reject]').forEach(function (b) {
+      b.addEventListener('click', function () {
+        currentRejectId = b.getAttribute('data-reject');
+        RTW.qs('#rejectReason').value = '';
+        RTW.openModal('rejectModal');
+      });
+    });
+  }
+
+  function renderQueue() {
+    var filter = RTW.qs('#reviewFilter').value;
+    var list = queue.filter(function (q) {
+      if (q.status !== 'pending') return false;
+      if (filter === 'warn') return q.riskLevel === 'warn';
+      if (filter === 'danger') return q.riskLevel === 'danger';
+      return true;
+    });
+    RTW.qs('#reviewList').innerHTML = list.length ? list.map(reviewRow).join('') : '<div class="table-empty">当前没有待审核任务</div>';
+    RTW.qs('#queueCount').textContent = queue.filter(function (q) { return q.status === 'pending'; }).length;
+    bindReviewActions();
+  }
+
+  function updateQueueCount() {
+    var n = queue.filter(function (q) { return q.status === 'pending'; }).length;
+    RTW.qs('#queueCount').textContent = n;
+  }
+
+  RTW.qs('#reviewFilter').addEventListener('change', renderQueue);
+
+  RTW.qs('#rejectSubmit').addEventListener('click', function () {
+    var reason = RTW.qs('#rejectReason').value.trim();
+    if (!reason) { RTW.toast('请填写驳回原因', 'error'); return; }
+    var row = document.querySelector('[data-review-id="' + currentRejectId + '"]');
+    if (row) {
+      row.style.opacity = '.55';
+      row.querySelector('.review-actions').innerHTML = '<span class="status-pill red">已驳回 · 待修改</span>';
+    }
+    var item = queue.filter(function (q) { return q.id === currentRejectId; })[0];
+    if (item) { item.status = 'rejected'; item.reason = reason; }
+    RTW.closeModal('rejectModal');
+    updateQueueCount();
+    RTW.toast('已驳回，原因已通知出题方', 'info');
+  });
+
+  function renderDashboardReview() {
+    var pending = queue.filter(function (q) { return q.status === 'pending'; }).slice(0, 3);
+    RTW.qs('#dashboardReview').innerHTML = pending.length ? pending.map(function (q) {
+      return '<div class="review-row"><div class="review-main"><b>' + q.title + '</b><div class="review-meta"><span>' + q.org + '</span><span>' + (q.line === 'A' ? 'A 线' : 'B 线') + '</span><span>' + q.submitted + '</span>' + riskHTML(q) + '</div></div><button class="btn btn-ghost" type="button" data-admin-jump="review">处理</button></div>';
+    }).join('') : '<div class="table-empty">暂无待审核任务</div>';
+    RTW.qsa('#dashboardReview [data-admin-jump="review"]').forEach(function (b) {
+      b.addEventListener('click', function (e) { e.preventDefault(); showView('review'); });
+    });
+  }
+
+  /* 用户 */
+  function renderUsers() {
+    var filter = RTW.qs('#userFilter').value;
+    var list = users.filter(function (u) { return filter === 'all' || u.role === filter; });
+    RTW.qs('#userCount').textContent = list.length;
+    RTW.qs('#userTable').innerHTML = '<table class="data-table"><thead><tr><th>用户</th><th>角色</th><th>单位 / 学院</th><th>信用分</th><th>状态</th><th>加入时间</th><th>操作</th></tr></thead><tbody>' +
+      list.map(function (u) {
+        var cls = u.status === '正常' ? 'green' : (u.status === '限制认领' ? 'red' : 'amber');
+        return '<tr><td class="strong">' + u.name + '<span class="sub">' + u.role + '</span></td><td>' + u.role + '</td><td>' + u.org + '</td><td class="num">' + u.credit + '</td><td><span class="status-pill ' + cls + '">' + u.status + '</span></td><td class="num">' + u.joined + '</td>' +
+          '<td><div class="table-actions"><button class="btn btn-ghost" type="button" data-toast="演示环境：用户详情将在正式版展开" data-toast-type="info">查看</button><button class="btn btn-ghost" type="button" data-toast="演示环境：账号状态已更新（未持久化）" data-toast-type="success">' + (u.status === '正常' ? '禁用' : '恢复') + '</button></div></td></tr>';
+      }).join('') + '</tbody></table>';
+  }
+  RTW.qs('#userFilter').addEventListener('change', renderUsers);
+
+  /* 财务 */
+  function renderFinance() {
+    var orders = window.RTW_DATA.orders || [];
+    RTW.qs('#financeTable').innerHTML = '<table class="data-table"><thead><tr><th>订单号</th><th>任务</th><th>阶段</th><th>金额</th><th>状态</th><th>创建时间</th><th>操作</th></tr></thead><tbody>' +
+      orders.map(function (o) {
+        var cls = o.status === 'paid' ? 'green' : (o.status === 'refunded' ? 'red' : 'amber');
+        return '<tr><td class="num">' + o.id + '</td><td class="strong">' + o.task + '</td><td>' + o.stage + '</td><td class="num">' + RTW.money(o.amount) + '</td><td><span class="status-pill ' + cls + '">' + o.statusText + '</span></td><td class="num">' + o.created + '</td>' +
+          '<td><button class="btn btn-ghost" type="button" data-toast="演示环境：对账详情已展开" data-toast-type="info">对账</button></td></tr>';
+      }).join('') + '</tbody></table>';
+  }
+
+  /* 日志 */
+  function renderLogs() {
+    var rows = [
+      { time: '2026-10-23 14:12', op: '王璐', action: '通过初审', target: '化工安全培训题库', ip: '10.12.3.41' },
+      { time: '2026-10-23 11:20', op: '王璐', action: '审核企业资质', target: '齐家务冬枣合作社', ip: '10.12.3.41' },
+      { time: '2026-10-23 10:05', op: '系统', action: 'M2 阶段款结算', target: 'PAY-20261008-0076 · ¥3,200', ip: '—' },
+      { time: '2026-10-22 17:40', op: '周明远', action: '通过 M1 评审', target: '林知远 · 化工巡检台账', ip: '10.12.8.17' },
+      { time: '2026-10-22 16:08', op: '王璐', action: '驳回任务', target: '养老院智能药盒提醒（健康数据）', ip: '10.12.3.41' },
+      { time: '2026-10-22 09:30', op: '系统', action: '权限校验拦截', target: '学生账号访问运营后台', ip: '10.12.9.88' },
+      { time: '2026-10-21 18:22', op: '周明远', action: '提交导师评注', target: '冬枣小程序 · M2', ip: '10.12.8.17' },
+      { time: '2026-10-21 09:10', op: '王璐', action: '导出课程数据', target: '2026 秋季期中报表', ip: '10.12.3.41' }
+    ];
+    RTW.qs('#logTable').innerHTML = '<table class="data-table"><thead><tr><th>时间</th><th>操作人</th><th>动作</th><th>对象</th><th>IP</th></tr></thead><tbody>' +
+      rows.map(function (r) {
+        return '<tr><td class="num">' + r.time + '</td><td class="strong">' + r.op + '</td><td>' + r.action + '</td><td>' + r.target + '</td><td class="num">' + r.ip + '</td></tr>';
+      }).join('') + '</tbody></table>';
+  }
+
+  /* 公告 */
+  RTW.qs('#publishNotice').addEventListener('click', function () {
+    var title = RTW.qs('#noticeTitle').value.trim();
+    var body = RTW.qs('#noticeBody').value.trim();
+    if (!title || !body) { RTW.toast('请填写公告标题与正文', 'error'); return; }
+    var item = document.createElement('div');
+    item.className = 'announce-item';
+    item.innerHTML = '<span class="pin"><svg class="ic"><use href="#i-flag"></use></svg></span><div><b>' + RTW.esc(title) + '</b><p>' + RTW.esc(body) + '</p></div><span class="date">今天</span>';
+    RTW.qs('#announceList').prepend(item);
+    RTW.qs('#noticeTitle').value = '';
+    RTW.qs('#noticeBody').value = '';
+    RTW.toast('公告已发布（演示）', 'success');
+  });
+
+  /* 初始 */
+  var initial = (location.hash || '').replace('#', '');
+  currentView = meta[initial] ? initial : 'dashboard';
+  RTW.qsa('[data-admin-view]').forEach(function (v) {
+    var on = v.getAttribute('data-admin-view') === currentView;
+    v.classList.toggle('is-active', on);
+    v.hidden = !on;
+  });
+  renderShell();
+  RTW.initUI();
+  drawCharts();
+  // 视口变化（含移动端旋转）后重绘趋势图，避免固定 viewBox 在窄屏被压缩
+  var resizeTimer = null;
+  window.addEventListener('resize', function () {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(function () {
+      if (currentView === 'dashboard') drawCharts();
+    }, 160);
+  });
+  setTimeout(function () {
+    if (currentView === 'dashboard') drawCharts();
+  }, 260);
+  renderDashboardReview();
+  if (currentView === 'review') renderQueue();
+  if (currentView === 'users') renderUsers();
+  if (currentView === 'finance') renderFinance();
+  if (currentView === 'logs') renderLogs();
+  window.addEventListener('hashchange', function () {
+    var v = (location.hash || '').replace('#', '');
+    showView(meta[v] ? v : 'dashboard');
+  });
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>真题工场 · 校地协同任务实践平台</title>
+<meta name="description" content="真题工场把县域企业的真实数字化需求，变成大三软件工程实践与大四毕业设计的课程任务。企业出题、双导师护航、里程碑验收。">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+<script src="assets/js/icons.js"></script>
+<div id="siteHeader"></div>
+
+<main>
+  <!-- Hero -->
+  <section class="hero">
+    <div class="container hero-grid">
+      <div class="hero-copy">
+        <div class="hero-eyebrow"><span class="dot"></span>连接企业需求与校园实践</div>
+        <h1 class="hero-title">真题目，<br>真交付，<span class="hl">真成长。</span></h1>
+        <p class="hero-sub">真题工场连接企业真实需求、学生团队与专业指导，将真实问题转化为目标明确、过程可追踪、成果可验收的实践项目。</p>
+        <p class="hero-sub hero-sub-secondary">在这里，学生通过真实项目锻炼实践能力、积累作品成果；企业与校园需求方获得清晰的项目管理与交付流程；教师参与过程指导与质量把关，让每一次实践都更有价值。</p>
+        <p class="hero-support">真实需求 <i>·</i> 协同实践 <i>·</i> 质量交付</p>
+      </div>
+
+      <div class="hero-stage relation-stage" role="img" aria-label="学生、审核、企业三方双向协作关系图">
+        <svg class="relation-lines" viewBox="0 0 520 470" aria-hidden="true">
+          <defs>
+            <marker id="relArrow" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="5.5" markerHeight="5.5" orient="auto">
+              <path d="M0 0 10 5 0 10Z" fill="#6e8279"></path>
+            </marker>
+            <marker id="relArrowAmber" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="5.5" markerHeight="5.5" orient="auto">
+              <path d="M0 0 10 5 0 10Z" fill="#c58a35"></path>
+            </marker>
+          </defs>
+          <g fill="none" stroke="#9aaca3" stroke-width="1.3">
+            <path d="M128 98 C 200 72 320 72 422 98" marker-end="url(#relArrow)"></path>
+            <path d="M422 128 C 320 154 200 154 128 128" marker-end="url(#relArrow)"></path>
+            <path d="M112 150 C 128 240 184 314 244 332" marker-end="url(#relArrow)"></path>
+            <path d="M268 350 C 200 324 150 256 126 166" marker-end="url(#relArrow)"></path>
+            <path d="M408 150 C 392 240 336 314 276 332" marker-end="url(#relArrowAmber)"></path>
+            <path d="M252 350 C 320 324 370 256 394 166" marker-end="url(#relArrowAmber)"></path>
+          </g>
+        </svg>
+
+        <div class="rel-node rel-student">
+          <span class="rel-node-ic"><svg class="ic" aria-hidden="true"><use href="#i-users"></use></svg></span>
+          <b>学生</b>
+          <small>提交 · 实践</small>
+        </div>
+        <div class="rel-node rel-enterprise">
+          <span class="rel-node-ic"><svg class="ic" aria-hidden="true"><use href="#i-building"></use></svg></span>
+          <b>企业</b>
+          <small>需求 · 验收</small>
+        </div>
+        <div class="rel-node rel-review">
+          <span class="rel-node-ic"><svg class="ic" aria-hidden="true"><use href="#i-shield"></use></svg></span>
+          <b>审核</b>
+          <small>指导 · 把关</small>
+        </div>
+
+        <div class="rel-core">真实需求<br>协同实践<br>质量交付</div>
+
+        <div class="rel-label rel-label-top1"><span>企业 → 学生</span><p>发布需求 · 明确目标与交付要求</p></div>
+        <div class="rel-label rel-label-top2"><span>学生 → 企业</span><p>同步进度 · 反馈问题与提交成果</p></div>
+        <div class="rel-label rel-label-left1"><span>学生 → 审核</span><p>提交申请 · 成果与交付物</p></div>
+        <div class="rel-label rel-label-left2"><span>审核 → 学生</span><p>反馈结果 · 指导与整改要求</p></div>
+        <div class="rel-label rel-label-right1"><span>企业 → 审核</span><p>提供背景 · 要求与验收标准</p></div>
+        <div class="rel-label rel-label-right2"><span>审核 → 企业</span><p>反馈意见 · 验收与整改建议</p></div>
+      </div>
+    </div>
+
+    <div class="container hero-entries" aria-label="平台主要入口">
+      <a class="hero-entry hero-entry-primary" href="tasks.html" target="_blank" rel="noopener">
+        <span class="entry-ic"><svg class="ic" aria-hidden="true"><use href="#i-grid"></use></svg></span>
+        <span class="entry-label">浏览在架真题</span>
+        <svg class="ic entry-arrow" aria-hidden="true"><use href="#i-arrow-right"></use></svg>
+      </a>
+      <a class="hero-entry" href="tasks.html?mode=recruit" target="_blank" rel="noopener">
+        <span class="entry-ic"><svg class="ic" aria-hidden="true"><use href="#i-users"></use></svg></span>
+        <span class="entry-label">我要接项目</span>
+        <svg class="ic entry-arrow" aria-hidden="true"><use href="#i-arrow-right"></use></svg>
+      </a>
+      <a class="hero-entry" href="review.html" target="_blank" rel="noopener">
+        <span class="entry-ic"><svg class="ic" aria-hidden="true"><use href="#i-shield"></use></svg></span>
+        <span class="entry-label">我要做审核</span>
+        <svg class="ic entry-arrow" aria-hidden="true"><use href="#i-arrow-right"></use></svg>
+      </a>
+      <a class="hero-entry hero-entry-amber" href="publish.html" target="_blank" rel="noopener">
+        <span class="entry-ic"><svg class="ic" aria-hidden="true"><use href="#i-plus"></use></svg></span>
+        <span class="entry-label">我要发任务</span>
+        <svg class="ic entry-arrow" aria-hidden="true"><use href="#i-arrow-right"></use></svg>
+      </a>
+    </div>
+    <p class="hero-demo-note container">演示环境 · 审核与发布入口需要对应身份，任务与资金数据均为模拟。</p>
+  </section>
+
+  <!-- 移动端关系卡（桌面隐藏） -->
+  <div class="relation-mobile container">
+    <div class="rel-mobile-nodes">
+      <div class="rel-mobile-node"><svg class="ic" aria-hidden="true"><use href="#i-users"></use></svg><b>学生</b><small>提交 · 实践</small></div>
+      <div class="rel-mobile-node"><svg class="ic" aria-hidden="true"><use href="#i-shield"></use></svg><b>审核</b><small>指导 · 把关</small></div>
+      <div class="rel-mobile-node"><svg class="ic" aria-hidden="true"><use href="#i-building"></use></svg><b>企业</b><small>需求 · 验收</small></div>
+    </div>
+    <div class="rel-mobile-card">
+      <div class="rel-mobile-head"><span>企业 ↔ 学生</span><em>双向沟通</em></div>
+      <div class="rel-dir"><span>企业 → 学生</span><p>发布需求 · 明确目标与交付要求</p></div>
+      <div class="rel-dir rel-dir-reverse"><span>学生 → 企业</span><p>同步进度 · 反馈问题与提交成果</p></div>
+    </div>
+    <div class="rel-mobile-card">
+      <div class="rel-mobile-head"><span>学生 ↔ 审核</span><em>过程指导</em></div>
+      <div class="rel-dir"><span>学生 → 审核</span><p>提交申请 · 阶段成果与交付物</p></div>
+      <div class="rel-dir rel-dir-reverse"><span>审核 → 学生</span><p>反馈结果 · 指导意见与整改要求</p></div>
+    </div>
+    <div class="rel-mobile-card">
+      <div class="rel-mobile-head"><span>企业 ↔ 审核</span><em>需求与验收</em></div>
+      <div class="rel-dir"><span>企业 → 审核</span><p>提供背景 · 项目要求与验收标准</p></div>
+      <div class="rel-dir rel-dir-reverse"><span>审核 → 企业</span><p>反馈意见 · 验收结果与整改建议</p></div>
+    </div>
+    <div class="rel-mobile-core">真实需求 · 协同实践 · 质量交付</div>
+  </div>
+
+  <!-- Stats -->
+  <div class="stat-band">
+    <div class="container stat-row">
+      <div class="stat-cell"><b data-count="26">26</b><span>在架真题 · 本学期第一期</span></div>
+      <div class="stat-cell"><b data-count="15">15</b><span>签约企业 / 校内部门</span></div>
+      <div class="stat-cell"><b data-count="312">312</b><span>参与学生 · 覆盖 5 个学院</span></div>
+      <div class="stat-cell"><b data-count="94" data-suffix="%">94%</b><span>里程碑按期验收率</span></div>
+    </div>
+  </div>
+
+  <!-- Flow -->
+  <section class="section" id="flow">
+    <div class="container">
+      <div class="section-head">
+        <div>
+          <div class="section-tag"><span class="num">01</span> HOW IT WORKS</div>
+          <h2 class="section-title">从一句模糊的需求，<br>到一份可验收的交付。</h2>
+          <p class="section-sub">平台不是任务公告板。每道题都要经过需求加工、双级审核、三方立项和五个里程碑，企业、学生、导师在同一张任务书上工作。</p>
+        </div>
+        <a class="section-link" href="#path">了解课程如何衔接 <svg class="ic" aria-hidden="true"><use href="#i-arrow-right"></use></svg></a>
+      </div>
+      <div class="flow-grid">
+        <article class="flow-card reveal">
+          <div class="flow-num">STEP 01</div>
+          <div class="flow-ic"><svg class="ic" aria-hidden="true"><use href="#i-edit"></use></svg></div>
+          <h3>企业出题</h3>
+          <p>六要素发布向导 + AI 结构化助手，把口语化需求写成有边界、有验收标准的任务书草案。</p>
+        </article>
+        <article class="flow-card reveal">
+          <div class="flow-num">STEP 02</div>
+          <div class="flow-ic"><svg class="ic" aria-hidden="true"><use href="#i-shield"></use></svg></div>
+          <h3>双级审核</h3>
+          <p>运营初审真实性与数据合规，导师复核课程匹配度与工作量。缺一项验收标准就不上架。</p>
+        </article>
+        <article class="flow-card reveal">
+          <div class="flow-num">STEP 03</div>
+          <div class="flow-ic"><svg class="ic" aria-hidden="true"><use href="#i-users"></use></svg></div>
+          <h3>认领立项</h3>
+          <p>A 线组队、B 线个人，企业与导师在线确认。需求在 M1 后冻结，变更必须走变更单。</p>
+        </article>
+        <article class="flow-card reveal">
+          <div class="flow-num">STEP 04</div>
+          <div class="flow-ic"><svg class="ic" aria-hidden="true"><use href="#i-layers"></use></svg></div>
+          <h3>里程碑交付</h3>
+          <p>M0—M4 全程留痕：Git 提交、文档版本、AI 使用记录、验收单，自动沉淀为作品集。</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- Featured tasks -->
+  <section class="section section-paper">
+    <div class="container">
+      <div class="section-head">
+        <div>
+          <div class="section-tag"><span class="num">02</span> SELECTED TASKS</div>
+          <h2 class="section-title">精选真题，<br>每一道都来自真实业务现场。</h2>
+          <p class="section-sub">不是教学案例库里的“图书管理系统”。这些题目有真实的对接人、真实的数据约束和真实的使用者。</p>
+        </div>
+        <a class="section-link" href="tasks.html">查看全部 26 道 <svg class="ic" aria-hidden="true"><use href="#i-arrow-right"></use></svg></a>
+      </div>
+      <div class="featured-grid" id="featuredGrid"></div>
+    </div>
+  </section>
+
+  <!-- Two lines -->
+  <section class="section" id="path">
+    <div class="container">
+      <div class="section-head">
+        <div>
+          <div class="section-tag"><span class="num">03</span> TWO TRACKS</div>
+          <h2 class="section-title">一条练协作，一条练独立。<br>两年，一条作品主线。</h2>
+          <p class="section-sub">同一个平台，两种课程载体。A 线嵌入大三软件工程实践，B 线嵌入大四毕业设计，A 线验收后的项目可由 B 线继续深化。</p>
+        </div>
+        <a class="section-link" href="tasks.html?line=A">按任务线筛选 <svg class="ic" aria-hidden="true"><use href="#i-arrow-right"></use></svg></a>
+      </div>
+      <div class="lines-grid">
+        <article class="line-panel reveal">
+          <div class="line-head">
+            <span class="line-badge line-A">A 线 · 小组实践</span>
+            <span class="tag">大三 · 软件工程实践课</span>
+          </div>
+          <h3 class="line-title">四个人，跑完一遍<br>真实的软件工程。</h3>
+          <div class="line-sub">Team Practice / 8–12 Weeks</div>
+          <p class="line-desc">从需求调研、竞述立项到公测交付，角色轮换、每人主导一个模块。课程答辩 60% + 企业验收 40%。</p>
+          <ul class="line-list">
+            <li><svg class="ic" aria-hidden="true"><use href="#i-check"></use></svg> 4–6 人组队，认领一道 A 线任务</li>
+            <li><svg class="ic" aria-hidden="true"><use href="#i-check"></use></svg> 按 V2 规范出图：用例、架构、时序、ER</li>
+            <li><svg class="ic" aria-hidden="true"><use href="#i-check"></use></svg> 交付小组实践报告 + 可运行系统 + 演示视频</li>
+            <li><svg class="ic" aria-hidden="true"><use href="#i-check"></use></svg> 企业验收优秀者，可优先认领该企业 B 线任务</li>
+          </ul>
+          <div class="line-foot">
+            <div class="line-stat"><div><b>14</b><small>在架 A 线题</small></div><div><b>4.7</b><small>平均组队人数</small></div></div>
+            <a class="line-cta" href="tasks.html?line=A">认领小组任务 <svg class="ic" aria-hidden="true"><use href="#i-arrow-right"></use></svg></a>
+          </div>
+        </article>
+        <article class="line-panel dark reveal">
+          <div class="line-head">
+            <span class="line-badge line-B">B 线 · 个人毕设</span>
+            <span class="tag tag-amber">大四 · 毕业设计</span>
+          </div>
+          <h3 class="line-title">一个人，完成一次<br>从 0 到 1 的交付。</h3>
+          <div class="line-sub">Solo Thesis / 12–16 Weeks</div>
+          <p class="line-desc">以个人身份承接县域真题，完整走完需求、设计、实现、测试、部署与运营。产品发布会 + 技术答辩，论文与系统同源。</p>
+          <ul class="line-list">
+            <li><svg class="ic" aria-hidden="true"><use href="#i-check"></use></svg> 一人同期仅可认领 1 个 B 线席位，避免过度承诺</li>
+            <li><svg class="ic" aria-hidden="true"><use href="#i-check"></use></svg> 任务来源可三选一：平台真题 / A 线深化 / 自带选题</li>
+            <li><svg class="ic" aria-hidden="true"><use href="#i-check"></use></svg> 交付《全产业链解决方案文档》+ 可运行系统 + 答辩</li>
+            <li><svg class="ic" aria-hidden="true"><use href="#i-check"></use></svg> 优秀项目进入成果库，可转孵化或实习签约</li>
+          </ul>
+          <div class="line-foot">
+            <div class="line-stat"><div><b>12</b><small>在架 B 线题</small></div><div><b>50%</b><small>目标毕设占比</small></div></div>
+            <a class="line-cta" href="tasks.html?line=B">认领毕设真题 <svg class="ic" aria-hidden="true"><use href="#i-arrow-right"></use></svg></a>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- Proof -->
+  <section class="section section-paper" id="works">
+    <div class="container proof-grid">
+      <div>
+        <div class="section-tag"><span class="num">04</span> TRACEABLE PROCESS</div>
+        <h2 class="section-title">过程可检查，<br>成果可追溯。</h2>
+        <p class="section-sub">答辩前一周才开始补材料，是传统课程项目的通病。平台把过程证据变成日常动作，导师随时能看到真实进展。</p>
+        <div class="proof-list">
+          <div class="proof-item reveal"><span class="n">01</span><div><b>里程碑留痕</b><p>每个节点提交交付物与说明，导师在线评注“通过 / 退回整改”，超期 48 小时自动提醒。</p></div></div>
+          <div class="proof-item reveal"><span class="n">02</span><div><b>Git 提交归因</b><p>仓库绑定后按成员统计提交与合并记录，小组互评有据可依，减少“搭车”。</p></div></div>
+          <div class="proof-item reveal"><span class="n">03</span><div><b>AI 使用记录</b><p>平台内置记录表，哪些环节用了 AI、生成内容如何人工核对，全部进入过程材料。</p></div></div>
+          <div class="proof-item reveal"><span class="n">04</span><div><b>企业验收单</b><p>验收标准在立项时锁定，M4 由企业在线确认。评价与成绩脱钩，争议走运营仲裁。</p></div></div>
+        </div>
+      </div>
+      <div class="archive-card reveal">
+        <div class="archive-head">
+          <div>
+            <div class="archive-label">PROJECT ARCHIVE / 项目档案</div>
+            <h3 class="archive-title">区域化工园区<br>设备巡检台账系统</h3>
+            <div class="task-org" style="margin-top:6px"><svg class="ic" aria-hidden="true"><use href="#i-building"></use></svg> 渤海新区某化工科技有限公司 · B 线</div>
+          </div>
+          <span class="status-pill green">进行中</span>
+        </div>
+        <div class="archive-body">
+          <div class="archive-row"><svg class="ic" aria-hidden="true"><use href="#i-shield"></use></svg><div class="grow"><b>M1 需求评审</b><small>导师通过 · 需求已冻结</small></div><span class="val">10-08</span></div>
+          <div class="archive-row"><svg class="ic" aria-hidden="true"><use href="#i-git"></use></svg><div class="grow"><b>Git 提交</b><small>3 人归因 · 最近提交 10 分钟前</small></div><span class="val">128 次</span></div>
+          <div class="archive-row"><svg class="ic" aria-hidden="true"><use href="#i-file"></use></svg><div class="grow"><b>文档库</b><small>需求规格 v1.3 · 异常闭环流程图</small></div><span class="val">v1.3</span></div>
+          <div class="archive-row"><svg class="ic" aria-hidden="true"><use href="#i-spark"></use></svg><div class="grow"><b>AI 使用记录</b><small>已标注 4 个辅助环节</small></div><span class="val">4 份</span></div>
+        </div>
+        <div class="progress-track"><i style="width:40%"></i></div>
+        <div class="progress-meta"><span>整体进度 40%</span><span>下一节点 M2 · 10-31</span></div>
+        <div class="archive-foot">
+          <span>最近更新：今天 10:24</span>
+          <span class="receipt-stamp"><svg class="ic" aria-hidden="true"><use href="#i-check"></use></svg> 过程材料完整</span>
+        </div>
+        <div class="archive-stamp">可追溯</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Fund -->
+  <section class="fund-band" id="fund">
+    <div class="container fund-grid">
+      <div>
+        <div class="section-tag"><span class="num">05</span> ESCROW &amp; SETTLEMENT</div>
+        <h2 class="section-title">资金托管，<br>按里程碑结算。</h2>
+        <p class="section-sub">企业先托管赏金，平台按验收节点释放。学生不追着企业要钱，企业也不为“看不见的进度”预付全款。</p>
+        <div class="fund-flow">
+          <div class="fund-step"><span class="n">01</span><b>企业托管</b><small>立项时赏金进入监管账户</small></div>
+          <div class="fund-step"><span class="n">02</span><b>节点验收</b><small>导师与企业逐节点确认</small></div>
+          <div class="fund-step"><span class="n">03</span><b>自动结算</b><small>验收通过后 T+1 结算</small></div>
+          <div class="fund-step"><span class="n">04</span><b>开票与对账</b><small>在线开票，流水一键导出</small></div>
+        </div>
+        <div class="fund-note"><svg class="ic" aria-hidden="true"><use href="#i-shield"></use></svg> 校地公益期平台服务费为 0，学生提现免手续费。资金由持牌支付机构分账，平台不经手现金；验收争议可发起运营仲裁并原路退回。</div>
+      </div>
+      <div class="fund-receipt reveal">
+        <div class="receipt-brand">
+          <div class="flex gap-8"><span class="brand-mark" style="width:28px;height:28px;font-size:15px;border-radius:7px">真</span><b style="font-family:var(--serif);font-size:13px">资金托管回单</b></div>
+          <span>ESCROW-0081</span>
+        </div>
+        <div class="receipt-amount"><small>本期托管金额</small><b>¥16,000.00</b></div>
+        <div class="receipt-lines">
+          <div class="receipt-line"><span>项目</span><b>化工园区设备巡检台账系统</b></div>
+          <div class="receipt-line"><span>出题方</span><b>渤海新区某化工科技有限公司</b></div>
+          <div class="receipt-line"><span>阶段</span><b>M2 中期款 · 30%</b></div>
+          <div class="receipt-line"><span>平台服务费</span><b>¥0.00（公益期）</b></div>
+        </div>
+        <div class="flex between">
+          <span class="receipt-stamp"><svg class="ic" aria-hidden="true"><use href="#i-lock"></use></svg> 监管账户 · 已冻结</span>
+          <span class="mono" style="font-size:9px;color:var(--muted)">2026-10-23</span>
+        </div>
+        <div class="seal" style="position:absolute;right:20px;bottom:-48px;width:62px;height:62px;font-size:10px">资金<br>已托管</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Voices -->
+  <section class="section">
+    <div class="container">
+      <div class="section-head">
+        <div>
+          <div class="section-tag"><span class="num">06</span> VOICES FROM THE FIELD</div>
+          <h2 class="section-title">来自真实现场的声音。</h2>
+          <p class="section-sub">学生、导师、企业对接人，三种视角看同一件事：真实项目带来的改变。</p>
+        </div>
+      </div>
+      <div class="quote-grid">
+        <article class="quote-card reveal">
+          <div class="quote-mark">“</div>
+          <p class="quote-text">以前课程项目做完就丢了。现在每次提交都有 Git 记录、导师评注和企业验收单，面试时我直接打开项目档案讲二十分钟，比背简历有用。</p>
+          <div class="quote-person"><span class="avatar">林</span><div><b>林知远</b><small>软件工程 2301 · B 线进行中</small></div><span class="quote-tag">STUDENT</span></div>
+        </article>
+        <article class="quote-card reveal">
+          <div class="quote-mark">“</div>
+          <p class="quote-text">我们提的需求很“土”，平台帮我们把验收标准一条条写清楚。中期看到能跑的原型，比看十页 PPT 踏实，也知道钱花在哪。</p>
+          <div class="quote-person"><span class="avatar">张</span><div><b>张海宁</b><small>化工企业 · 信息化负责人</small></div><span class="quote-tag">ENTERPRISE</span></div>
+        </article>
+        <article class="quote-card reveal">
+          <div class="quote-mark">“</div>
+          <p class="quote-text">我最看重的不是学生用了什么框架，而是里程碑上有没有真实的过程。风险预警让我能在第三周就找到需要帮助的组，而不是答辩时才发现。</p>
+          <div class="quote-person"><span class="avatar">周</span><div><b>周明远</b><small>计算机学院 · 副教授</small></div><span class="quote-tag">MENTOR</span></div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- About + FAQ -->
+  <section class="section section-paper" id="about">
+    <div class="container">
+      <div class="proof-grid" style="align-items:start">
+        <div>
+          <div class="section-tag"><span class="num">07</span> ABOUT THE PLATFORM</div>
+          <h2 class="section-title">不是众包，<br>是课程载体。</h2>
+          <p class="section-sub" style="margin-bottom:22px">真题工场面向校地协同，把本地中小企业的碎片化数字化需求，加工成计算机类专业高年级的实践与毕设任务。所有任务必须落入课程学分体系，所有交付必须接受课程评价。</p>
+          <div class="proof-list" style="margin-top:0">
+            <div class="proof-item"><span class="n">A</span><div><b>真题入库</b><p>六要素缺一不上架；运营初审真实性、导师复核课程匹配度，双级留痕。</p></div></div>
+            <div class="proof-item"><span class="n">B</span><div><b>双导师制</b><p>校内导师管过程与学术规范，企业对接人管需求与验收，每周至少 1 小时。</p></div></div>
+            <div class="proof-item"><span class="n">C</span><div><b>成果资产化</b><p>验收后的源码、文档、演示视频进入成果库，可分享、可继承、可转孵化。</p></div></div>
+          </div>
+          <div class="flex gap-12 mt-24">
+            <a class="btn btn-primary" href="register.html">注册学生账号 <svg class="ic" aria-hidden="true"><use href="#i-arrow-right"></use></svg></a>
+            <a class="btn btn-ghost" href="publish.html">发布企业任务</a>
+          </div>
+        </div>
+        <div id="faq">
+          <div class="section-tag"><span class="num">08</span> FAQ</div>
+          <h2 class="section-title" style="font-size:32px">常见问题</h2>
+          <div style="margin-top:22px;border-top:1px solid var(--line)">
+            <details style="border-bottom:1px solid var(--line);padding:15px 0">
+              <summary style="cursor:pointer;font-size:13px;font-weight:600;list-style:none;display:flex;justify-content:space-between;gap:12px">和普通实习 / 兼职平台有什么区别？<span class="muted">+</span></summary>
+              <p style="margin-top:8px;font-size:11.5px;line-height:1.85;color:var(--muted)">它是课程载体而不是兼职市场。任务进入学分体系，有校内导师、课程节奏和统一评价量表；企业支付的是赏金与验收成本，不是“买廉价劳动力”。</p>
+            </details>
+            <details style="border-bottom:1px solid var(--line);padding:15px 0">
+              <summary style="cursor:pointer;font-size:13px;font-weight:600;list-style:none;display:flex;justify-content:space-between;gap:12px">认领任务会影响正常上课吗？<span class="muted">+</span></summary>
+              <p style="margin-top:8px;font-size:11.5px;line-height:1.85;color:var(--muted)">任务按课程节奏设置 M0—M4，预期每周投入 8—10 小时。一人同期只能认领 1 个 B 线任务或 1 个 A 线团队席位，平台会校验。</p>
+            </details>
+            <details style="border-bottom:1px solid var(--line);padding:15px 0">
+              <summary style="cursor:pointer;font-size:13px;font-weight:600;list-style:none;display:flex;justify-content:space-between;gap:12px">企业需要付多少钱？<span class="muted">+</span></summary>
+              <p style="margin-top:8px;font-size:11.5px;line-height:1.85;color:var(--muted)">赏金在立项时托管，按里程碑分期释放。校地公益期平台服务费为 0；学生侧结算与提现免手续费。具体金额以任务书为准。</p>
+            </details>
+            <details style="border-bottom:1px solid var(--line);padding:15px 0">
+              <summary style="cursor:pointer;font-size:13px;font-weight:600;list-style:none;display:flex;justify-content:space-between;gap:12px">企业数据安全怎么保障？<span class="muted">+</span></summary>
+              <p style="margin-top:8px;font-size:11.5px;line-height:1.85;color:var(--muted)">附件上传强制勾选脱敏承诺，签署数据安全协议；涉敏感数据的任务改为校内环境交付，平台只流转文档与结论。</p>
+            </details>
+            <details style="border-bottom:1px solid var(--line);padding:15px 0">
+              <summary style="cursor:pointer;font-size:13px;font-weight:600;list-style:none;display:flex;justify-content:space-between;gap:12px">现在注册就能接单吗？<span class="muted">+</span></summary>
+              <p style="margin-top:8px;font-size:11.5px;line-height:1.85;color:var(--muted)">当前是 V0.2 前端原型：注册、登录、认领、支付均可走通演示流程，但不会产生真实账号与交易。正式环境需接入统一身份认证与持牌支付。</p>
+            </details>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta-band">
+    <div class="container cta-inner">
+      <div>
+        <h2 class="cta-title">下一道真题，<br><span>等你认领。</span></h2>
+        <p class="cta-sub">无论你想找项目、出题目，还是带学生，这里都有一条清晰的路径。</p>
+      </div>
+      <div class="cta-actions">
+        <a class="btn btn-primary btn-lg" href="register.html">注册学生账号</a>
+        <a class="btn btn-ghost btn-lg" href="publish.html">发布企业任务 <svg class="ic" aria-hidden="true"><use href="#i-arrow-right"></use></svg></a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<div id="siteFooter"></div>
+<script src="assets/js/data.js"></script>
+<script src="assets/js/app.js"></script>
+<script>
+(function(){
+  RTW.initChrome('home');
+  var tasks = (window.RTW_DATA.tasks || []).filter(function(t){ return t.featured; }).slice(0,3);
+  var grid = RTW.qs('#featuredGrid');
+  grid.innerHTML = tasks.map(function(t){
+    return '<article class="task-card reveal">' +
+      '<div class="task-card-top"><div class="left"><span class="line-badge line-' + t.line + '">' + RTW.lineShort(t.line) + '</span>' +
+      (t.hot ? '<span class="task-flag">' + RTW.icon('trend') + '热门</span>' : '') + '</div>' +
+      '<button class="bm-btn" type="button" data-bookmark="' + t.id + '" aria-label="收藏任务" aria-pressed="false">' + RTW.icon('bookmark') + '</button></div>' +
+      '<h3><a href="task.html?id=' + t.id + '">' + t.title + '</a></h3>' +
+      '<div class="task-org">' + RTW.icon('building') + t.org + '</div>' +
+      '<p class="task-summary">' + t.summary + '</p>' +
+      '<div class="task-tags">' + t.tech.map(function(x){return '<span class="tag">' + x + '</span>';}).join('') + '</div>' +
+      '<div class="task-foot"><div class="task-price"><small>企业托管赏金</small><b>' + RTW.money(t.budget) + '</b></div>' +
+      '<div class="task-meta"><span>' + RTW.icon('clock') + t.cycle + '</span><span>' + RTW.icon('users') + t.teamSize + '</span></div>' +
+      '<a class="go" href="task.html?id=' + t.id + '" aria-label="查看任务">' + RTW.icon('arrow-right') + '</a></div>' +
+      '</article>';
+  }).join('');
+  RTW.applyLinkPolicy();
+  RTW.initUI();
+
+  // 刷新懒加载观察对象
+  if ('IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('is-in'); io.unobserve(e.target); } });
+    }, {threshold:0.08});
+    RTW.qsa('.reveal').forEach(function(el){ io.observe(el); });
+  }
+})();
+</script>
+</body>
+</html>
+

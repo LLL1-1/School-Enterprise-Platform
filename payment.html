@@ -1,0 +1,664 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>资金中心 · 真题工场</title>
+<meta name="description" content="企业赏金托管、里程碑结算、学生收款与发票管理。">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body class="app-body">
+<script src="assets/js/icons.js"></script>
+
+<div class="app-shell">
+  <div class="sidebar-scrim" data-sidebar-close></div>
+  <aside class="app-sidebar" id="appSidebar"></aside>
+  <div class="app-main">
+    <header class="app-topbar" id="appTopbar"></header>
+    <main class="page-body">
+      <div class="page-head">
+        <div>
+          <h1>资金中心</h1>
+          <div class="sub">托管、结算、发票与流水，一处管理<span id="sessionHint"></span></div>
+        </div>
+        <div class="page-head-actions">
+          <span class="status-pill green">资金托管 · 演示环境</span>
+          <button class="btn btn-ghost btn-sm" type="button" data-toast="演示环境：流水导出将在正式版接入财务系统" data-toast-type="info">
+            <svg class="ic"><use href="#i-download"></use></svg>导出流水
+          </button>
+        </div>
+      </div>
+
+      <div class="finance-tabs" role="tablist" aria-label="资金功能">
+        <button class="finance-tab is-active" type="button" role="tab" aria-selected="true" data-finance-tab="checkout">收银台</button>
+        <button class="finance-tab" type="button" role="tab" aria-selected="false" data-finance-tab="bills">账单流水</button>
+        <button class="finance-tab" type="button" role="tab" aria-selected="false" data-finance-tab="wallet">收款与结算</button>
+        <button class="finance-tab" type="button" role="tab" aria-selected="false" data-finance-tab="invoice">发票管理</button>
+      </div>
+
+      <!-- 收银台 -->
+      <section class="finance-view is-active" data-finance-view="checkout">
+        <div class="pay-layout">
+          <div class="pay-main">
+            <div class="order-card" id="orderCard">
+              <div class="order-head">
+                <div>
+                  <div class="no">订单号 <span id="orderNo">PAY-20261023-0081</span></div>
+                  <h2 id="orderStage">M2 中期款 · 30%</h2>
+                </div>
+                <div class="countdown">
+                  <svg class="ic" style="width:13px;height:13px"><use href="#i-clock"></use></svg>
+                  剩余支付时间 <b id="countdown">29:58</b>
+                </div>
+              </div>
+              <div class="order-body">
+                <div class="order-line"><span>任务名称</span><b id="orderTask">化工园区设备巡检台账系统</b></div>
+                <div class="order-line"><span>出题方</span><b id="orderPayer">渤海新区某化工科技有限公司</b></div>
+                <div class="order-line"><span>收款阶段</span><b id="orderStageText">M2 中期 MVP · 验收后释放</b></div>
+                <div class="order-line"><span>平台服务费</span><b>¥0.00（校地公益期）</b></div>
+              </div>
+              <div class="order-total">
+                <div><span>应付金额</span><br><b id="orderAmount">¥4,800.00</b></div>
+                <span class="tag tag-pine"><svg class="ic" style="width:11px;height:11px"><use href="#i-lock"></use></svg> 资金进入监管专户</span>
+              </div>
+
+              <div class="pay-methods">
+                <h3>选择支付方式</h3>
+                <div class="method-grid">
+                  <button class="method is-selected" type="button" data-method="wechat">
+                    <span class="method-logo wechat">微</span>
+                    <span><b>微信支付</b><small>扫码支付 · 推荐</small></span>
+                    <span class="radio"></span>
+                  </button>
+                  <button class="method" type="button" data-method="alipay">
+                    <span class="method-logo alipay">支</span>
+                    <span><b>支付宝</b><small>扫码支付</small></span>
+                    <span class="radio"></span>
+                  </button>
+                  <button class="method" type="button" data-method="bank">
+                    <span class="method-logo bank">银</span>
+                    <span><b>对公转账</b><small>企业网银 / 柜台</small></span>
+                    <span class="radio"></span>
+                  </button>
+                  <button class="method" type="button" data-method="campus">
+                    <span class="method-logo campus">校</span>
+                    <span><b>校园一卡通</b><small>校内部门专用</small></span>
+                    <span class="radio"></span>
+                  </button>
+                </div>
+                <div class="method-note is-on" id="methodNote"></div>
+
+                <label class="pay-agree">
+                  <input type="checkbox" id="payAgree" checked>
+                  我已阅读并同意《资金托管与结算规则》，理解赏金将按里程碑验收结果释放，退款原路返回。
+                </label>
+                <button class="btn btn-primary pay-submit" type="button" id="payBtn">
+                  确认支付 <span id="payButtonAmount">¥4,800.00</span>
+                  <svg class="ic"><use href="#i-arrow-right"></use></svg>
+                </button>
+                <p class="pay-security">
+                  <svg class="ic"><use href="#i-shield"></use></svg>
+                  由持牌支付机构提供分账与托管服务 · 平台不经手现金 · 本页为演示，不会真实扣款
+                </p>
+              </div>
+            </div>
+
+            <div class="pay-success" id="paySuccess">
+              <div class="success-title">
+                <div class="success-ic"><svg class="ic"><use href="#i-check"></use></svg></div>
+                <div>
+                  <h2>支付成功</h2>
+                  <p>资金已进入托管专户，将按里程碑验收结果释放。电子回单已生成。</p>
+                </div>
+              </div>
+              <div class="receipt" id="payReceipt">
+                <div class="receipt-top">
+                  <div><b>真题工场 · 资金托管电子回单</b><small id="successOrderNo">PAY-20261023-0081</small></div>
+                  <span class="receipt-status"><svg class="ic" style="width:11px;height:11px"><use href="#i-check"></use></svg>支付成功</span>
+                </div>
+                <div class="receipt-amount"><span>实付金额</span><b id="successAmount">¥4,800.00</b></div>
+                <div class="receipt-rows">
+                  <div class="receipt-row"><span>任务</span><b id="successTask">化工园区设备巡检台账系统</b></div>
+                  <div class="receipt-row"><span>阶段</span><b id="successStage">M2 中期款 · 30%</b></div>
+                  <div class="receipt-row"><span>出题方</span><b id="successPayer">渤海新区某化工科技有限公司</b></div>
+                  <div class="receipt-row"><span>支付方式</span><b id="successMethod">微信支付</b></div>
+                  <div class="receipt-row"><span>支付时间</span><b id="successTime">2026-10-23 14:32:08</b></div>
+                  <div class="receipt-row"><span>收款方</span><b>真题工场 · 资金托管专户</b></div>
+                </div>
+                <div class="receipt-seal">资金托管<br>已收讫</div>
+              </div>
+              <div class="success-actions">
+                <button class="btn btn-primary btn-sm" type="button" id="viewBillsBtn">查看账单流水</button>
+                <button class="btn btn-ghost btn-sm" type="button" id="printReceiptBtn">
+                  <svg class="ic"><use href="#i-receipt"></use></svg>打印回单
+                </button>
+                <a class="btn btn-ghost btn-sm" href="workspace.html">返回工作台</a>
+              </div>
+              <p class="field-hint" style="margin-top:12px">企业可在「账单流水」中查看订单，在「发票管理」中申请开票。</p>
+            </div>
+          </div>
+
+          <aside class="pay-aside">
+            <div class="panel aside-card">
+              <h3><svg class="ic"><use href="#i-shield"></use></svg>收款与托管</h3>
+              <div class="payee">
+                <b>真题工场 · 资金托管专户</b>
+                <small>持牌支付机构监管 · 演示账户</small>
+                <div class="bank-info" style="margin-top:10px">
+                  <div><span>开户行</span><b>招商银行沧州分行</b></div>
+                  <div><span>账号</span><b>6214 **** **** 8821</b></div>
+                  <div><span>户名</span><b>沧州校地协同服务中心</b></div>
+                </div>
+              </div>
+              <div class="flow-mini">
+                <div class="flow-mini-row"><span class="n">1</span><div><b>企业付款</b><small>赏金进入监管专户，平台不可挪用</small></div></div>
+                <div class="flow-mini-row"><span class="n">2</span><div><b>节点验收</b><small>导师与企业双确认后释放</small></div></div>
+                <div class="flow-mini-row"><span class="n">3</span><div><b>学生结算</b><small>T+1 到账，提现免手续费</small></div></div>
+                <div class="flow-mini-row"><span class="n">4</span><div><b>开票与对账</b><small>企业在线开票，流水可导出</small></div></div>
+              </div>
+              <div class="flex between" style="padding:10px 0;border-top:1px solid var(--line)">
+                <span style="font-size:10px;color:var(--muted)">平台服务费</span>
+                <b style="font-size:11px;color:var(--green)">¥0.00（公益期）</b>
+              </div>
+              <div class="pay-disclaimer">
+                <svg class="ic"><use href="#i-info"></use></svg>
+                <span>本页面为前端原型，二维码、账号与支付结果均为模拟数据，不会产生真实扣款或资金流转。</span>
+              </div>
+            </div>
+            <div class="panel aside-card" style="margin-top:12px">
+              <h3><svg class="ic"><use href="#i-calendar"></use></svg>下一结算节点</h3>
+              <div class="flex between" style="padding:4px 0 8px"><span style="font-size:10px;color:var(--muted)">M2 验收截止</span><b style="font-size:10.5px">2026-10-31</b></div>
+              <div class="progress-track"><i style="width:40%"></i></div>
+              <div class="progress-meta"><span>已释放 20%</span><span>待释放 80%</span></div>
+              <p style="font-size:9px;line-height:1.7;color:var(--muted);margin-top:10px">验收通过后，M2 阶段款 ¥4,800 将在 T+1 结算至学生收款账户。</p>
+            </div>
+          </aside>
+        </div>
+      </section>
+
+      <!-- 账单 -->
+      <section class="finance-view" data-finance-view="bills" hidden>
+        <div class="wallet-grid">
+          <div class="wallet-card dark"><span class="wallet-label"><svg class="ic"><use href="#i-wallet"></use></svg>本期托管总额</span><b>¥16,000</b><small>含首期与后续节点</small></div>
+          <div class="wallet-card"><span class="wallet-label">已支付</span><b>¥5,200</b><small>首期 + 保证金</small></div>
+          <div class="wallet-card"><span class="wallet-label">待支付</span><b>¥4,800</b><small>1 笔订单待处理</small></div>
+          <div class="wallet-card"><span class="wallet-label">已退款</span><b>¥2,940</b><small>1 笔争议退款</small></div>
+        </div>
+        <div class="panel">
+          <div class="panel-head">
+            <div class="panel-title">账单流水 <span class="count" id="billCount">6</span></div>
+            <div class="flex gap-8">
+              <select class="select-sm" id="billFilter" aria-label="筛选账单状态" style="height:32px;font-size:10px">
+                <option value="all">全部状态</option>
+                <option value="pending">待支付</option>
+                <option value="paid">已支付</option>
+                <option value="refunded">已退款</option>
+              </select>
+              <button class="btn btn-ghost btn-sm" type="button" data-toast="演示环境：对账单导出将在正式版接入" data-toast-type="info">
+                <svg class="ic"><use href="#i-download"></use></svg>导出
+              </button>
+            </div>
+          </div>
+          <div class="table-wrap" id="billsTable"></div>
+        </div>
+        <div class="notice-box" style="margin-top:14px">
+          <svg class="ic"><use href="#i-info"></use></svg>
+          <span>账单按支付时间倒序展示。待支付订单保留 30 分钟，超时自动关闭；已支付订单可在 M1—M4 节点验收后释放对应款项。</span>
+        </div>
+      </section>
+
+      <!-- 收款与结算 -->
+      <section class="finance-view" data-finance-view="wallet" hidden>
+        <div class="flex between" style="margin-bottom:14px;gap:12px;flex-wrap:wrap">
+          <div class="segmented" id="walletPersp">
+            <button class="seg-btn" type="button" data-persp="student">学生收款</button>
+            <button class="seg-btn" type="button" data-persp="enterprise">企业账户</button>
+          </div>
+          <button class="btn btn-primary btn-sm" type="button" id="walletPrimary">申请提现</button>
+        </div>
+        <div id="walletContent"></div>
+        <div class="notice-box" style="margin-top:14px">
+          <svg class="ic"><use href="#i-shield"></use></svg>
+          <span>资金由持牌支付机构分账托管，平台不经手现金。学生侧结算与提现免手续费；企业侧开票与对账可在「发票管理」中完成。</span>
+        </div>
+      </section>
+
+      <!-- 发票 -->
+      <section class="finance-view" data-finance-view="invoice" hidden>
+        <div class="invoice-layout">
+          <div class="panel invoice-card">
+            <div class="panel-title" style="margin-bottom:14px">申请开票</div>
+            <div class="field"><label class="label">发票抬头</label><input class="input" id="invTitle" value="渤海新区某化工科技有限公司"></div>
+            <div class="field"><label class="label">统一社会信用代码</label><input class="input" id="invTax" value="91130900MA0XXXXXXX"></div>
+            <div class="form-row">
+              <div class="field"><label class="label">发票类型</label><select class="select" id="invType"><option>增值税普通发票（电子）</option><option>增值税专用发票</option></select></div>
+              <div class="field"><label class="label">开票金额（元）</label><input class="input" id="invAmount" type="number" value="3200"></div>
+            </div>
+            <div class="field"><label class="label">接收邮箱</label><input class="input" id="invEmail" type="email" value="finance@example.com"></div>
+            <div class="field"><label class="label">备注 <span class="opt">选填</span></label><input class="input" id="invNote" placeholder="例如：项目 M1 阶段款"></div>
+            <button class="btn btn-primary btn-block" type="button" id="invoiceSubmit">提交开票申请</button>
+            <p class="field-hint" style="margin-top:8px;text-align:center">电子发票将在 1—3 个工作日内发送至邮箱。</p>
+          </div>
+          <div>
+            <div class="wallet-grid" style="grid-template-columns:1fr 1fr">
+              <div class="wallet-card"><span class="wallet-label">可开票金额</span><b>¥5,200</b><small>已支付且未开票</small></div>
+              <div class="wallet-card dark"><span class="wallet-label">已开票金额</span><b>¥3,200</b><small>2 张电子发票</small></div>
+            </div>
+            <div class="panel" style="margin-top:12px">
+              <div class="panel-head"><div class="panel-title">开票说明</div></div>
+              <div class="panel-body" style="font-size:10px;line-height:1.9;color:var(--muted)">
+                <p>· 仅已支付且未开票的订单可申请开票，金额可合并或拆分。</p>
+                <p>· 电子发票开具后将发送至接收邮箱，可在本页下载。</p>
+                <p>· 校地公益期平台服务费为 0，发票金额即托管实付金额。</p>
+                <p>· 需专用发票请提供完整开票资料，运营将在 1 个工作日内审核。</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="panel" style="margin-top:14px">
+          <div class="panel-head"><div class="panel-title">开票记录</div><span class="badge-soft">电子发票</span></div>
+          <div class="table-wrap" id="invoiceTable"></div>
+        </div>
+      </section>
+    </main>
+  </div>
+</div>
+
+<!-- 提现弹窗 -->
+<div class="modal" id="withdrawModal" aria-hidden="true">
+  <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="withdrawTitle">
+    <div class="modal-head">
+      <div><h2 id="withdrawTitle">申请提现</h2><p>结算至招商银行 •••• 4821 · T+1 到账</p></div>
+      <button class="modal-close" type="button" data-modal-close aria-label="关闭"><svg class="ic"><use href="#i-close"></use></svg></button>
+    </div>
+    <div class="modal-body">
+      <div class="field"><label class="label">提现金额</label><input class="input" id="withdrawAmount" type="number" value="2400" min="1"></div>
+      <div class="field"><label class="label">收款账户</label><select class="select"><option>招商银行 •••• 4821（林知远）</option><option>支付宝 138****1234</option></select></div>
+      <div class="notice-box"><svg class="ic"><use href="#i-info"></use></svg><span>可提现余额 ¥2,400。学生侧提现免手续费，预计 T+1 到账。</span></div>
+    </div>
+    <div class="modal-foot">
+      <button class="btn btn-ghost" type="button" data-modal-close>取消</button>
+      <button class="btn btn-primary" type="button" id="withdrawSubmit">确认提现</button>
+    </div>
+  </div>
+</div>
+
+<!-- 回单弹窗 -->
+<div class="modal" id="receiptModal" aria-hidden="true">
+  <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="receiptTitle">
+    <div class="modal-head">
+      <div><h2 id="receiptTitle">电子回单</h2><p>资金托管 · 演示回单</p></div>
+      <button class="modal-close" type="button" data-modal-close aria-label="关闭"><svg class="ic"><use href="#i-close"></use></svg></button>
+    </div>
+    <div class="modal-body" id="receiptModalBody"></div>
+    <div class="modal-foot">
+      <button class="btn btn-ghost" type="button" data-modal-close>关闭</button>
+      <button class="btn btn-primary" type="button" onclick="window.print()">打印回单</button>
+    </div>
+  </div>
+</div>
+
+<script src="assets/js/data.js"></script>
+<script src="assets/js/app.js"></script>
+<script>
+(function () {
+  var session = RTW.getSession() || RTW.loginDemo('enterprise', true);
+  var orders = (window.RTW_DATA.orders || []).map(function (o) { return Object.assign({}, o); });
+
+  var amountParam = Number(RTW.param('amount'));
+  if (amountParam > 0) {
+    orders.unshift({
+      id: RTW.param('id') || 'PAY-20261023-0090',
+      taskId: '',
+      task: RTW.param('task') || '新发布任务',
+      stage: RTW.param('stage') || '首期托管款',
+      amount: amountParam,
+      status: 'pending',
+      statusText: '待支付',
+      created: '2026-10-23 14:30',
+      due: '2026-10-23 15:00',
+      payer: session.role === 'enterprise' ? session.sub : '渤海新区某化工科技有限公司',
+      invoice: false
+    });
+  }
+
+  var currentOrder = orders.filter(function (o) { return o.status === 'pending'; })[0] || orders[0];
+  var activeTab = RTW.param('tab') || 'checkout';
+  var method = 'wechat';
+  var methodNames = { wechat: '微信支付', alipay: '支付宝', bank: '对公转账', campus: '校园一卡通' };
+  var countdownTimer = null;
+
+  RTW.renderAppSidebar('finance');
+  RTW.renderAppTopbar({ root: '资金中心', title: '收银台' });
+  RTW.qs('#sessionHint').textContent = session.role === 'enterprise' ? ' · 当前为企业出题方视角' : ' · 当前为' + session.label + '视角（付款流程演示）';  RTW.initUI();
+
+  function fmt(n) { return '¥' + Number(n || 0).toLocaleString('zh-CN') + '.00'; }
+  function nowText() {
+    var d = new Date();
+    function p(x) { return x < 10 ? '0' + x : x; }
+    return d.getFullYear() + '-' + p(d.getMonth() + 1) + '-' + p(d.getDate()) + ' ' + p(d.getHours()) + ':' + p(d.getMinutes()) + ':' + p(d.getSeconds());
+  }
+
+  /* 伪二维码（演示用，不包含真实支付信息） */
+  function qrSVG(seed) {
+    var size = 25;
+    var svg = '<svg viewBox="0 0 ' + size + ' ' + size + '" xmlns="http://www.w3.org/2000/svg" shape-rendering="crispEdges"><rect width="' + size + '" height="' + size + '" fill="#fff"/>';
+    function hash(x, y) {
+      var s = String(seed) + ':' + x + ':' + y;
+      var h = 2166136261;
+      for (var i = 0; i < s.length; i += 1) { h ^= s.charCodeAt(i); h = Math.imul(h, 16777619); }
+      return ((h >>> 0) % 100) < 47;
+    }
+    function finder(x, y) {
+      return (x < 7 && y < 7) || (x >= size - 7 && y < 7) || (x < 7 && y >= size - 7);
+    }
+    var x, y;
+    for (y = 0; y < size; y += 1) {
+      for (x = 0; x < size; x += 1) {
+        if (finder(x, y)) continue;
+        if (hash(x, y)) svg += '<rect x="' + x + '" y="' + y + '" width="1" height="1" fill="#0b2b27"/>';
+      }
+    }
+    function drawFinder(ox, oy) {
+      svg += '<rect x="' + ox + '" y="' + oy + '" width="7" height="7" fill="#0b2b27"/>';
+      svg += '<rect x="' + (ox + 1) + '" y="' + (oy + 1) + '" width="5" height="5" fill="#fff"/>';
+      svg += '<rect x="' + (ox + 2) + '" y="' + (oy + 2) + '" width="3" height="3" fill="#0b2b27"/>';
+    }
+    drawFinder(0, 0); drawFinder(size - 7, 0); drawFinder(0, size - 7);
+    svg += '</svg>';
+    return svg;
+  }
+
+  /* 收银台 */
+  function renderCheckout(order, keepSuccess) {
+    if (!order) return;
+    currentOrder = order;
+    RTW.qs('#orderCard').style.display = '';
+    if (!keepSuccess) RTW.qs('#paySuccess').classList.remove('is-on');
+    RTW.qs('#orderNo').textContent = order.id;
+    RTW.qs('#orderStage').textContent = order.stage;
+    RTW.qs('#orderTask').textContent = order.task;
+    RTW.qs('#orderPayer').textContent = order.payer;
+    RTW.qs('#orderStageText').textContent = order.stage + ' · 验收后释放';
+    RTW.qs('#orderAmount').textContent = fmt(order.amount);
+    RTW.qs('#payButtonAmount').textContent = fmt(order.amount);
+    RTW.qs('#payBtn').disabled = false;
+    RTW.qs('#payBtn').innerHTML = '确认支付 <span id="payButtonAmount">' + fmt(order.amount) + '</span><svg class="ic"><use href="#i-arrow-right"></use></svg>';
+    renderMethod(method);
+    startCountdown();
+  }
+
+  function startCountdown() {
+    if (countdownTimer) clearInterval(countdownTimer);
+    var left = 30 * 60 - 2;
+    var el = RTW.qs('#countdown');
+    function tick() {
+      var m = Math.floor(left / 60);
+      var s = left % 60;
+      el.textContent = (m < 10 ? '0' + m : m) + ':' + (s < 10 ? '0' + s : s);
+      if (left <= 0) { clearInterval(countdownTimer); el.textContent = '已超时'; return; }
+      left -= 1;
+    }
+    tick();
+    countdownTimer = setInterval(tick, 1000);
+  }
+
+  function renderMethod(key) {
+    method = key;
+    RTW.qsa('[data-method]').forEach(function (b) {
+      var on = b.getAttribute('data-method') === key;
+      b.classList.toggle('is-selected', on);
+    });
+    var note = RTW.qs('#methodNote');
+    if (key === 'wechat' || key === 'alipay') {
+      note.innerHTML = '<div class="qr-box">' + qrSVG(currentOrder.id + key) + '</div>' +
+        '<div class="qr-text"><b>使用' + (key === 'wechat' ? '微信' : '支付宝') + '扫一扫</b>' +
+        '<p>扫描二维码完成支付。演示二维码不会跳转真实收银台。</p>' +
+        '<span class="tag" style="margin-top:6px">' + methodNames[key] + ' · 演示</span></div>';
+    } else if (key === 'bank') {
+      note.innerHTML = '<div class="bank-info" style="flex:1">' +
+        '<div><span>收款户名</span><b>沧州校地协同服务中心</b></div>' +
+        '<div><span>开户银行</span><b>招商银行沧州分行</b></div>' +
+        '<div><span>银行账号</span><b>6214 **** **** 8821</b></div>' +
+        '<div><span>转账附言</span><b>' + currentOrder.id + '</b></div>' +
+        '</div><button class="btn btn-ghost btn-sm" type="button" data-copy="6214 8888 8888 8821">复制账号</button>';
+    } else {
+      note.innerHTML = '<div class="qr-text"><b>校园一卡通支付</b><p>仅限校内部门使用。演示环境请直接点击下方“确认支付”。</p>' +
+        '<div class="flex gap-8" style="margin-top:8px"><input class="input" placeholder="工号 / 一卡通号" style="height:34px;font-size:10px;width:170px"><span class="tag">演示</span></div></div>';
+    }
+  }
+
+  RTW.qsa('[data-method]').forEach(function (b) {
+    b.addEventListener('click', function () { renderMethod(b.getAttribute('data-method')); });
+  });
+
+  RTW.qs('#payBtn').addEventListener('click', function () {
+    if (!RTW.qs('#payAgree').checked) { RTW.toast('请先勾选同意《资金托管与结算规则》', 'error'); return; }
+    var btn = RTW.qs('#payBtn');
+    btn.disabled = true;
+    btn.innerHTML = '支付处理中…';
+    setTimeout(function () {
+      var o = currentOrder;
+      o.status = 'paid';
+      o.statusText = '已支付';
+      o.method = methodNames[method];
+      RTW.qs('#orderCard').style.display = 'none';
+      RTW.qs('#paySuccess').classList.add('is-on');
+      RTW.qs('#successOrderNo').textContent = o.id;
+      RTW.qs('#successAmount').textContent = fmt(o.amount);
+      RTW.qs('#successTask').textContent = o.task;
+      RTW.qs('#successStage').textContent = o.stage;
+      RTW.qs('#successPayer').textContent = o.payer;
+      RTW.qs('#successMethod').textContent = methodNames[method];
+      RTW.qs('#successTime').textContent = nowText();
+      RTW.toast('支付成功，资金已进入监管专户', 'success');
+      if (activeTab === 'bills') renderBills();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }, 900);
+  });
+
+  RTW.qs('#printReceiptBtn').addEventListener('click', function () { window.print(); });
+  RTW.qs('#viewBillsBtn').addEventListener('click', function () { switchTab('bills'); });
+
+  /* 账单 */
+  function statusPill(o) {
+    if (o.status === 'paid') return '<span class="status-pill green">已支付</span>';
+    if (o.status === 'refunded') return '<span class="status-pill red">已退款</span>';
+    return '<span class="status-pill amber">待支付</span>';
+  }
+
+  function renderBills() {
+    var filter = RTW.qs('#billFilter').value;
+    var list = orders.filter(function (o) { return filter === 'all' || o.status === filter; });
+    RTW.qs('#billCount').textContent = list.length;
+    if (!list.length) {
+      RTW.qs('#billsTable').innerHTML = '<div class="table-empty">暂无符合条件的账单</div>';
+      return;
+    }
+    RTW.qs('#billsTable').innerHTML = '<table class="data-table"><thead><tr><th>订单号</th><th>任务 / 阶段</th><th>金额</th><th>状态</th><th>创建时间</th><th>操作</th></tr></thead><tbody>' +
+      list.map(function (o) {
+        var action = '';
+        if (o.status === 'pending') action = '<button class="btn btn-primary" type="button" data-pay-order="' + o.id + '">去支付</button>';
+        else if (o.status === 'paid') action = '<button class="btn btn-ghost" type="button" data-receipt-view="' + o.id + '">查看回单</button>';
+        else action = '<span class="badge-soft">原路退回</span>';
+        return '<tr><td class="num">' + o.id + '</td><td class="strong">' + o.task + '<span class="sub">' + o.stage + '</span></td>' +
+          '<td class="num">' + fmt(o.amount) + '</td><td>' + statusPill(o) + '</td><td class="num">' + o.created + '</td>' +
+          '<td><div class="table-actions">' + action + '<button class="btn btn-ghost" type="button" data-invoice-order="' + o.id + '">开票</button></div></td></tr>';
+      }).join('') + '</tbody></table>';
+    bindBillActions();
+  }
+
+  function bindBillActions() {
+    RTW.qsa('[data-pay-order]').forEach(function (b) {
+      b.addEventListener('click', function () {
+        var o = orders.filter(function (x) { return x.id === b.getAttribute('data-pay-order'); })[0];
+        switchTab('checkout');
+        renderCheckout(o);
+      });
+    });
+    RTW.qsa('[data-receipt-view]').forEach(function (b) {
+      b.addEventListener('click', function () {
+        var o = orders.filter(function (x) { return x.id === b.getAttribute('data-receipt-view'); })[0];
+        openReceipt(o);
+      });
+    });
+    RTW.qsa('[data-invoice-order]').forEach(function (b) {
+      b.addEventListener('click', function () {
+        var o = orders.filter(function (x) { return x.id === b.getAttribute('data-invoice-order'); })[0];
+        switchTab('invoice');
+        RTW.qs('#invAmount').value = o.amount;
+        RTW.qs('#invNote').value = o.task + ' · ' + o.stage;
+      });
+    });
+  }
+
+  RTW.qs('#billFilter').addEventListener('change', renderBills);
+
+  function openReceipt(o) {
+    RTW.qs('#receiptModalBody').innerHTML = '<div class="receipt" style="padding:16px">' +
+      '<div class="receipt-top"><div><b>真题工场 · 资金托管电子回单</b><small>' + o.id + '</small></div><span class="receipt-status">支付成功</span></div>' +
+      '<div class="receipt-amount"><span>实付金额</span><b>' + fmt(o.amount) + '</b></div>' +
+      '<div class="receipt-rows"><div class="receipt-row"><span>任务</span><b>' + o.task + '</b></div>' +
+      '<div class="receipt-row"><span>阶段</span><b>' + o.stage + '</b></div>' +
+      '<div class="receipt-row"><span>支付时间</span><b>' + o.created + '</b></div>' +
+      '<div class="receipt-row"><span>收款方</span><b>真题工场 · 资金托管专户</b></div></div>' +
+      '<div class="receipt-seal">资金托管<br>已收讫</div></div>';
+    RTW.openModal('receiptModal');
+  }
+
+  /* 收款与结算 */
+  var persp = session.role === 'enterprise' ? 'enterprise' : 'student';
+
+  function renderWallet() {
+    RTW.qsa('[data-persp]').forEach(function (b) {
+      b.classList.toggle('is-active', b.getAttribute('data-persp') === persp);
+    });
+    RTW.qs('#walletPrimary').textContent = persp === 'student' ? '申请提现' : '追加托管';
+    if (persp === 'student') {
+      RTW.qs('#walletContent').innerHTML =
+        '<div class="wallet-grid">' +
+          '<div class="wallet-card dark"><span class="wallet-label"><svg class="ic"><use href="#i-wallet"></use></svg>可提现余额</span><b id="walletBalance">¥2,400</b><small>招商银行 •••• 4821</small></div>' +
+          '<div class="wallet-card"><span class="wallet-label">累计结算</span><b>¥8,650</b><small>4 笔 · 全部免手续费</small></div>' +
+          '<div class="wallet-card"><span class="wallet-label">待结算</span><b>¥4,800</b><small>M2 验收后释放</small></div>' +
+          '<div class="wallet-card"><span class="wallet-label">平台服务费</span><b>¥0</b><small>校地公益期</small></div>' +
+        '</div>' +
+        '<div class="panel"><div class="panel-head"><div class="panel-title">收款账户</div><button class="btn btn-ghost btn-sm" type="button" data-toast="演示环境：新增账户需完成实名认证">管理账户</button></div><div class="panel-body" style="display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap">' +
+          '<div class="flex gap-12"><span class="method-logo bank" style="width:38px;height:38px;border-radius:9px">招</span><div><b style="font-size:11.5px">招商银行 · 储蓄卡</b><div style="font-size:9.5px;color:var(--muted);margin-top:2px">林知远 · •••• 4821 · 已实名</div></div></div>' +
+          '<span class="status-pill green">结算账户正常</span></div></div>' +
+        '<div class="panel" style="margin-top:14px"><div class="panel-head"><div class="panel-title">结算记录</div><span class="badge-soft">学生视角</span></div><div class="table-wrap">' +
+          '<table class="data-table"><thead><tr><th>结算单号</th><th>项目 / 阶段</th><th>金额</th><th>手续费</th><th>状态</th><th>日期</th></tr></thead><tbody>' +
+          window.RTW_DATA.settlements.map(function (s) {
+            return '<tr><td class="num">' + s.id + '</td><td class="strong">' + s.task + '<span class="sub">' + s.stage + '</span></td><td class="num">' + fmt(s.amount) + '</td><td class="num">¥0.00</td><td><span class="status-pill ' + (s.status === '已结算' ? 'green' : 'amber') + '">' + s.status + '</span></td><td class="num">' + s.date + '</td></tr>';
+          }).join('') + '</tbody></table></div></div>';
+    } else {
+      RTW.qs('#walletContent').innerHTML =
+        '<div class="wallet-grid">' +
+          '<div class="wallet-card dark"><span class="wallet-label"><svg class="ic"><use href="#i-wallet"></use></svg>托管账户余额</span><b>¥16,000</b><small>冻结中 · 按节点释放</small></div>' +
+          '<div class="wallet-card"><span class="wallet-label">本期已托管</span><b>¥16,000</b><small>含 5 个里程碑</small></div>' +
+          '<div class="wallet-card"><span class="wallet-label">已释放</span><b>¥3,200</b><small>M1 需求评审</small></div>' +
+          '<div class="wallet-card"><span class="wallet-label">待释放</span><b>¥12,800</b><small>M2—M4 阶段</small></div>' +
+        '</div>' +
+        '<div class="panel"><div class="panel-head"><div class="panel-title">托管批次</div><span class="badge-soft">按节点释放</span></div><div class="table-wrap">' +
+          '<table class="data-table"><thead><tr><th>批次</th><th>阶段</th><th>金额</th><th>状态</th><th>计划日期</th></tr></thead><tbody>' +
+          '<tr><td class="num">ESC-0921-01</td><td>M1 需求评审 · 20%</td><td class="num">¥3,200</td><td><span class="status-pill green">已释放</span></td><td class="num">10-10</td></tr>' +
+          '<tr><td class="num">ESC-0921-02</td><td>M2 中期 MVP · 30%</td><td class="num">¥4,800</td><td><span class="status-pill amber">冻结中</span></td><td class="num">10-31</td></tr>' +
+          '<tr><td class="num">ESC-0921-03</td><td>M3 公测交付 · 30%</td><td class="num">¥4,800</td><td><span class="status-pill gray">待验收</span></td><td class="num">11-21</td></tr>' +
+          '<tr><td class="num">ESC-0921-04</td><td>M4 答辩验收 · 10%</td><td class="num">¥1,600</td><td><span class="status-pill gray">待验收</span></td><td class="num">12-12</td></tr>' +
+          '</tbody></table></div></div>' +
+        '<div class="panel" style="margin-top:14px"><div class="panel-head"><div class="panel-title">企业付款记录</div></div><div class="table-wrap"><table class="data-table"><thead><tr><th>订单号</th><th>阶段</th><th>金额</th><th>状态</th><th>时间</th></tr></thead><tbody>' +
+          orders.slice(0, 4).map(function (o) {
+            return '<tr><td class="num">' + o.id + '</td><td>' + o.stage + '</td><td class="num">' + fmt(o.amount) + '</td><td>' + statusPill(o) + '</td><td class="num">' + o.created + '</td></tr>';
+          }).join('') + '</tbody></table></div></div>';
+    }
+  }
+
+  RTW.qsa('[data-persp]').forEach(function (b) {
+    b.addEventListener('click', function () {
+      persp = b.getAttribute('data-persp');
+      renderWallet();
+    });
+  });
+
+  RTW.qs('#walletPrimary').addEventListener('click', function () {
+    if (persp === 'student') RTW.openModal('withdrawModal');
+    else RTW.toast('演示环境：追加托管将生成新的支付订单', 'info');
+  });
+
+  RTW.qs('#withdrawSubmit').addEventListener('click', function () {
+    var val = Number(RTW.qs('#withdrawAmount').value);
+    if (!val || val <= 0) { RTW.toast('请输入正确的提现金额', 'error'); return; }
+    if (val > 2400) { RTW.toast('提现金额不能超过可提现余额 ¥2,400', 'error'); return; }
+    RTW.closeModal('withdrawModal');
+    RTW.toast('提现申请已提交，预计 T+1 到账', 'success');
+    var bal = RTW.qs('#walletBalance');
+    if (bal) bal.textContent = fmt(2400 - val);
+  });
+
+  /* 发票 */
+  var invoices = [
+    { id: 'INV-20261010-012', title: '渤海新区某化工科技有限公司', amount: 3200, type: '增值税普通发票（电子）', status: '已开具', date: '2026-10-10' },
+    { id: 'INV-20260930-009', title: '渤海新区某化工科技有限公司', amount: 2000, type: '增值税普通发票（电子）', status: '已开具', date: '2026-09-30' }
+  ];
+  function renderInvoices() {
+    RTW.qs('#invoiceTable').innerHTML = '<table class="data-table"><thead><tr><th>发票号</th><th>抬头</th><th>金额</th><th>类型</th><th>状态</th><th>日期</th></tr></thead><tbody>' +
+      invoices.map(function (v) {
+        return '<tr><td class="num">' + v.id + '</td><td class="strong">' + v.title + '</td><td class="num">' + fmt(v.amount) + '</td><td>' + v.type + '</td><td><span class="status-pill ' + (v.status === '已开具' ? 'green' : 'amber') + '">' + v.status + '</span></td><td class="num">' + v.date + '</td></tr>';
+      }).join('') + '</tbody></table>';
+  }
+  RTW.qs('#invoiceSubmit').addEventListener('click', function () {
+    var title = RTW.qs('#invTitle').value.trim();
+    var amount = Number(RTW.qs('#invAmount').value);
+    var email = RTW.qs('#invEmail').value.trim();
+    if (!title || !amount || !email) { RTW.toast('请补全抬头、金额与接收邮箱', 'error'); return; }
+    var id = 'INV-' + new Date().toISOString().slice(0, 10).replace(/-/g, '') + '-' + String(Math.floor(Math.random() * 900) + 100);
+    invoices.unshift({ id: id, title: title, amount: amount, type: RTW.qs('#invType').value, status: '开具中', date: '2026-10-23' });
+    renderInvoices();
+    RTW.toast('开票申请已提交，电子发票将发送至 ' + email, 'success');
+  });
+
+  /* 标签页 */
+  var tabTitles = { checkout: '收银台', bills: '账单流水', wallet: '收款与结算', invoice: '发票管理' };
+  function switchTab(tab) {
+    if (!tabTitles[tab]) tab = 'checkout';
+    activeTab = tab;
+    RTW.qsa('[data-finance-tab]').forEach(function (b) {
+      var on = b.getAttribute('data-finance-tab') === tab;
+      b.classList.toggle('is-active', on);
+      b.setAttribute('aria-selected', on ? 'true' : 'false');
+    });
+    RTW.qsa('[data-finance-view]').forEach(function (v) {
+      var on = v.getAttribute('data-finance-view') === tab;
+      v.classList.toggle('is-active', on);
+      v.hidden = !on;
+    });
+    RTW.renderAppTopbar({ root: '资金中心', title: tabTitles[tab] });
+    if (tab === 'bills') renderBills();
+    if (tab === 'wallet') renderWallet();
+    if (tab === 'invoice') renderInvoices();
+    if (tab === 'checkout') {
+      RTW.qs('#orderCard').style.display = currentOrder.status === 'paid' ? 'none' : '';
+      if (currentOrder.status === 'paid') RTW.qs('#paySuccess').classList.add('is-on');
+    }
+    history.replaceState(null, '', 'payment.html?tab=' + tab);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  RTW.qsa('[data-finance-tab]').forEach(function (b) {
+    b.addEventListener('click', function () { switchTab(b.getAttribute('data-finance-tab')); });
+  });
+
+  /* 初始 */
+  renderCheckout(currentOrder);
+  renderBills();
+  renderWallet();
+  renderInvoices();
+  switchTab(tabTitles[activeTab] ? activeTab : 'checkout');
+  if (activeTab === 'checkout' && currentOrder.status === 'paid') {
+    RTW.qs('#orderCard').style.display = 'none';
+    RTW.qs('#paySuccess').classList.add('is-on');
+  }
+})();
+</script>
+</body>
+</html>

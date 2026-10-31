@@ -1,0 +1,584 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>发布任务 · 真题工场</title>
+<meta name="description" content="企业六要素发布向导：把真实需求写成可教学、可验收的任务书。">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body class="guarded" data-guard="enterprise" data-guard-roles="enterprise" data-guard-next="publish.html">
+<script src="assets/js/guard.js"></script>
+<script src="assets/js/icons.js"></script>
+
+<div class="auth-gate" id="authGate">
+  <div class="auth-gate-card">
+    <a class="brand" href="index.html" data-same-tab aria-label="真题工场首页">
+      <span class="brand-mark" aria-hidden="true">真</span>
+      <span class="brand-text"><b>真题工场</b><small>REAL TASK WORKS</small></span>
+    </a>
+    <div class="gate-ic"><svg class="ic" aria-hidden="true"><use href="#i-building"></use></svg></div>
+    <h1>发布任务需要企业身份</h1>
+    <p>该入口面向企业或校园需求方。当前身份不具备发布权限，不会展示任务表单。</p>
+    <div class="gate-actions">
+      <button class="btn btn-primary" type="button" data-switch-role="enterprise">使用企业演示身份进入</button>
+      <a class="btn btn-ghost" data-same-tab href="login.html?next=publish.html&amp;need=enterprise">切换账号登录</a>
+      <a class="btn btn-ghost" data-same-tab href="workspace.html">返回工作台</a>
+    </div>
+    <p class="gate-note">演示环境：角色与权限均为前端模拟，选择企业演示身份后可填写并提交任务表单。</p>
+  </div>
+</div>
+
+<div id="siteHeader"></div>
+
+<main>
+  <section class="page-hero">
+    <div class="container">
+      <div class="breadcrumb">
+        <a href="index.html">首页</a>
+        <svg class="ic" aria-hidden="true"><use href="#i-chevron-right"></use></svg>
+        <a href="tasks.html">任务市场</a>
+        <svg class="ic" aria-hidden="true"><use href="#i-chevron-right"></use></svg>
+        <span>发布任务</span>
+      </div>
+      <div class="page-hero-row">
+        <div>
+          <h1>把需求说清楚，<br>剩下的交给流程。</h1>
+          <p>六要素向导 + AI 结构化助手，约 8 分钟完成。提交后由运营初审、导师复核，通过后上架并进入资金托管。</p>
+        </div>
+        <div class="page-hero-stats">
+          <div><b>8<span style="font-size:12px"> 分钟</span></b><span>平均填写时长</span></div>
+          <div><b>2<span style="font-size:12px"> 级</span></b><span>审核与反馈</span></div>
+          <div><b>0<span style="font-size:12px"> 元</span></b><span>公益期服务费</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="container publish-wrap">
+    <div class="publish-layout">
+      <aside class="publish-rail">
+        <div class="rail-title">发布向导 / 4 STEPS</div>
+        <div class="rail-step is-active" data-rail="1">
+          <span class="n">01</span>
+          <div><b>基本信息</b><small>任务名称、领域与任务线</small></div>
+        </div>
+        <div class="rail-step" data-rail="2">
+          <span class="n">02</span>
+          <div><b>任务书六要素</b><small>痛点、成果、数据、约束、验收、对接人</small></div>
+        </div>
+        <div class="rail-step" data-rail="3">
+          <span class="n">03</span>
+          <div><b>里程碑与预算</b><small>赏金拆分、周期与数据承诺</small></div>
+        </div>
+        <div class="rail-step" data-rail="4">
+          <span class="n">04</span>
+          <div><b>确认提交</b><small>预览任务书并提交审核</small></div>
+        </div>
+        <div class="rail-help">
+          <b><svg class="ic" aria-hidden="true"><use href="#i-spark"></use></svg>AI 结构化助手</b>
+          可以先用 AI 生成六要素草案，再由你逐条核对。平台不会把未核对的内容直接入库。
+        </div>
+        <div class="rail-help" style="margin-top:10px">
+          <b><svg class="ic" aria-hidden="true"><use href="#i-shield"></use></svg>数据合规提示</b>
+          上传前请完成脱敏。涉敏感数据的任务可申请改为校内环境交付。
+        </div>
+      </aside>
+
+      <div>
+        <div class="publish-card" id="wizardCard">
+          <div class="wizard-head">
+            <div>
+              <h2 id="wizardTitle">先介绍一下这道题</h2>
+              <p id="wizardSub">用一句话说明你想解决什么问题，以及它属于哪条任务线。</p>
+            </div>
+            <span class="step-count" id="stepCount">STEP 01 / 04</span>
+          </div>
+
+          <form id="publishForm" novalidate>
+            <!-- STEP 1 -->
+            <section class="wizard-step is-active" data-step="1">
+              <div class="form-grid">
+                <div class="field full">
+                  <label class="label" for="taskTitle">任务名称</label>
+                  <input class="input" id="taskTitle" placeholder="例如：化工园区设备巡检台账系统（二期）" value="化工园区设备巡检台账系统（二期）">
+                  <p class="field-hint">建议包含“场景 + 对象 + 系统形态”，避免使用“数字化平台”这类宽泛表述。</p>
+                </div>
+                <div class="field">
+                  <label class="label" for="taskOrg">出题单位</label>
+                  <input class="input" id="taskOrg" value="渤海新区某化工科技有限公司">
+                </div>
+                <div class="field">
+                  <label class="label" for="taskDomain">所属领域</label>
+                  <select class="select" id="taskDomain">
+                    <option>工业软件</option>
+                    <option>农业数字化</option>
+                    <option>智能制造</option>
+                    <option>民生服务</option>
+                    <option>智慧校园</option>
+                    <option>文旅消费</option>
+                    <option>物流供应链</option>
+                    <option>文化数字化</option>
+                  </select>
+                </div>
+                <div class="field">
+                  <label class="label" for="taskLine">建议任务线</label>
+                  <select class="select" id="taskLine">
+                    <option value="B">B 线 · 个人毕设（1 人，12—16 周）</option>
+                    <option value="A">A 线 · 小组实践（4—6 人，8—12 周）</option>
+                  </select>
+                  <p class="field-hint">导师复核时可调整；个人能独立完成的题优先 B 线。</p>
+                </div>
+                <div class="field">
+                  <label class="label" for="taskDate">期望上线时间</label>
+                  <input class="input" id="taskDate" type="date" value="2026-11-15">
+                </div>
+                <div class="field full">
+                  <label class="label" for="taskSummary">一句话简介</label>
+                  <textarea class="textarea" id="taskSummary" style="min-height:88px">在现有巡检系统基础上增加离线补传、异常闭环与班组统计模块，解决园区边缘区域网络不稳定导致的漏检问题。</textarea>
+                  <p class="field-hint">这段文字会出现在任务卡片上，建议 60—100 字。</p>
+                </div>
+              </div>
+              <div class="wizard-actions">
+                <button class="btn btn-ghost" type="button" data-save>保存草稿</button>
+                <button class="btn btn-primary" type="button" data-next>
+                  下一步：填写六要素
+                  <svg class="ic" aria-hidden="true"><use href="#i-arrow-right"></use></svg>
+                </button>
+              </div>
+            </section>
+
+            <!-- STEP 2 -->
+            <section class="wizard-step" data-step="2">
+              <div class="ai-banner" id="aiBanner">
+                <svg class="ic" aria-hidden="true"><use href="#i-spark"></use></svg>
+                <span><b>AI 草案已生成（演示）</b> · 已根据“化工巡检”场景填入示例内容，请逐条核对后再提交。</span>
+              </div>
+              <div class="field full">
+                <label class="label" for="fPain">01 背景与痛点 <span class="opt">为什么现在要做</span></label>
+                <div class="textarea-wrap">
+                  <textarea class="textarea" id="fPain" placeholder="描述业务现状、具体痛点、目前如何解决，以及不解决会带来什么影响。" style="min-height:100px"></textarea>
+                  <button class="ai-btn" type="button" data-ai-fill="fPain"><svg class="ic" aria-hidden="true"><use href="#i-spark"></use></svg>AI 起草</button>
+                </div>
+              </div>
+              <div class="field full">
+                <label class="label" for="fGoal">02 期望成果 <span class="opt">做成什么样</span></label>
+                <div class="textarea-wrap">
+                  <textarea class="textarea" id="fGoal" placeholder="描述期望的系统形态、核心功能与使用对象，避免只写“做一个平台”。" style="min-height:100px"></textarea>
+                  <button class="ai-btn" type="button" data-ai-fill="fGoal"><svg class="ic" aria-hidden="true"><use href="#i-spark"></use></svg>AI 起草</button>
+                </div>
+              </div>
+              <div class="form-grid">
+                <div class="field">
+                  <label class="label" for="fData">03 数据与资源</label>
+                  <div class="textarea-wrap">
+                    <textarea class="textarea" id="fData" placeholder="能提供哪些脱敏数据、接口、场地或设备？" style="min-height:92px"></textarea>
+                    <button class="ai-btn" type="button" data-ai-fill="fData"><svg class="ic" aria-hidden="true"><use href="#i-spark"></use></svg>AI 起草</button>
+                  </div>
+                </div>
+                <div class="field">
+                  <label class="label" for="fLimits">04 约束条件</label>
+                  <div class="textarea-wrap">
+                    <textarea class="textarea" id="fLimits" placeholder="周期、技术栈、部署环境、合规要求的硬约束。" style="min-height:92px"></textarea>
+                    <button class="ai-btn" type="button" data-ai-fill="fLimits"><svg class="ic" aria-hidden="true"><use href="#i-spark"></use></svg>AI 起草</button>
+                  </div>
+                </div>
+              </div>
+              <div class="field full">
+                <label class="label" for="fAccept">05 验收标准 <span class="opt">必须可量化</span></label>
+                <div class="textarea-wrap">
+                  <textarea class="textarea" id="fAccept" placeholder="写清“什么算完成”：功能范围、性能指标、试用人数、交付物清单。" style="min-height:96px"></textarea>
+                  <button class="ai-btn" type="button" data-ai-fill="fAccept"><svg class="ic" aria-hidden="true"><use href="#i-spark"></use></svg>AI 起草</button>
+                </div>
+                <p class="field-hint">没有明确验收标准的任务不能上架。导师会逐条核对可测试性。</p>
+              </div>
+              <div class="field">
+                <label class="label" for="fContact">06 对接人</label>
+                <input class="input" id="fContact" value="张海宁 · 信息化负责人">
+              </div>
+              <div class="form-row">
+                <div class="field">
+                  <label class="label" for="fPhone">对接人手机号</label>
+                  <input class="input" id="fPhone" type="tel" value="13700009012">
+                </div>
+                <div class="field">
+                  <label class="label" for="fTime">每周可对接时间</label>
+                  <input class="input" id="fTime" value="周五 15:00—16:00">
+                </div>
+              </div>
+              <div class="wizard-actions">
+                <button class="btn btn-ghost" type="button" data-back>
+                  <svg class="ic" aria-hidden="true"><use href="#i-chevron-left"></use></svg>
+                  上一步
+                </button>
+                <div class="left">
+                  <button class="btn btn-ghost" type="button" id="aiAll">
+                    <svg class="ic" aria-hidden="true"><use href="#i-spark"></use></svg>
+                    AI 生成草案
+                  </button>
+                  <button class="btn btn-primary" type="button" data-next>
+                    下一步：拆解里程碑
+                    <svg class="ic" aria-hidden="true"><use href="#i-arrow-right"></use></svg>
+                  </button>
+                </div>
+              </div>
+            </section>
+
+            <!-- STEP 3 -->
+            <section class="wizard-step" data-step="3">
+              <div class="form-grid">
+                <div class="field">
+                  <label class="label" for="budget">企业托管赏金（元）</label>
+                  <input class="input" id="budget" type="number" min="1000" step="100" value="16000">
+                  <p class="field-hint">赏金全额托管，按里程碑释放；学生侧不收费。</p>
+                </div>
+                <div class="field">
+                  <label class="label" for="cycle">项目周期</label>
+                  <select class="select" id="cycle">
+                    <option>8 周</option>
+                    <option>10 周</option>
+                    <option selected>12 周</option>
+                    <option>14 周</option>
+                    <option>16 周</option>
+                  </select>
+                </div>
+                <div class="field">
+                  <label class="label" for="teamSize">团队规模</label>
+                  <select class="select" id="teamSize">
+                    <option selected>1 人（B 线）</option>
+                    <option>4 人</option>
+                    <option>5 人</option>
+                    <option>6 人</option>
+                  </select>
+                </div>
+                <div class="field">
+                  <label class="label" for="deadline">期望答辩时间</label>
+                  <input class="input" id="deadline" type="date" value="2026-12-20">
+                </div>
+              </div>
+
+              <div class="milestone-table" id="milestoneTable"></div>
+              <div class="budget-box">
+                <div><small>托管总额</small><b id="budgetTotal">¥16,000</b></div>
+                <div class="split">
+                  <div><span>首期 M0+M1</span><b id="firstPayment">¥4,800</b></div>
+                  <div><span>中期 M2+M3</span><b id="midPayment">¥9,600</b></div>
+                  <div><span>尾款 M4</span><b id="lastPayment">¥1,600</b></div>
+                </div>
+              </div>
+
+              <div class="field">
+                <label class="label" for="attachment">任务附件 <span class="opt">选填 · 单个不超过 100MB</span></label>
+                <label class="upload-zone" for="attachment">
+                  <svg class="ic" aria-hidden="true"><use href="#i-upload"></use></svg>
+                  <b id="fileName">点击上传数据样例、现有系统截图或需求说明</b>
+                  <small>支持 PDF / DOCX / XLSX / PNG / ZIP；上传前必须完成脱敏</small>
+                  <input type="file" id="attachment">
+                </label>
+              </div>
+
+              <label class="check" style="margin:4px 0 14px">
+                <input type="checkbox" id="dataPromise" checked>
+                我承诺：上传的数据已完成脱敏，不含身份证号、手机号、患者信息等个人敏感数据；如涉及敏感数据，同意改为校内环境交付。
+              </label>
+
+              <div class="notice-box">
+                <svg class="ic" aria-hidden="true"><use href="#i-wallet"></use></svg>
+                <span>审核通过后，平台将生成托管订单。首期款在立项确认后释放 30%，其余按 M2—M4 验收节点结算。校地公益期平台服务费为 0。</span>
+              </div>
+
+              <div class="wizard-actions">
+                <button class="btn btn-ghost" type="button" data-back>
+                  <svg class="ic" aria-hidden="true"><use href="#i-chevron-left"></use></svg>
+                  上一步
+                </button>
+                <button class="btn btn-primary" type="button" data-next>
+                  下一步：确认任务书
+                  <svg class="ic" aria-hidden="true"><use href="#i-arrow-right"></use></svg>
+                </button>
+              </div>
+            </section>
+
+            <!-- STEP 4 -->
+            <section class="wizard-step" data-step="4">
+              <div class="summary-card" id="publishSummary"></div>
+
+              <div style="margin-top:18px">
+                <div class="filter-title" style="margin-bottom:0"><span>提交后的审核流程</span><span class="badge-soft">预计 2—3 个工作日</span></div>
+                <div class="review-flow">
+                  <div><b>运营初审</b><small>真实性 · 合规 · 脱敏检查</small></div>
+                  <div><b>导师复核</b><small>可行性 · 课程匹配 · 工作量</small></div>
+                  <div><b>上架与托管</b><small>打标签 · 生成订单 · 开放认领</small></div>
+                </div>
+              </div>
+
+              <label class="check" style="margin:16px 0 4px">
+                <input type="checkbox" id="publishAgree" checked>
+                我确认以上信息真实、完整，并同意 <a href="#" data-toast="演示环境：任务发布与数据安全协议为示意文本">《任务发布与数据安全协议》</a>，理解任务上架后需求变更须走线上变更单。
+              </label>
+
+              <div class="form-msg" id="publishMsg" style="margin-top:10px">
+                <svg class="ic" aria-hidden="true"><use href="#i-alert"></use></svg>
+                <span id="publishMsgText">请补全必填信息。</span>
+              </div>
+
+              <div class="wizard-actions">
+                <button class="btn btn-ghost" type="button" data-back>
+                  <svg class="ic" aria-hidden="true"><use href="#i-chevron-left"></use></svg>
+                  返回修改
+                </button>
+                <button class="btn btn-primary" type="submit" id="publishSubmit">
+                  提交审核
+                  <svg class="ic" aria-hidden="true"><use href="#i-check"></use></svg>
+                </button>
+              </div>
+            </section>
+          </form>
+        </div>
+
+        <!-- 成功 -->
+        <div class="publish-success" id="publishSuccess">
+          <div class="success-ic">
+            <svg class="ic" aria-hidden="true"><use href="#i-check"></use></svg>
+          </div>
+          <h2>任务已提交审核</h2>
+          <p>运营将在 48 小时内完成初审，随后指派导师复核。审核意见会通过站内消息和短信通知你。</p>
+          <div class="code" id="publishCode">RT-2610-001</div>
+          <div class="success-steps">
+            <div><b>01 运营初审</b><small>真实性、合规与脱敏检查</small></div>
+            <div><b>02 导师复核</b><small>课程匹配度与工作量</small></div>
+            <div><b>03 上架与托管</b><small>生成托管订单，开放认领</small></div>
+          </div>
+          <div class="actions">
+            <a class="btn btn-primary" id="goPay" href="payment.html">
+              去支付首期托管款
+              <svg class="ic" aria-hidden="true"><use href="#i-arrow-right"></use></svg>
+            </a>
+            <a class="btn btn-ghost" href="tasks.html">查看任务市场</a>
+            <a class="btn btn-ghost" href="workspace.html">返回工作台</a>
+          </div>
+          <p class="field-hint" style="margin-top:16px">演示环境：托管支付不会真实扣款，可在资金中心查看订单状态。</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+
+<div id="siteFooter"></div>
+<script src="assets/js/data.js"></script>
+<script src="assets/js/app.js"></script>
+<script>
+(function () {
+  RTW.initChrome('publish');
+
+  var step = 1;
+  var titles = [
+    { t: '先介绍一下这道题', s: '用一句话说明你想解决什么问题，以及它属于哪条任务线。' },
+    { t: '把需求写成可验收的任务书', s: '六要素缺一不可。写不清验收标准，任务就不会被放行。' },
+    { t: '拆解里程碑与托管赏金', s: '按 M0—M4 拆分赏金，学生按节点交付，企业按节点验收。' },
+    { t: '最后检查一遍', s: '确认信息无误后提交，运营与导师会分别在 48 小时内给出意见。' }
+  ];
+
+  function setStep(n) {
+    step = n;
+    RTW.qsa('.wizard-step').forEach(function (s) {
+      s.classList.toggle('is-active', Number(s.getAttribute('data-step')) === n);
+    });
+    RTW.qsa('[data-rail]').forEach(function (r) {
+      var i = Number(r.getAttribute('data-rail'));
+      r.classList.remove('is-active', 'is-done');
+      if (i === n) r.classList.add('is-active');
+      if (i < n) r.classList.add('is-done');
+    });
+    RTW.qs('#wizardTitle').textContent = titles[n - 1].t;
+    RTW.qs('#wizardSub').textContent = titles[n - 1].s;
+    RTW.qs('#stepCount').textContent = 'STEP 0' + n + ' / 04';
+    if (n === 4) fillSummary();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  function showMsg(text) {
+    RTW.qs('#publishMsgText').textContent = text;
+    RTW.qs('#publishMsg').classList.add('is-on');
+  }
+  function hideMsg() { RTW.qs('#publishMsg').classList.remove('is-on'); }
+
+  function check(stepNo) {
+    var required = {
+      1: [['#taskTitle', '请填写任务名称'], ['#taskOrg', '请填写出题单位'], ['#taskSummary', '请填写一句话简介']],
+      2: [['#fPain', '请填写背景与痛点'], ['#fGoal', '请填写期望成果'], ['#fData', '请填写数据与资源'], ['#fLimits', '请填写约束条件'], ['#fAccept', '请填写验收标准'], ['#fContact', '请填写对接人'], ['#fPhone', '请填写对接人手机号']],
+      3: []
+    };
+    var list = required[stepNo] || [];
+    for (var i = 0; i < list.length; i += 1) {
+      var el = RTW.qs(list[i][0]);
+      if (!String(el.value || '').trim()) {
+        el.classList.add('is-error');
+        el.focus();
+        showMsg(list[i][1]);
+        return false;
+      }
+      el.classList.remove('is-error');
+    }
+    if (stepNo === 3) {
+      var budget = Number(RTW.qs('#budget').value);
+      if (!budget || budget < 1000) {
+        RTW.qs('#budget').classList.add('is-error');
+        RTW.qs('#budget').focus();
+        showMsg('托管赏金至少为 1,000 元。');
+        return false;
+      }
+      RTW.qs('#budget').classList.remove('is-error');
+      if (!RTW.qs('#dataPromise').checked) {
+        showMsg('请先勾选数据脱敏承诺。');
+        return false;
+      }
+    }
+    hideMsg();
+    return true;
+  }
+
+  RTW.qsa('[data-next]').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      if (!check(step)) return;
+      if (step < 4) setStep(step + 1);
+    });
+  });
+  RTW.qsa('[data-back]').forEach(function (btn) {
+    btn.addEventListener('click', function () { setStep(Math.max(1, step - 1)); });
+  });
+  RTW.qsa('[data-save]').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      RTW.write('rtw.publishDraft', { title: RTW.qs('#taskTitle').value, savedAt: Date.now() });
+      RTW.toast('草稿已保存到本地（演示）', 'success');
+    });
+  });
+
+  /* AI 草案 */
+  var DRAFT = {
+    fPain: '现有巡检系统在园区边缘区域网络不稳定，离线巡检记录无法补传；异常上报后缺少闭环跟踪，安全科每月仍需人工翻表汇总。',
+    fGoal: '在现有系统上增加离线巡检队列与自动补传、异常闭环看板、按班组 / 设备维度的统计报表；保持与现有账号体系兼容。',
+    fData: '提供现有系统接口文档、脱敏设备清单（约 480 台）、近三个月巡检记录；不接入 DCS 实时数据，不涉及工艺参数。',
+    fLimits: '12 周；Vue 3 + FastAPI；部署在企业内网；需兼容现有安卓平板；通过等保二级自查；不改造现有 ERP。',
+    fAccept: '离线 30 分钟可补传且不丢数据；异常闭环率 100%；报表字段与安全科模板一致；试点 1 个班组 2 周；提供部署与回滚文档。'
+  };
+  function fillDraft(all) {
+    var filled = 0;
+    Object.keys(DRAFT).forEach(function (id) {
+      var el = RTW.qs('#' + id);
+      if (!el) return;
+      if (all || !String(el.value || '').trim()) {
+        el.value = DRAFT[id];
+        el.classList.remove('is-error');
+        filled += 1;
+      }
+    });
+    RTW.qs('#aiBanner').classList.add('is-on');
+    if (filled) RTW.toast('已生成 ' + filled + ' 段草案，请人工核对后提交', 'success');
+    else RTW.toast('草案已存在，请直接核对', 'info');
+  }
+  RTW.qsa('[data-ai-fill]').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var id = btn.getAttribute('data-ai-fill');
+      RTW.qs('#' + id).value = DRAFT[id];
+      RTW.qs('#aiBanner').classList.add('is-on');
+      RTW.toast('已生成这一段草案，请核对', 'success');
+    });
+  });
+  RTW.qs('#aiAll').addEventListener('click', function () { fillDraft(false); });
+
+  /* 预算与里程碑 */
+  function renderMilestones() {
+    var budget = Number(RTW.qs('#budget').value) || 0;
+    var rows = [
+      { code: 'M0', name: '立项与开题', pct: 10 },
+      { code: 'M1', name: '需求评审（冻结点）', pct: 20 },
+      { code: 'M2', name: '中期 MVP', pct: 30 },
+      { code: 'M3', name: '公测与交付', pct: 30 },
+      { code: 'M4', name: '答辩与验收', pct: 10 }
+    ];
+    var html = '<div class="mt-row mt-head"><span>阶段</span><span>交付节点</span><span>比例</span><span>金额</span></div>';
+    html += rows.map(function (r) {
+      var amount = Math.round(budget * r.pct / 100);
+      return '<div class="mt-row"><span class="code">' + r.code + '</span><span>' + r.name + '</span><span>' + r.pct + '%</span><span>¥' + amount.toLocaleString('zh-CN') + '</span></div>';
+    }).join('');
+    RTW.qs('#milestoneTable').innerHTML = html;
+    RTW.qs('#budgetTotal').textContent = RTW.money(budget);
+    RTW.qs('#firstPayment').textContent = RTW.money(Math.round(budget * 0.3));
+    RTW.qs('#midPayment').textContent = RTW.money(Math.round(budget * 0.6));
+    RTW.qs('#lastPayment').textContent = RTW.money(Math.round(budget * 0.1));
+  }
+  RTW.qs('#budget').addEventListener('input', renderMilestones);
+  renderMilestones();
+
+  RTW.qs('#attachment').addEventListener('change', function (e) {
+    var f = e.target.files && e.target.files[0];
+    if (f) {
+      RTW.qs('#fileName').textContent = f.name + ' · ' + Math.ceil(f.size / 1024) + ' KB';
+      RTW.toast('附件已选择（演示环境仅记录文件名）', 'info');
+    }
+  });
+
+  function fillSummary() {
+    var line = RTW.qs('#taskLine').value;
+    var budget = Number(RTW.qs('#budget').value) || 0;
+    var rows = [
+      ['任务名称', RTW.qs('#taskTitle').value],
+      ['出题单位', RTW.qs('#taskOrg').value],
+      ['任务线', line === 'A' ? 'A 线 · 小组实践' : 'B 线 · 个人毕设'],
+      ['领域', RTW.qs('#taskDomain').value],
+      ['周期 / 团队', RTW.qs('#cycle').value + ' · ' + RTW.qs('#teamSize').value],
+      ['托管赏金', RTW.money(budget) + '（首期 30%：' + RTW.money(Math.round(budget * 0.3)) + '）'],
+      ['对接人', RTW.qs('#fContact').value + ' · ' + RTW.qs('#fTime').value],
+      ['验收标准', RTW.qs('#fAccept').value || '—']
+    ];
+    RTW.qs('#publishSummary').innerHTML = rows.map(function (r) {
+      return '<div class="summary-row"><span>' + r[0] + '</span><b>' + RTW.esc(r[1]) + '</b></div>';
+    }).join('');
+  }
+
+  RTW.qs('#publishForm').addEventListener('submit', function (e) {
+    e.preventDefault();
+    if (!RTW.qs('#publishAgree').checked) {
+      showMsg('请先阅读并勾选任务发布与数据安全协议。');
+      return;
+    }
+    if (!check(2) || !check(3)) { setStep(2); return; }
+
+    var budget = Number(RTW.qs('#budget').value);
+    var code = 'RT-2610-' + String(Math.floor(Math.random() * 900) + 100);
+    var title = RTW.qs('#taskTitle').value;
+    var newTask = {
+      id: code,
+      title: title,
+      org: RTW.qs('#taskOrg').value,
+      line: RTW.qs('#taskLine').value,
+      domain: RTW.qs('#taskDomain').value,
+      submitted: '刚刚',
+      risk: '新提交 · 待初审',
+      riskLevel: 'ok',
+      status: 'pending'
+    };
+    var queue = RTW.read('rtw.published', []);
+    queue.unshift(newTask);
+    RTW.write('rtw.published', queue.slice(0, 6));
+
+    RTW.qs('#wizardCard').style.display = 'none';
+    RTW.qs('#publishSuccess').classList.add('is-on');
+    RTW.qs('#publishCode').textContent = code;
+    RTW.qs('#goPay').setAttribute('href', 'payment.html?amount=' + Math.round(budget * 0.3) + '&stage=' + encodeURIComponent('首期托管款 · M0+M1 30%') + '&task=' + encodeURIComponent(title) + '&id=' + code);
+    RTW.qsa('[data-rail]').forEach(function (r) { r.classList.remove('is-active'); r.classList.add('is-done'); });
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+
+  RTW.qsa('[data-switch-role]').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      RTW.loginDemo(btn.getAttribute('data-switch-role'), true);
+      location.reload();
+    });
+  });
+})();
+</script>
+</body>
+</html>

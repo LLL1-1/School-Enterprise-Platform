@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>审核工作台 · 真题工场</title>
+<meta name="description" content="匿名审核工作台：查看进行中项目、过程材料与审核记录。">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body class="app-body guarded" data-guard="review" data-guard-roles="mentor,admin" data-guard-next="review.html">
+<script src="assets/js/guard.js"></script>
+<script src="assets/js/icons.js"></script>
+
+<div class="auth-gate" id="authGate">
+  <div class="auth-gate-card">
+    <a class="brand" href="index.html" data-same-tab aria-label="真题工场首页">
+      <span class="brand-mark" aria-hidden="true">真</span>
+      <span class="brand-text"><b>真题工场</b><small>REAL TASK WORKS</small></span>
+    </a>
+    <div class="gate-ic"><svg class="ic" aria-hidden="true"><use href="#i-shield"></use></svg></div>
+    <h1>审核工作台需要审核身份</h1>
+    <p>该入口面向指导教师或平台审核人员。当前身份不具备审核权限，不会展示任何项目材料。</p>
+    <div class="gate-actions">
+      <button class="btn btn-primary" type="button" data-switch-role="mentor">使用导师演示身份进入</button>
+      <a class="btn btn-ghost" data-same-tab href="login.html?next=review.html&amp;need=review">切换账号登录</a>
+      <a class="btn btn-ghost" data-same-tab href="workspace.html">返回工作台</a>
+    </div>
+    <p class="gate-note">演示环境：角色与权限均为前端模拟；审核页已隐藏学生与团队身份信息。</p>
+  </div>
+</div>
+
+<div class="app-shell">
+  <div class="sidebar-scrim" data-sidebar-close></div>
+  <aside class="app-sidebar" id="appSidebar"></aside>
+  <div class="app-main">
+    <header class="app-topbar" id="appTopbar"></header>
+    <main class="page-body">
+      <div class="page-head">
+        <div>
+          <h1>审核工作台</h1>
+          <div class="sub">匿名评审模式 · 已隐藏学生与团队身份信息 · 只保留项目内容、过程材料与审核状态</div>
+        </div>
+        <div class="page-head-actions">
+          <span class="status-pill green">审核员视角</span>
+          <button class="btn btn-ghost btn-sm" type="button" data-toast="演示环境：评审规则为平台 V0.2 示意文本" data-toast-type="info">
+            <svg class="ic"><use href="#i-file"></use></svg>评审规则
+          </button>
+        </div>
+      </div>
+
+      <div class="audit-note">
+        <svg class="ic" aria-hidden="true"><use href="#i-shield"></use></svg>
+        <span><b>匿名评审说明：</b>学生姓名、学号、头像、联系方式、团队名称均已隐藏；审核记录以“审核员 A / B”编号显示。项目编号仅用于本次评审追踪。</span>
+      </div>
+
+      <div class="kpi-grid">
+        <div class="kpi-card"><div class="kpi-top"><span class="kpi-label">进行中项目</span><span class="kpi-ic"><svg class="ic"><use href="#i-layers"></use></svg></span></div><div class="kpi-value" id="kpiOngoing">4<small>个</small></div><div class="kpi-foot"><span>已认领并进入里程碑</span></div></div>
+        <div class="kpi-card"><div class="kpi-top"><span class="kpi-label">待我审核</span><span class="kpi-ic"><svg class="ic"><use href="#i-shield"></use></svg></span></div><div class="kpi-value" id="kpiPending">2<small>项</small></div><div class="kpi-foot"><span class="warn">最近提交 2 小时前</span></div></div>
+        <div class="kpi-card"><div class="kpi-top"><span class="kpi-label">已审核</span><span class="kpi-ic"><svg class="ic"><use href="#i-check-circle"></use></svg></span></div><div class="kpi-value" id="kpiDone">1<small>项</small></div><div class="kpi-foot"><span>本轮评审记录可追溯</span></div></div>
+        <div class="kpi-card"><div class="kpi-top"><span class="kpi-label">风险提示</span><span class="kpi-ic"><svg class="ic"><use href="#i-alert"></use></svg></span></div><div class="kpi-value">1<small>项</small></div><div class="kpi-foot"><span class="warn">M1 材料待补充</span></div></div>
+      </div>
+
+      <div class="panel" style="margin-top:14px">
+        <div class="panel-head">
+          <div class="panel-title">项目审核队列 <span class="count" id="auditCount">4</span></div>
+          <div class="segmented" id="auditTabs" role="tablist" aria-label="审核项目筛选">
+            <button class="seg-btn is-active" type="button" data-audit-tab="ongoing">进行中</button>
+            <button class="seg-btn" type="button" data-audit-tab="pending">待审核</button>
+            <button class="seg-btn" type="button" data-audit-tab="done">已审核</button>
+          </div>
+        </div>
+        <div class="panel-body">
+          <div class="audit-grid" id="auditGrid"></div>
+        </div>
+      </div>
+
+      <div class="audit-bottom">
+        <div class="notice-box">
+          <svg class="ic" aria-hidden="true"><use href="#i-info"></use></svg>
+          <span>审核操作只在前端演示：通过/退回不会写入真实数据库，也不影响学生实际成绩。正式版需接入 RBAC、评分量表与审计日志。</span>
+        </div>
+      </div>
+    </main>
+  </div>
+</div>
+
+<div class="modal" id="auditModal" aria-hidden="true">
+  <div class="modal-card audit-modal" role="dialog" aria-modal="true" aria-labelledby="auditTitle">
+    <div class="modal-head">
+      <div>
+        <div class="mono" style="font-size:9px;letter-spacing:.06em;color:var(--muted)" id="auditCode">PRJ-A-03</div>
+        <h2 id="auditTitle">项目材料</h2>
+        <p id="auditSub">匿名项目 · 团队 4 人 · 2023 级</p>
+      </div>
+      <button class="modal-close" type="button" data-modal-close aria-label="关闭"><svg class="ic"><use href="#i-close"></use></svg></button>
+    </div>
+    <div class="modal-body">
+      <div class="audit-anon"><svg class="ic"><use href="#i-shield"></use></svg><span>已匿名：不显示姓名、学号、头像、联系方式与团队名称</span></div>
+      <div class="audit-meta-grid" id="auditMeta"></div>
+      <div class="audit-section"><h3>里程碑状态</h3><div class="milestone-list" id="auditMilestones"></div></div>
+      <div class="audit-section"><h3>提交材料</h3><div class="audit-materials" id="auditMaterials"></div></div>
+      <div class="audit-section"><h3>审核记录</h3><div class="audit-history" id="auditHistory"></div></div>
+      <div class="audit-section"><h3>审核意见</h3><textarea class="textarea" id="auditComment" style="min-height:82px" placeholder="填写通过说明或整改要求；退回时必填。"></textarea></div>
+    </div>
+    <div class="modal-foot">
+      <button class="btn btn-ghost" type="button" data-modal-close>取消</button>
+      <button class="btn btn-ghost" type="button" id="auditReturn" style="color:var(--red);border-color:#eed0c8">退回整改</button>
+      <button class="btn btn-primary" type="button" id="auditPass">通过审核</button>
+    </div>
+  </div>
+</div>
+
+<script src="assets/js/data.js"></script>
+<script src="assets/js/app.js"></script>
+<script>
+(function () {
+  RTW.renderReviewSidebar('review');
+  RTW.renderAppTopbar({ root: '审核工作台', title: '进行中项目' });
+  RTW.initUI();
+
+  var projects = (window.RTW_DATA.auditProjects || []).slice();
+  var filter = 'ongoing';
+  var currentId = null;
+  var initialHash = (location.hash || '').replace('#', '');
+  if (initialHash === 'pending') filter = 'pending';
+  if (initialHash === 'history') filter = 'done';
+
+  function statusInfo(p) {
+    if (p.status === 'done') return { text: '已审核', cls: 'gray' };
+    if (p.status === 'pending') return { text: '待审核', cls: 'amber' };
+    return { text: '进行中', cls: 'green' };
+  }
+
+  function counts() {
+    var ongoing = projects.filter(function (p) { return p.status !== 'done'; }).length;
+    var pending = projects.filter(function (p) { return p.status === 'pending'; }).length;
+    var done = projects.filter(function (p) { return p.status === 'done'; }).length;
+    RTW.qs('#kpiOngoing').innerHTML = ongoing + '<small>个</small>';
+    RTW.qs('#kpiPending').innerHTML = pending + '<small>项</small>';
+    RTW.qs('#kpiDone').innerHTML = done + '<small>项</small>';
+  }
+
+  function render() {
+    var list = projects.filter(function (p) {
+      if (filter === 'pending') return p.status === 'pending';
+      if (filter === 'done') return p.status === 'done';
+      return p.status !== 'done';
+    });
+    RTW.qs('#auditCount').textContent = list.length;
+    RTW.qsa('[data-audit-tab]').forEach(function (b) {
+      b.classList.toggle('is-active', b.getAttribute('data-audit-tab') === filter);
+    });
+    RTW.qs('#auditGrid').innerHTML = list.length ? list.map(function (p) {
+      var st = statusInfo(p);
+      return '<article class="audit-card">' +
+        '<div class="audit-card-top"><span class="mono">' + p.id + '</span><span class="status-pill ' + st.cls + '">' + st.text + '</span></div>' +
+        '<h3>' + p.title + '</h3>' +
+        '<p>' + p.summary + '</p>' +
+        '<div class="audit-card-meta"><span>' + p.domain + '</span><span>团队 ' + p.teamSize + ' 人</span><span>' + p.cohort + '</span></div>' +
+        '<div class="progress-head"><span>' + p.stage + '</span><b>' + p.progress + '%</b></div>' +
+        '<div class="progress-track"><i style="width:' + p.progress + '%"></i></div>' +
+        '<div class="audit-card-foot"><span>' + (p.status === 'done' ? '已归档' : '待办：' + p.pending) + '</span>' +
+        '<button class="btn btn-primary btn-sm" type="button" data-audit-open="' + p.id + '">' + (p.status === 'done' ? '查看记录' : '查看材料') + '</button></div>' +
+        '</article>';
+    }).join('') : '<div class="table-empty">当前筛选下暂无项目</div>';
+    counts();
+    RTW.qsa('[data-audit-open]').forEach(function (btn) {
+      btn.addEventListener('click', function () { openProject(btn.getAttribute('data-audit-open')); });
+    });
+  }
+
+  RTW.qsa('[data-audit-tab]').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      filter = btn.getAttribute('data-audit-tab');
+      render();
+    });
+  });
+
+  function openProject(id) {
+    var p = projects.filter(function (x) { return x.id === id; })[0];
+    if (!p) return;
+    currentId = id;
+    RTW.qs('#auditCode').textContent = p.id;
+    RTW.qs('#auditTitle').textContent = p.title;
+    RTW.qs('#auditSub').textContent = '匿名项目 · 团队 ' + p.teamSize + ' 人 · ' + p.college + ' ' + p.cohort;
+    RTW.qs('#auditMeta').innerHTML =
+      '<div><span>领域</span><b>' + p.domain + '</b></div>' +
+      '<div><span>当前阶段</span><b>' + p.stage + '</b></div>' +
+      '<div><span>进度</span><b>' + p.progress + '%</b></div>' +
+      '<div><span>最近更新</span><b>' + p.updated + '</b></div>';
+    RTW.qs('#auditMilestones').innerHTML = p.milestones.map(function (m) {
+      var st = m.status === 'done' ? '已完成' : (m.status === 'active' ? '进行中' : '待开始');
+      var tag = m.status === 'done' ? 'tag-pine' : (m.status === 'active' ? 'tag-amber' : '');
+      return '<div class="ms-row ' + m.status + '"><div class="ms-code"><span class="ms-dot">' + m.code + '</span></div>' +
+        '<div class="ms-body"><b>' + m.name + ' <span class="tag ' + tag + '">' + st + '</span></b></div><div class="ms-money"></div></div>';
+    }).join('');
+    RTW.qs('#auditMaterials').innerHTML = p.materials.map(function (f) {
+      return '<div class="audit-material"><span class="audit-file">' + f.type + '</span><div><b>' + f.name + '</b><small>' + f.size + ' · 团队提交于 ' + f.date + '</small></div><button class="btn btn-ghost btn-sm" type="button" data-toast="演示环境：材料预览未接入文件服务" data-toast-type="info">预览</button></div>';
+    }).join('');
+    RTW.qs('#auditHistory').innerHTML = p.history.map(function (h) {
+      return '<div class="audit-history-row"><span class="mono">' + h.time + '</span><div><b>' + h.text + '</b><small>' + h.by + '</small></div></div>';
+    }).join('');
+    RTW.qs('#auditComment').value = '';
+    var done = p.status === 'done';
+    RTW.qs('#auditReturn').style.display = done ? 'none' : '';
+    RTW.qs('#auditPass').style.display = done ? 'none' : '';
+    RTW.openModal('auditModal');
+  }
+
+  RTW.qs('#auditPass').addEventListener('click', function () {
+    var p = projects.filter(function (x) { return x.id === currentId; })[0];
+    if (!p) return;
+    p.status = 'done';
+    p.pending = '已通过 · 待归档';
+    RTW.closeModal('auditModal');
+    render();
+    RTW.toast('审核已通过，项目进入下一节点', 'success');
+  });
+
+  RTW.qs('#auditReturn').addEventListener('click', function () {
+    var p = projects.filter(function (x) { return x.id === currentId; })[0];
+    if (!p) return;
+    var comment = RTW.qs('#auditComment').value.trim();
+    if (!comment) {
+      RTW.toast('退回时请填写整改要求', 'error');
+      RTW.qs('#auditComment').focus();
+      return;
+    }
+    p.status = 'ongoing';
+    p.pending = '已退回 · 待团队整改';
+    p.history.unshift({ time: '刚刚', text: '退回整改：' + comment, by: '审核员 A' });
+    RTW.closeModal('auditModal');
+    render();
+    RTW.toast('已退回整改，学生端将收到匿名反馈', 'info');
+  });
+
+  RTW.qsa('[data-switch-role]').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      RTW.loginDemo(btn.getAttribute('data-switch-role'), true);
+      location.reload();
+    });
+  });
+
+  window.addEventListener('hashchange', function () {
+    var h = (location.hash || '').replace('#', '');
+    filter = h === 'pending' ? 'pending' : (h === 'history' ? 'done' : 'ongoing');
+    render();
+  });
+
+  render();
+})();
+</script>
+</body>
+</html>

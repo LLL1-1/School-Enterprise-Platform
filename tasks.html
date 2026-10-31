@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>任务市场 · 真题工场</title>
+<meta name="description" content="浏览来自县域企业与校内部门的真实任务，按任务线、领域、地域、周期与赏金筛选。">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+<script src="assets/js/icons.js"></script>
+<div id="siteHeader"></div>
+
+<main>
+  <section class="page-hero">
+    <div class="container">
+      <div class="breadcrumb">
+        <a href="index.html">首页</a>
+        <svg class="ic" aria-hidden="true"><use href="#i-chevron-right"></use></svg>
+        <span>任务市场</span>
+      </div>
+      <div class="page-hero-row">
+        <div>
+          <h1>任务市场</h1>
+          <p>每道题都经过运营初审与导师复核，六要素齐全才会上架。先看清边界与验收标准，再决定要不要认领。</p>
+        </div>
+        <div class="page-hero-stats">
+          <div><b>26</b><span>在架真题</span></div>
+          <div><b>15</b><span>签约出题方</span></div>
+          <div><b>8</b><span>覆盖领域</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="container">
+    <div class="recruit-banner" id="recruitBanner" hidden>
+      <div class="recruit-banner-main">
+        <span class="status-pill green">正在招募</span>
+        <div><b>当前显示可申请项目</b><span>已满员或暂停招募的任务默认隐藏，方便直接认领。</span></div>
+      </div>
+      <a class="btn btn-ghost btn-sm" href="tasks.html">查看全部在架真题</a>
+    </div>
+  </div>
+
+  <div class="container market-layout">
+    <aside class="filter-panel" id="filterPanel">
+      <div class="filter-block">
+        <div class="filter-title"><span>任务线</span><button class="reset" type="button" id="resetFilters">重置</button></div>
+        <div class="filter-chips" id="lineChips"></div>
+      </div>
+      <div class="filter-block">
+        <div class="filter-title"><span>领域</span></div>
+        <div class="filter-chips" id="domainChips"></div>
+      </div>
+      <div class="filter-block">
+        <div class="filter-title"><span>地域</span></div>
+        <select class="select select-sm" id="regionSelect" style="width:100%;height:36px;font-size:10.5px;border-radius:7px">
+          <option value="all">全部地域</option>
+        </select>
+      </div>
+      <div class="filter-block">
+        <div class="filter-title"><span>周期</span></div>
+        <div class="filter-chips" id="cycleChips"></div>
+      </div>
+      <div class="filter-block">
+        <div class="filter-title"><span>赏金</span></div>
+        <div class="filter-chips" id="budgetChips"></div>
+      </div>
+      <div class="filter-note">
+        <b><svg class="ic" aria-hidden="true"><use href="#i-shield"></use></svg> 质量说明</b>
+        当前展示 12 道演示任务，完整真题池共 26 道。所有赏金已由企业托管，按里程碑结算。
+      </div>
+    </aside>
+
+    <section class="market-main" aria-label="任务列表">
+      <div class="market-toolbar">
+        <button class="filter-toggle" type="button" id="filterToggle">
+          <svg class="ic" style="width:14px;height:14px" aria-hidden="true"><use href="#i-filter"></use></svg>
+          筛选
+        </button>
+        <div class="search-box">
+          <svg class="ic" aria-hidden="true"><use href="#i-search"></use></svg>
+          <input type="search" id="searchInput" placeholder="搜索任务名称、企业、技术栈…" aria-label="搜索任务">
+        </div>
+        <select class="select-sm" id="sortSelect" aria-label="排序">
+          <option value="latest">最近发布</option>
+          <option value="budget">赏金最高</option>
+          <option value="cycle">周期最短</option>
+          <option value="hot">最热门</option>
+        </select>
+        <div class="view-toggle" role="group" aria-label="视图切换">
+          <button type="button" class="is-active" data-view="grid" aria-label="网格视图" aria-pressed="true">
+            <svg class="ic" aria-hidden="true"><use href="#i-grid"></use></svg>
+          </button>
+          <button type="button" data-view="list" aria-label="列表视图" aria-pressed="false">
+            <svg class="ic" aria-hidden="true"><use href="#i-list"></use></svg>
+          </button>
+        </div>
+      </div>
+
+      <div class="result-line">
+        <span>共 <b id="resultCount">12</b> 道<span id="resultKind">演示任务</span> <span id="resultQuery"></span></span>
+        <div class="active-filters" id="activeFilters"></div>
+      </div>
+
+      <div class="market-grid" id="taskGrid"></div>
+      <div class="empty-state" id="emptyState">
+        <svg class="ic" aria-hidden="true"><use href="#i-search"></use></svg>
+        <b>没有找到符合条件的任务</b>
+        <p>试试放宽筛选条件，或清空关键词。</p>
+        <button class="btn btn-ghost btn-sm" type="button" id="emptyReset" style="margin-top:14px">清空筛选</button>
+      </div>
+
+      <div class="pagination" id="pagination"></div>
+
+      <div class="panel" style="margin-top:28px;padding:18px 20px;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap">
+        <div>
+          <div style="font-size:12.5px;font-weight:600">没有合适的题目？</div>
+          <div style="font-size:10.5px;color:var(--muted);margin-top:2px">新一批县域真题将在 11 月初上架，订阅后可收到提醒。</div>
+        </div>
+        <button class="btn btn-ghost btn-sm" type="button" data-toast="已订阅新任务提醒（演示）" data-toast-type="success">
+          <svg class="ic" aria-hidden="true"><use href="#i-bell"></use></svg>
+          订阅新任务
+        </button>
+      </div>
+    </section>
+  </div>
+</main>
+
+<div id="siteFooter"></div>
+<script src="assets/js/data.js"></script>
+<script src="assets/js/app.js"></script>
+<script>
+(function () {
+  RTW.initChrome('tasks');
+
+  var tasks = (window.RTW_DATA.tasks || []).slice();
+  var state = {
+    line: 'all',
+    domain: 'all',
+    region: 'all',
+    cycle: 'all',
+    budget: 'all',
+    q: (RTW.param('q') || '').trim(),
+    mode: RTW.param('mode') === 'recruit' ? 'recruit' : 'all',
+    sort: 'latest',
+    view: 'grid',
+    page: 1,
+    perPage: 6
+  };
+  var lineParam = RTW.param('line');
+  if (lineParam === 'A' || lineParam === 'B') state.line = lineParam;
+  RTW.qs('#recruitBanner').hidden = state.mode !== 'recruit';
+
+  var lineDefs = [
+    { key: 'all', label: '全部' },
+    { key: 'A', label: 'A 线 · 小组' },
+    { key: 'B', label: 'B 线 · 个人' }
+  ];
+  var domainDefs = [{ key: 'all', label: '全部' }].concat(Array.from(new Set(tasks.map(function (t) { return t.domain; }))).map(function (d) { return { key: d, label: d }; }));
+  var cycleDefs = [
+    { key: 'all', label: '全部' },
+    { key: 'short', label: '8 周及以内' },
+    { key: 'mid', label: '9—12 周' },
+    { key: 'long', label: '13 周以上' }
+  ];
+  var budgetDefs = [
+    { key: 'all', label: '全部' },
+    { key: 'low', label: '1 万以下' },
+    { key: 'mid', label: '1—2 万' },
+    { key: 'high', label: '2 万以上' }
+  ];
+
+  function countLine(key) {
+    return key === 'all' ? tasks.length : tasks.filter(function (t) { return t.line === key; }).length;
+  }
+  function countDomain(key) {
+    return key === 'all' ? tasks.length : tasks.filter(function (t) { return t.domain === key; }).length;
+  }
+
+  function chip(label, count, active, attr, value) {
+    return '<button class="chip ' + (active ? 'is-active' : '') + '" type="button" ' + attr + '="' + value + '">' + label + (count != null ? '<span class="count">' + count + '</span>' : '') + '</button>';
+  }
+
+  function renderFilters() {
+    RTW.qs('#lineChips').innerHTML = lineDefs.map(function (d) {
+      return chip(d.label, countLine(d.key), state.line === d.key, 'data-line', d.key);
+    }).join('');
+    RTW.qs('#domainChips').innerHTML = domainDefs.map(function (d) {
+      return chip(d.label, countDomain(d.key), state.domain === d.key, 'data-domain', d.key);
+    }).join('');
+    RTW.qs('#cycleChips').innerHTML = cycleDefs.map(function (d) {
+      return chip(d.label, null, state.cycle === d.key, 'data-cycle', d.key);
+    }).join('');
+    RTW.qs('#budgetChips').innerHTML = budgetDefs.map(function (d) {
+      return chip(d.label, null, state.budget === d.key, 'data-budget', d.key);
+    }).join('');
+
+    var regions = Array.from(new Set(tasks.map(function (t) { return t.region; })));
+    var select = RTW.qs('#regionSelect');
+    select.innerHTML = '<option value="all">全部地域</option>' + regions.map(function (r) {
+      return '<option value="' + r + '"' + (state.region === r ? ' selected' : '') + '>' + r + '</option>';
+    }).join('');
+
+    RTW.qsa('[data-line]').forEach(function (b) {
+      b.addEventListener('click', function () { state.line = b.getAttribute('data-line'); state.page = 1; render(); });
+    });
+    RTW.qsa('[data-domain]').forEach(function (b) {
+      b.addEventListener('click', function () { state.domain = b.getAttribute('data-domain'); state.page = 1; render(); });
+    });
+    RTW.qsa('[data-cycle]').forEach(function (b) {
+      b.addEventListener('click', function () { state.cycle = b.getAttribute('data-cycle'); state.page = 1; render(); });
+    });
+    RTW.qsa('[data-budget]').forEach(function (b) {
+      b.addEventListener('click', function () { state.budget = b.getAttribute('data-budget'); state.page = 1; render(); });
+    });
+  }
+
+  function parseWeeks(str) {
+    var m = String(str).match(/(\d+)/);
+    return m ? Number(m[1]) : 0;
+  }
+
+  function filtered() {
+    var q = state.q.toLowerCase();
+    return tasks.filter(function (t) {
+      if (state.mode === 'recruit' && (t.claimed >= t.slots || t.status !== 'open')) return false;
+      if (state.line !== 'all' && t.line !== state.line) return false;
+      if (state.domain !== 'all' && t.domain !== state.domain) return false;
+      if (state.region !== 'all' && t.region !== state.region) return false;
+      var weeks = parseWeeks(t.cycle);
+      if (state.cycle === 'short' && weeks > 8) return false;
+      if (state.cycle === 'mid' && (weeks < 9 || weeks > 12)) return false;
+      if (state.cycle === 'long' && weeks < 13) return false;
+      if (state.budget === 'low' && t.budget >= 10000) return false;
+      if (state.budget === 'mid' && (t.budget < 10000 || t.budget > 20000)) return false;
+      if (state.budget === 'high' && t.budget <= 20000) return false;
+      if (q) {
+        var hay = [t.title, t.org, t.summary, t.domain, t.region, t.tech.join(' ')].join(' ').toLowerCase();
+        if (hay.indexOf(q) === -1) return false;
+      }
+      return true;
+    }).sort(function (a, b) {
+      if (state.sort === 'budget') return b.budget - a.budget;
+      if (state.sort === 'cycle') return parseWeeks(a.cycle) - parseWeeks(b.cycle);
+      if (state.sort === 'hot') return (b.hot ? 1 : 0) - (a.hot ? 1 : 0) || b.applications - a.applications;
+      return String(b.published).localeCompare(String(a.published));
+    });
+  }
+
+  function applyBookmark(html, id) {
+    if (RTW.getBookmarks().indexOf(id) > -1) {
+      return html.replace('class="bm-btn"', 'class="bm-btn is-on"').replace('aria-pressed="false"', 'aria-pressed="true"');
+    }
+    return html;
+  }
+
+  function cardHTML(t) {
+    var full = t.claimed >= t.slots;
+    var status = full ? '已满员' : RTW.statusText(t.status);
+    var html = '<article class="task-card">' +
+      '<div class="task-card-top"><div class="left">' +
+        '<span class="line-badge line-' + t.line + '">' + RTW.lineShort(t.line) + '</span>' +
+        (t.hot ? '<span class="task-flag">' + RTW.icon('trend') + '热门</span>' : '') +
+      '</div>' +
+      '<button class="bm-btn" type="button" data-bookmark="' + t.id + '" aria-label="收藏任务" aria-pressed="false">' + RTW.icon('bookmark') + '</button></div>' +
+      '<div class="task-main">' +
+        '<h3><a href="task.html?id=' + t.id + '">' + t.title + '</a></h3>' +
+        '<div class="task-org">' + RTW.icon('building') + t.org + '<span class="status-pill ' + (full ? 'amber' : 'green') + '" style="margin-left:6px">' + status + ' ' + t.claimed + '/' + t.slots + '</span></div>' +
+        '<p class="task-summary">' + t.summary + '</p>' +
+        '<div class="task-tags"><span class="tag tag-pine">' + t.domain + '</span>' + t.tech.slice(0, 2).map(function (x) { return '<span class="tag">' + x + '</span>'; }).join('') + '</div>' +
+      '</div>' +
+      '<div class="task-foot">' +
+        '<div class="task-price"><small>企业托管赏金</small><b>' + RTW.money(t.budget) + '</b></div>' +
+        '<div class="task-meta">' +
+          '<span>' + RTW.icon('clock') + t.cycle + '</span>' +
+          '<span>' + RTW.icon('users') + t.teamSize + '</span>' +
+          '<span>' + RTW.icon('map-pin') + t.region + '</span>' +
+        '</div>' +
+        '<a class="go" href="task.html?id=' + t.id + '" aria-label="查看任务详情">' + RTW.icon('arrow-right') + '</a>' +
+      '</div>' +
+    '</article>';
+    return applyBookmark(html, t.id);
+  }
+
+  function renderActive() {
+    var parts = [];
+    if (state.line !== 'all') parts.push({ k: 'line', label: state.line === 'A' ? 'A 线' : 'B 线' });
+    if (state.domain !== 'all') parts.push({ k: 'domain', label: state.domain });
+    if (state.region !== 'all') parts.push({ k: 'region', label: state.region });
+    if (state.cycle !== 'all') parts.push({ k: 'cycle', label: cycleDefs.filter(function (d) { return d.key === state.cycle; })[0].label });
+    if (state.budget !== 'all') parts.push({ k: 'budget', label: budgetDefs.filter(function (d) { return d.key === state.budget; })[0].label });
+    RTW.qs('#activeFilters').innerHTML = parts.map(function (p) {
+      return '<span class="active-filter">' + p.label + '<button type="button" data-clear="' + p.k + '" aria-label="移除筛选">' + RTW.icon('close') + '</button></span>';
+    }).join('');
+    RTW.qsa('[data-clear]').forEach(function (b) {
+      b.addEventListener('click', function () {
+        state[b.getAttribute('data-clear')] = 'all';
+        state.page = 1;
+        render();
+      });
+    });
+  }
+
+  function renderPagination(total) {
+    var pages = Math.max(1, Math.ceil(total / state.perPage));
+    if (pages <= 1) { RTW.qs('#pagination').innerHTML = ''; return; }
+    var html = '';
+    html += '<button type="button" data-page="' + Math.max(1, state.page - 1) + '" aria-label="上一页">' + RTW.icon('chevron-left') + '</button>';
+    for (var i = 1; i <= pages; i += 1) {
+      html += '<button type="button" class="' + (i === state.page ? 'is-active' : '') + '" data-page="' + i + '">' + i + '</button>';
+    }
+    html += '<button type="button" data-page="' + Math.min(pages, state.page + 1) + '" aria-label="下一页">' + RTW.icon('chevron-right') + '</button>';
+    RTW.qs('#pagination').innerHTML = html;
+    RTW.qsa('[data-page]').forEach(function (b) {
+      b.addEventListener('click', function () {
+        state.page = Number(b.getAttribute('data-page'));
+        render();
+        var top = RTW.qs('.market-main').getBoundingClientRect().top + window.scrollY - 100;
+        window.scrollTo({ top: top, behavior: 'smooth' });
+      });
+    });
+  }
+
+  function render() {
+    var list = filtered();
+    var totalPages = Math.max(1, Math.ceil(list.length / state.perPage));
+    if (state.page > totalPages) state.page = totalPages;
+    var pageList = list.slice((state.page - 1) * state.perPage, state.page * state.perPage);
+
+    RTW.qs('#resultCount').textContent = list.length;
+    RTW.qs('#resultKind').textContent = state.mode === 'recruit' ? '可申请项目' : '演示任务';
+    RTW.qs('#resultQuery').textContent = state.q ? '· 关键词「' + state.q + '」' : '';
+    RTW.qs('#taskGrid').className = state.view === 'list' ? 'market-list' : 'market-grid';
+    RTW.qs('#taskGrid').innerHTML = pageList.map(cardHTML).join('');
+    RTW.qs('#emptyState').classList.toggle('is-on', list.length === 0);
+    RTW.qs('#taskGrid').style.display = list.length === 0 ? 'none' : '';
+    renderActive();
+    renderPagination(list.length);
+    renderFilters();
+    RTW.applyLinkPolicy();
+  }
+
+  /* 事件 */
+  var searchTimer;
+  RTW.qs('#searchInput').addEventListener('input', function (e) {
+    clearTimeout(searchTimer);
+    var val = e.target.value;
+    searchTimer = setTimeout(function () {
+      state.q = val.trim();
+      state.page = 1;
+      render();
+    }, 180);
+  });
+  RTW.qs('#sortSelect').addEventListener('change', function (e) {
+    state.sort = e.target.value;
+    state.page = 1;
+    render();
+  });
+  RTW.qsa('[data-view]').forEach(function (b) {
+    b.addEventListener('click', function () {
+      state.view = b.getAttribute('data-view');
+      RTW.qsa('[data-view]').forEach(function (x) {
+        var on = x === b;
+        x.classList.toggle('is-active', on);
+        x.setAttribute('aria-pressed', on ? 'true' : 'false');
+      });
+      render();
+    });
+  });
+  RTW.qs('#regionSelect').addEventListener('change', function (e) {
+    state.region = e.target.value;
+    state.page = 1;
+    render();
+  });
+  RTW.qs('#resetFilters').addEventListener('click', function () {
+    state.line = 'all'; state.domain = 'all'; state.region = 'all'; state.cycle = 'all'; state.budget = 'all'; state.q = '';
+    state.page = 1;
+    RTW.qs('#searchInput').value = '';
+    render();
+  });
+  RTW.qs('#filterToggle').addEventListener('click', function () {
+    RTW.qs('#filterPanel').classList.toggle('is-open');
+  });
+  RTW.qs('#emptyReset').addEventListener('click', function () {
+    if (state.mode === 'recruit') {
+      window.location.href = 'tasks.html';
+      return;
+    }
+    RTW.qs('#resetFilters').click();
+  });
+
+  RTW.qs('#searchInput').value = state.q;
+  if (state.q) RTW.qs('#resultQuery').textContent = '· 关键词「' + state.q + '」';
+  render();
+  RTW.initUI();
+})();
+</script>
+</body>
+</html>

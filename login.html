@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>登录 · 真题工场</title>
+<meta name="description" content="登录真题工场，继续你的真实项目。">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body class="auth-page">
+<script src="assets/js/icons.js"></script>
+
+<div class="auth-topbar">
+  <a class="brand" href="index.html" aria-label="真题工场首页">
+    <span class="brand-mark" aria-hidden="true">真</span>
+    <span class="brand-text"><b>真题工场</b><small>REAL TASK WORKS</small></span>
+  </a>
+  <div class="meta">
+    <span>还没有账号？</span>
+    <a href="register.html">立即注册</a>
+    <span>·</span>
+    <a href="index.html" style="color:var(--muted);font-weight:400">返回首页</a>
+  </div>
+</div>
+
+<div class="auth-wrap">
+  <aside class="auth-aside">
+    <div class="auth-aside-inner">
+      <div class="hero-eyebrow" style="background:rgba(248,243,228,.06);border-color:rgba(248,243,228,.2);color:rgba(248,243,228,.85)">
+        <span class="dot" style="background:#e6b86a;box-shadow:0 0 0 3px rgba(230,184,106,.16)"></span>
+        校地协同任务实践平台
+      </div>
+      <blockquote class="auth-quote">让每一道真题，<br>都成为简历上<br><em>拿得出手的作品。</em></blockquote>
+      <p class="auth-aside-sub">企业出题、双导师护航、里程碑验收。你提交的每一份需求、每一次 Git 提交、每一张验收单，都会沉淀为可追溯的项目档案。</p>
+      <div class="auth-stats">
+        <div class="auth-stat"><b>26</b><small>在架真题</small></div>
+        <div class="auth-stat"><b>15</b><small>签约出题方</small></div>
+        <div class="auth-stat"><b>94%</b><small>按期验收率</small></div>
+      </div>
+    </div>
+    <div class="auth-aside-foot">
+      <svg class="ic" aria-hidden="true"><use href="#i-shield"></use></svg>
+      <span>统一身份认证 · 数据不出校 · 全过程留痕</span>
+    </div>
+  </aside>
+
+  <main class="auth-main">
+    <div class="auth-card">
+      <div class="auth-head">
+        <div class="badge-soft" style="margin-bottom:12px;background:#eef3ee;color:#23684c">
+          <svg class="ic" style="width:11px;height:11px" aria-hidden="true"><use href="#i-lock"></use></svg>
+          安全登录 · V0.2 演示环境
+        </div>
+        <h1>欢迎回来</h1>
+        <p>登录后继续你的项目。首次使用？<a href="register.html">创建账号</a></p>
+      </div>
+
+      <div class="auth-tabs" role="tablist" aria-label="登录方式">
+        <button class="auth-tab is-active" type="button" role="tab" aria-selected="true" data-auth-tab="password">密码登录</button>
+        <button class="auth-tab" type="button" role="tab" aria-selected="false" data-auth-tab="code">验证码登录</button>
+      </div>
+
+      <div class="form-msg" id="loginMsg">
+        <svg class="ic" aria-hidden="true"><use href="#i-alert"></use></svg>
+        <span id="loginMsgText"></span>
+      </div>
+
+      <!-- 密码登录 -->
+      <form id="passwordForm" novalidate>
+        <div class="field">
+          <label class="label" for="loginPhone">手机号</label>
+          <div class="input-group">
+            <span class="input-prefix">+86</span>
+            <input class="input" id="loginPhone" name="phone" type="tel" inputmode="numeric" autocomplete="tel" placeholder="请输入 11 位手机号" value="">
+          </div>
+          <p class="form-error" data-error="phone">请输入正确的 11 位手机号</p>
+        </div>
+        <div class="field">
+          <label class="label" for="loginPassword"><span>密码</span><a href="#" data-toast="演示环境暂未接入短信找回，请联系平台运营重置密码" data-toast-type="info" style="font-weight:400">忘记密码？</a></label>
+          <div class="input-group">
+            <input class="input" id="loginPassword" name="password" type="password" autocomplete="current-password" placeholder="请输入密码（演示环境任意 6 位）" style="padding-left:13px;padding-right:46px">
+            <button class="input-suffix icon-btn tiny" type="button" data-pw-toggle aria-label="显示密码">
+              <svg class="ic" aria-hidden="true"><use href="#i-eye"></use></svg>
+            </button>
+          </div>
+          <p class="form-error" data-error="password">密码至少需要 6 位</p>
+        </div>
+        <div class="form-options">
+          <label class="check"><input type="checkbox" checked> 30 天内免登录</label>
+          <a href="#" data-toast="演示环境使用本地会话，不会上传任何真实凭据" data-toast-type="info" style="font-size:10px;color:var(--muted)">登录遇到问题？</a>
+        </div>
+        <button class="btn btn-primary auth-submit" type="submit" data-submit>
+          登录
+          <svg class="ic" aria-hidden="true"><use href="#i-arrow-right"></use></svg>
+        </button>
+      </form>
+
+      <!-- 验证码登录 -->
+      <form id="codeForm" hidden novalidate>
+        <div class="field">
+          <label class="label" for="codePhone">手机号</label>
+          <div class="input-group">
+            <span class="input-prefix">+86</span>
+            <input class="input" id="codePhone" name="phone" type="tel" inputmode="numeric" placeholder="请输入 11 位手机号">
+          </div>
+          <p class="form-error" data-error="codePhone">请输入正确的 11 位手机号</p>
+        </div>
+        <div class="field">
+          <label class="label" for="loginCode">验证码</label>
+          <div class="input-group">
+            <input class="input" id="loginCode" name="code" type="text" inputmode="numeric" maxlength="6" placeholder="6 位验证码" style="padding-left:13px;padding-right:112px">
+            <button class="input-suffix code-btn" type="button" data-send-code>获取验证码</button>
+          </div>
+          <p class="form-error" data-error="loginCode">请输入 6 位验证码</p>
+          <p class="field-hint">演示环境固定验证码：123456</p>
+        </div>
+        <button class="btn btn-primary auth-submit" type="submit" data-submit>
+          验证并登录
+          <svg class="ic" aria-hidden="true"><use href="#i-arrow-right"></use></svg>
+        </button>
+      </form>
+
+      <div class="auth-divider">或使用</div>
+      <button class="btn btn-ghost btn-block" type="button" id="ssoBtn" style="height:46px">
+        <svg class="ic" aria-hidden="true"><use href="#i-cap"></use></svg>
+        统一身份认证登录（学生 / 教师）
+      </button>
+
+      <div class="demo-box">
+        <div class="demo-box-head">
+          <b>演示账号 · 一键进入</b>
+          <span>真实页面，模拟数据</span>
+        </div>
+        <div class="demo-grid">
+          <button class="demo-card" type="button" data-demo="student">
+            <span class="avatar">林</span>
+            <span><b>林知远</b><small>学生 · 13800001234</small></span>
+          </button>
+          <button class="demo-card" type="button" data-demo="mentor">
+            <span class="avatar">周</span>
+            <span><b>周明远</b><small>导师 · 13900005678</small></span>
+          </button>
+          <button class="demo-card" type="button" data-demo="enterprise">
+            <span class="avatar">张</span>
+            <span><b>张海宁</b><small>企业 · 13700009012</small></span>
+          </button>
+          <button class="demo-card" type="button" data-demo="admin">
+            <span class="avatar">王</span>
+            <span><b>王璐</b><small>运营 · 13600008888</small></span>
+          </button>
+        </div>
+        <p class="field-hint" style="margin-top:9px;text-align:center">密码均为 <b>123456</b>，验证码固定 <b>123456</b>；也可直接点上方卡片进入。</p>
+      </div>
+
+      <p class="auth-legal">
+        登录即表示同意 <a href="#" data-toast="演示环境：平台协议为示意文本">《平台服务协议》</a> 与 <a href="#" data-toast="演示环境：隐私政策为示意文本">《隐私政策》</a>。<br>
+        当前为前端原型，不会校验真实账号，也不产生真实交易。
+      </p>
+    </div>
+  </main>
+</div>
+
+<script src="assets/js/data.js"></script>
+<script src="assets/js/app.js"></script>
+<script>
+(function () {
+  RTW.initUI();
+  RTW.applyLinkPolicy();
+
+  var need = RTW.param('need');
+  var needRoles = need === 'review' ? ['mentor', 'admin'] : (need === 'enterprise' ? ['enterprise'] : null);
+  var needLabel = need === 'review' ? '导师 / 审核员' : (need === 'enterprise' ? '企业出题方' : '');
+  function canEnter(role) {
+    return !needRoles || needRoles.indexOf(role) > -1;
+  }
+  function needMessage() {
+    return '该入口需要「' + needLabel + '」身份。请使用下方对应的演示账号，或切换为正确身份后重试。';
+  }
+
+  var existing = RTW.getSession();
+  if (existing) {
+    var card = RTW.qs('.auth-card');
+    var tip = document.createElement('div');
+    tip.className = 'form-msg is-on';
+    tip.style.cssText = 'border-color:#cfe0d4;background:#f1f6f2;color:#23684c';
+    var existingText = '你已登录为 <b>' + RTW.esc(existing.name) + '</b>（' + RTW.esc(existing.label) + '），可直接进入工作台。';
+    if (need && !canEnter(existing.role)) {
+      existingText = '你已登录为 <b>' + RTW.esc(existing.name) + '</b>（' + RTW.esc(existing.label) + '），但当前入口需要「' + needLabel + '」身份，请使用对应演示账号或切换身份。';
+    }
+    tip.innerHTML = '<svg class="ic" aria-hidden="true"><use href="#i-info"></use></svg><span>' + existingText + '</span>';
+    card.insertBefore(tip, card.firstChild);
+  }
+  if (need) {
+    var needTip = document.createElement('div');
+    needTip.className = 'form-msg is-on';
+    needTip.style.cssText = 'border-color:#ecd2a4;background:#fbf3e3;color:#74501a';
+    needTip.innerHTML = '<svg class="ic" aria-hidden="true"><use href="#i-shield"></use></svg><span>当前入口需要 <b>' + needLabel + '</b> 身份。登录页已标注对应演示账号；身份不匹配时不会跳转。</span>';
+    RTW.qs('.auth-card').insertBefore(needTip, RTW.qs('.auth-card').firstChild);
+  }
+
+  /* 标签切换 */
+  function switchTab(name) {
+    RTW.qsa('[data-auth-tab]').forEach(function (b) {
+      var on = b.getAttribute('data-auth-tab') === name;
+      b.classList.toggle('is-active', on);
+      b.setAttribute('aria-selected', on ? 'true' : 'false');
+    });
+    RTW.qs('#passwordForm').hidden = name !== 'password';
+    RTW.qs('#codeForm').hidden = name !== 'code';
+    hideMsg();
+  }
+  RTW.qsa('[data-auth-tab]').forEach(function (b) {
+    b.addEventListener('click', function () { switchTab(b.getAttribute('data-auth-tab')); });
+  });
+
+  /* 密码可见切换 */
+  RTW.qsa('[data-pw-toggle]').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var input = btn.closest('.input-group').querySelector('input');
+      var show = input.type === 'password';
+      input.type = show ? 'text' : 'password';
+      btn.querySelector('use').setAttribute('href', show ? '#i-eye-off' : '#i-eye');
+      btn.setAttribute('aria-label', show ? '隐藏密码' : '显示密码');
+    });
+  });
+
+  function showError(field, on) {
+    var input = RTW.qs('#passwordForm [name="' + field + '"]') || RTW.qs('#codeForm [name="' + field + '"]');
+    var err = document.querySelector('[data-error="' + field + '"]');
+    if (input) input.classList.toggle('is-error', !!on);
+    if (err) err.classList.toggle('is-on', !!on);
+  }
+  function showMsg(text) {
+    RTW.qs('#loginMsgText').textContent = text;
+    RTW.qs('#loginMsg').classList.add('is-on');
+  }
+  function hideMsg() { RTW.qs('#loginMsg').classList.remove('is-on'); }
+
+  function go(role) {
+    if (!canEnter(role)) {
+      showMsg(needMessage());
+      return;
+    }
+    var next = RTW.param('next');
+    var target = role === 'admin' ? 'admin.html' : 'workspace.html';
+    if (next && /^[a-z0-9._-]+\.html(\?.*)?$/i.test(next)) target = next;
+    window.location.href = target;
+  }
+
+  function complete(role, label) {
+    if (!canEnter(role)) {
+      showMsg(needMessage());
+      return;
+    }
+    RTW.toast('登录成功 · ' + label, 'success');
+    window.setTimeout(function () { go(role); }, 420);
+  }
+
+  /* 密码登录 */
+  RTW.qs('#passwordForm').addEventListener('submit', function (e) {
+    e.preventDefault();
+    hideMsg();
+    var phone = RTW.qs('#loginPhone').value.replace(/\s+/g, '');
+    var pw = RTW.qs('#loginPassword').value;
+    var ok = true;
+    if (!/^1[3-9]\d{9}$/.test(phone)) { showError('phone', true); ok = false; } else { showError('phone', false); }
+    if (pw.length < 6) { showError('password', true); ok = false; } else { showError('password', false); }
+    if (!ok) { showMsg('请检查手机号与密码格式后再登录。'); return; }
+
+    var map = {
+      '13800001234': 'student',
+      '13900005678': 'mentor',
+      '13700009012': 'enterprise',
+      '13600008888': 'admin'
+    };
+    var role = map[phone] || 'student';
+    var meta = RTW.ROLE_META[role];
+    if (!canEnter(role)) { showMsg(needMessage()); return; }
+    var btn = RTW.qs('#passwordForm [data-submit]');
+    btn.disabled = true;
+    btn.textContent = '登录中…';
+    window.setTimeout(function () {
+      RTW.signIn(role, { name: meta.name, sub: meta.sub, phone: phone, scope: meta.scope });
+      complete(role, meta.label);
+    }, 480);
+  });
+
+  /* 验证码 */
+  var sendBtn = RTW.qs('[data-send-code]');
+  var counting = false;
+  sendBtn.addEventListener('click', function () {
+    var phone = RTW.qs('#codePhone').value.replace(/\s+/g, '');
+    if (!/^1[3-9]\d{9}$/.test(phone)) { showError('codePhone', true); showMsg('请先填写正确的手机号。'); return; }
+    showError('codePhone', false);
+    hideMsg();
+    RTW.toast('验证码已发送（演示验证码 123456）', 'info');
+    counting = true;
+    var left = 60;
+    sendBtn.disabled = true;
+    sendBtn.textContent = left + 's 后重发';
+    var timer = setInterval(function () {
+      left -= 1;
+      if (left <= 0) {
+        clearInterval(timer);
+        counting = false;
+        sendBtn.disabled = false;
+        sendBtn.textContent = '重新获取';
+      } else {
+        sendBtn.textContent = left + 's 后重发';
+      }
+    }, 1000);
+  });
+
+  RTW.qs('#codeForm').addEventListener('submit', function (e) {
+    e.preventDefault();
+    hideMsg();
+    var phone = RTW.qs('#codePhone').value.replace(/\s+/g, '');
+    var code = RTW.qs('#loginCode').value.trim();
+    var ok = true;
+    if (!/^1[3-9]\d{9}$/.test(phone)) { showError('codePhone', true); ok = false; } else { showError('codePhone', false); }
+    if (!/^\d{6}$/.test(code)) { showError('loginCode', true); ok = false; } else { showError('loginCode', false); }
+    if (!ok) { showMsg('请填写正确的手机号与 6 位验证码。'); return; }
+    if (code !== '123456') { showError('loginCode', true); showMsg('验证码不正确，演示环境请使用 123456。'); return; }
+    if (!canEnter('student')) { showMsg(needMessage()); return; }
+    var btn = RTW.qs('#codeForm [data-submit]');
+    btn.disabled = true;
+    btn.textContent = '验证中…';
+    window.setTimeout(function () {
+      RTW.signIn('student', { name: '林知远', sub: '计算机学院 · 软件工程 2301', phone: phone });
+      complete('student', '学生');
+    }, 420);
+  });
+
+  /* 统一身份认证 */
+  RTW.qs('#ssoBtn').addEventListener('click', function () {
+    if (!canEnter('student')) { showMsg(needMessage()); return; }
+    RTW.toast('正在跳转学校统一身份认证（演示）', 'info');
+    window.setTimeout(function () {
+      RTW.signIn('student', { name: '林知远', sub: '计算机学院 · 软件工程 2301' });
+      complete('student', '学生 · 统一身份认证');
+    }, 700);
+  });
+
+  /* 演示账号 */
+  RTW.qsa('[data-demo]').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var role = btn.getAttribute('data-demo');
+      if (!canEnter(role)) { showMsg(needMessage()); return; }
+      RTW.loginDemo(role, true);
+      var label = RTW.ROLE_META[role].label;
+      RTW.toast('已进入演示 · ' + label, 'success');
+      window.setTimeout(function () { go(role); }, 400);
+    });
+  });
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,22 @@
+# 内部需求与汇报材料：不进入代码仓库
+Requirement/
+1027.md
+1027new.md
+docs/internal/
+
+# 本地演示与测试产物：不进入代码仓库
+shots/
+tools/
+
+# 依赖与本地环境
+node_modules/
+.env
+.env.*
+!.env.example
+
+# 系统与编辑器缓存
+*.log
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/

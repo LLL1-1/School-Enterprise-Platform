@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>注册 · 真题工场</title>
+<meta name="description" content="注册真题工场账号，选择学生、导师或企业出题方身份。">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body class="auth-page">
+<script src="assets/js/icons.js"></script>
+
+<div class="auth-topbar">
+  <a class="brand" href="index.html" aria-label="真题工场首页">
+    <span class="brand-mark" aria-hidden="true">真</span>
+    <span class="brand-text"><b>真题工场</b><small>REAL TASK WORKS</small></span>
+  </a>
+  <div class="meta">
+    <span>已有账号？</span>
+    <a href="login.html">去登录</a>
+    <span>·</span>
+    <a href="index.html" style="color:var(--muted);font-weight:400">返回首页</a>
+  </div>
+</div>
+
+<div class="auth-wrap">
+  <aside class="auth-aside">
+    <div class="auth-aside-inner">
+      <div class="hero-eyebrow" style="background:rgba(248,243,228,.06);border-color:rgba(248,243,228,.2);color:rgba(248,243,228,.85)">
+        <span class="dot" style="background:#e6b86a;box-shadow:0 0 0 3px rgba(230,184,106,.16)"></span>
+        2026 秋季第一期 · 正在招募
+      </div>
+      <blockquote class="auth-quote">从第一道真题开始，<br>积累你的<em>作品集。</em></blockquote>
+      <p class="auth-aside-sub">不需要等到毕业才拥有“项目经验”。在真实的需求、真实的用户和真实的验收标准里，完成一次完整的交付。</p>
+      <ul class="line-list" style="margin-top:34px;border-top:1px solid rgba(248,243,228,.14)">
+        <li style="border-color:rgba(248,243,228,.12);color:rgba(248,243,228,.75)">
+          <svg class="ic" style="color:#e6b86a" aria-hidden="true"><use href="#i-check"></use></svg>
+          一人一席位，不鼓励过度承诺
+        </li>
+        <li style="border-color:rgba(248,243,228,.12);color:rgba(248,243,228,.75)">
+          <svg class="ic" style="color:#e6b86a" aria-hidden="true"><use href="#i-check"></use></svg>
+          双导师指导，过程与学分双重保障
+        </li>
+        <li style="border-color:rgba(248,243,228,.12);color:rgba(248,243,228,.75)">
+          <svg class="ic" style="color:#e6b86a" aria-hidden="true"><use href="#i-check"></use></svg>
+          项目档案可分享，成果进入作品集
+        </li>
+        <li style="border:none;color:rgba(248,243,228,.75)">
+          <svg class="ic" style="color:#e6b86a" aria-hidden="true"><use href="#i-check"></use></svg>
+          校地公益期，学生侧零费用
+        </li>
+      </ul>
+    </div>
+    <div class="auth-aside-foot">
+      <svg class="ic" aria-hidden="true"><use href="#i-shield"></use></svg>
+      <span>实名认证 · 数据脱敏 · 平台全程留痕</span>
+    </div>
+  </aside>
+
+  <main class="auth-main">
+    <div class="auth-card wide">
+      <div id="regFormWrap">
+        <div class="auth-head">
+          <h1>创建账号</h1>
+          <p>选择身份，加入 2026 秋季第一期真题池。学生与教师可即时进入，企业需完成资质审核。</p>
+        </div>
+
+        <div class="stepper" aria-label="注册进度">
+          <div class="step-pill is-active" data-step-pill="1"><span class="n">1</span>选择身份</div>
+          <div class="step-pill" data-step-pill="2"><span class="n">2</span>完善资料</div>
+          <div class="step-pill" data-step-pill="3"><span class="n">3</span>确认提交</div>
+        </div>
+
+        <form id="regForm" novalidate>
+          <!-- STEP 1 -->
+          <section class="wizard-step is-active" data-step="1">
+            <div class="role-grid">
+              <button class="role-card is-active" type="button" data-role="student" aria-pressed="true">
+                <span class="role-ic"><svg class="ic" aria-hidden="true"><use href="#i-cap"></use></svg></span>
+                <b>学生</b>
+                <small>认领 A 线小组任务或 B 线毕设真题</small>
+                <span class="tick"><svg class="ic" aria-hidden="true"><use href="#i-check"></use></svg></span>
+              </button>
+              <button class="role-card" type="button" data-role="mentor" aria-pressed="false">
+                <span class="role-ic"><svg class="ic" aria-hidden="true"><use href="#i-users"></use></svg></span>
+                <b>校内导师</b>
+                <small>评审任务、过程指导与成绩评定</small>
+                <span class="tick"><svg class="ic" aria-hidden="true"><use href="#i-check"></use></svg></span>
+              </button>
+              <button class="role-card" type="button" data-role="enterprise" aria-pressed="false">
+                <span class="role-ic"><svg class="ic" aria-hidden="true"><use href="#i-building"></use></svg></span>
+                <b>企业出题方</b>
+                <small>发布真实需求，获得可用成果与人才窗口</small>
+                <span class="tick"><svg class="ic" aria-hidden="true"><use href="#i-check"></use></svg></span>
+              </button>
+              <button class="role-card" type="button" data-role="admin" aria-pressed="false">
+                <span class="role-ic"><svg class="ic" aria-hidden="true"><use href="#i-settings"></use></svg></span>
+                <b>平台运营</b>
+                <small>双创中心运营人员，需邀请码</small>
+                <span class="tick"><svg class="ic" aria-hidden="true"><use href="#i-check"></use></svg></span>
+              </button>
+            </div>
+            <div class="notice-box" id="roleNote">
+              <svg class="ic" aria-hidden="true"><use href="#i-info"></use></svg>
+              <span id="roleNoteText">学生注册后需完成实名认证。一人同期仅可认领 1 个 B 线任务或 1 个 A 线团队席位，平台会自动校验。</span>
+            </div>
+            <div class="wizard-actions">
+              <a href="login.html" class="btn-link">已有账号？去登录</a>
+              <button class="btn btn-primary" type="button" data-next>
+                下一步
+                <svg class="ic" aria-hidden="true"><use href="#i-arrow-right"></use></svg>
+              </button>
+            </div>
+          </section>
+
+          <!-- STEP 2 -->
+          <section class="wizard-step" data-step="2">
+            <div class="role-panel" data-role-panel="student">
+              <div class="form-row">
+                <div class="field">
+                  <label class="label" for="realName">姓名</label>
+                  <input class="input" id="realName" name="realName" placeholder="请输入真实姓名" autocomplete="name" data-required>
+                </div>
+                <div class="field">
+                  <label class="label" for="studentNo">学号</label>
+                  <input class="input" id="studentNo" name="studentNo" placeholder="例如 2023010101" data-required>
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="field">
+                  <label class="label" for="school">学校</label>
+                  <input class="input" id="school" name="school" placeholder="请输入学校全称" data-required>
+                </div>
+                <div class="field">
+                  <label class="label" for="college">学院 / 专业</label>
+                  <input class="input" id="college" name="college" placeholder="例如 计算机学院 · 软件工程" data-required>
+                </div>
+              </div>
+              <div class="field">
+                <label class="label" for="grade">年级</label>
+                <select class="select" id="grade" name="grade" data-required>
+                  <option value="">请选择</option>
+                  <option>2023 级（大三）</option>
+                  <option>2022 级（大四）</option>
+                  <option>2024 级（大二）</option>
+                  <option>其他</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="role-panel" data-role-panel="mentor" hidden>
+              <div class="form-row">
+                <div class="field">
+                  <label class="label" for="mentorName">姓名</label>
+                  <input class="input" id="mentorName" name="realName" placeholder="请输入真实姓名" data-required>
+                </div>
+                <div class="field">
+                  <label class="label" for="staffNo">工号</label>
+                  <input class="input" id="staffNo" name="staffNo" placeholder="请输入校内工号" data-required>
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="field">
+                  <label class="label" for="department">院系</label>
+                  <input class="input" id="department" name="department" placeholder="例如 计算机学院" data-required>
+                </div>
+                <div class="field">
+                  <label class="label" for="title">职称</label>
+                  <select class="select" id="title" name="title" data-required>
+                    <option value="">请选择</option>
+                    <option>教授</option>
+                    <option>副教授</option>
+                    <option>讲师</option>
+                    <option>助教 / 实验师</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+
+            <div class="role-panel" data-role-panel="enterprise" hidden>
+              <div class="field">
+                <label class="label" for="company">企业 / 单位全称</label>
+                <input class="input" id="company" name="company" placeholder="须与营业执照一致" data-required>
+              </div>
+              <div class="form-row">
+                <div class="field">
+                  <label class="label" for="creditCode">统一社会信用代码</label>
+                  <input class="input" id="creditCode" name="creditCode" placeholder="18 位代码" maxlength="18" data-required>
+                </div>
+                <div class="field">
+                  <label class="label" for="companyName">联系人姓名</label>
+                  <input class="input" id="companyName" name="realName" placeholder="每周可投入 1 小时的对接人" data-required>
+                </div>
+              </div>
+              <div class="field">
+                <label class="label" for="companyTitle">职务</label>
+                <input class="input" id="companyTitle" name="companyTitle" placeholder="例如 信息化负责人" data-required>
+              </div>
+            </div>
+
+            <div class="role-panel" data-role-panel="admin" hidden>
+              <div class="form-row">
+                <div class="field">
+                  <label class="label" for="adminName">姓名</label>
+                  <input class="input" id="adminName" name="realName" placeholder="请输入真实姓名" data-required>
+                </div>
+                <div class="field">
+                  <label class="label" for="inviteCode">运营邀请码</label>
+                  <input class="input" id="inviteCode" name="inviteCode" placeholder="由双创中心提供" data-required>
+                </div>
+              </div>
+              <p class="field-hint">演示邀请码：RTW2026</p>
+            </div>
+
+            <div style="height:1px;background:var(--line);margin:4px 0 16px"></div>
+
+            <div class="form-row">
+              <div class="field">
+                <label class="label" for="regPhone">手机号</label>
+                <div class="input-group">
+                  <span class="input-prefix">+86</span>
+                  <input class="input" id="regPhone" name="phone" type="tel" inputmode="numeric" placeholder="用于登录与消息通知" data-required>
+                </div>
+              </div>
+              <div class="field">
+                <label class="label" for="regCode">验证码</label>
+                <div class="input-group">
+                  <input class="input" id="regCode" name="code" inputmode="numeric" maxlength="6" placeholder="6 位验证码" style="padding-left:13px;padding-right:112px" data-required>
+                  <button class="input-suffix code-btn" type="button" data-send-code>获取验证码</button>
+                </div>
+                <p class="field-hint">演示验证码：123456</p>
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="field">
+                <label class="label" for="regPassword">设置密码</label>
+                <div class="input-group">
+                  <input class="input" id="regPassword" name="password" type="password" placeholder="至少 6 位，建议字母 + 数字" style="padding-left:13px;padding-right:46px" data-required>
+                  <button class="input-suffix icon-btn tiny" type="button" data-pw-toggle aria-label="显示密码">
+                    <svg class="ic" aria-hidden="true"><use href="#i-eye"></use></svg>
+                  </button>
+                </div>
+              </div>
+              <div class="field">
+                <label class="label" for="regPassword2">确认密码</label>
+                <input class="input" id="regPassword2" name="password2" type="password" placeholder="再次输入密码" data-required>
+              </div>
+            </div>
+            <div class="form-msg" id="regMsg2" style="margin-top:6px">
+              <svg class="ic" aria-hidden="true"><use href="#i-alert"></use></svg>
+              <span id="regMsg2Text"></span>
+            </div>
+            <div class="wizard-actions">
+              <button class="btn btn-ghost" type="button" data-back>
+                <svg class="ic" aria-hidden="true"><use href="#i-chevron-left"></use></svg>
+                上一步
+              </button>
+              <button class="btn btn-primary" type="button" data-next>
+                下一步
+                <svg class="ic" aria-hidden="true"><use href="#i-arrow-right"></use></svg>
+              </button>
+            </div>
+          </section>
+
+          <!-- STEP 3 -->
+          <section class="wizard-step" data-step="3">
+            <div class="summary-card" id="regSummary">
+              <div class="summary-row"><span>注册身份</span><b id="sumRole">学生</b></div>
+              <div class="summary-row"><span>姓名</span><b id="sumName">—</b></div>
+              <div class="summary-row"><span>单位 / 学院</span><b id="sumOrg">—</b></div>
+              <div class="summary-row"><span>手机号</span><b id="sumPhone">—</b></div>
+              <div class="summary-row"><span>账号状态</span><b id="sumStatus">实名认证后可用</b></div>
+            </div>
+
+            <div style="display:grid;gap:10px;margin:18px 0">
+              <label class="check"><input type="checkbox" id="agree1" checked> 我已阅读并同意 <a href="#" data-toast="演示环境：平台服务协议为示意文本">《平台服务协议》</a> 与 <a href="#" data-toast="演示环境：社区公约">《社区公约》</a>，承诺真实、合规地参与任务。</label>
+              <label class="check"><input type="checkbox" id="agree2" checked> 我同意 <a href="#" data-toast="演示环境：数据安全协议为示意文本">《数据安全与保密协议》</a>，不下载、不传播企业敏感数据。</label>
+              <label class="check"><input type="checkbox" id="agree3" checked> 我知悉平台为课程载体，任务交付需接受导师与企业双重评价，并遵守学术诚信规范。</label>
+            </div>
+            <div class="notice-box">
+              <svg class="ic" aria-hidden="true"><use href="#i-shield"></use></svg>
+              <span>注册信息仅用于身份核验与课程管理。企业账号需上传营业执照或盖章函件，运营将在 1 个工作日内完成审核。</span>
+            </div>
+
+            <div class="form-msg" id="regMsg3" style="margin-top:12px">
+              <svg class="ic" aria-hidden="true"><use href="#i-alert"></use></svg>
+              <span id="regMsg3Text"></span>
+            </div>
+            <div class="wizard-actions">
+              <button class="btn btn-ghost" type="button" data-back>
+                <svg class="ic" aria-hidden="true"><use href="#i-chevron-left"></use></svg>
+                上一步
+              </button>
+              <button class="btn btn-primary" type="submit" id="regSubmit">
+                提交注册
+                <svg class="ic" aria-hidden="true"><use href="#i-check"></use></svg>
+              </button>
+            </div>
+          </section>
+        </form>
+
+        <p class="auth-legal">当前为前端原型，提交不会写入真实数据库。<br>如需正式账号，请联系平台运营开通。</p>
+      </div>
+
+      <!-- 成功 -->
+      <div class="auth-success" id="regSuccess">
+        <div class="success-ic"><svg class="ic" aria-hidden="true"><use href="#i-check"></use></svg></div>
+        <h2>注册申请已提交</h2>
+        <p id="successText">账号已创建。你可以立即进入工作台浏览任务市场，认领前需完成实名认证。</p>
+        <div class="summary-card" style="text-align:left;margin-bottom:18px">
+          <div class="summary-row"><span>账号</span><b id="successPhone">—</b></div>
+          <div class="summary-row"><span>身份</span><b id="successRole">学生</b></div>
+          <div class="summary-row"><span>下一步</span><b id="successNext">完善技能标签 → 浏览任务 → 提交认领</b></div>
+        </div>
+        <div class="flex" style="justify-content:center;gap:10px;flex-wrap:wrap">
+          <a class="btn btn-primary" href="workspace.html" id="successEnter">进入工作台
+            <svg class="ic" aria-hidden="true"><use href="#i-arrow-right"></use></svg>
+          </a>
+          <a class="btn btn-ghost" href="tasks.html">先看看任务市场</a>
+        </div>
+        <p class="field-hint" style="margin-top:16px">演示环境：已自动登录，后续可随时退出。</p>
+      </div>
+    </div>
+  </main>
+</div>
+
+<script src="assets/js/data.js"></script>
+<script src="assets/js/app.js"></script>
+<script>
+(function () {
+  RTW.initUI();
+  RTW.applyLinkPolicy();
+
+  var current = 1;
+  var role = 'student';
+  var labels = { student: '学生', mentor: '校内导师', enterprise: '企业出题方', admin: '平台运营' };
+  var roleNotes = {
+    student: '学生注册后需完成实名认证。一人同期仅可认领 1 个 B 线任务或 1 个 A 线团队席位，平台会自动校验。',
+    mentor: '校内导师需通过工号核验。导师可评审任务、查看学生里程碑并完成过程评注与成绩评定。',
+    enterprise: '企业账号需完成资质审核并签署《任务发布与数据安全协议》。审核通过后可发布任务、托管赏金与验收交付。',
+    admin: '平台运营账号仅限双创中心工作人员，需填写邀请码。运营负责任务初审、争议仲裁与数据看板。'
+  };
+
+  function setStep(n) {
+    current = n;
+    RTW.qsa('.wizard-step').forEach(function (s) {
+      s.classList.toggle('is-active', Number(s.getAttribute('data-step')) === n);
+    });
+    RTW.qsa('[data-step-pill]').forEach(function (p) {
+      var i = Number(p.getAttribute('data-step-pill'));
+      p.classList.remove('is-active', 'is-done');
+      if (i === n) p.classList.add('is-active');
+      if (i < n) p.classList.add('is-done');
+    });
+    if (n === 3) fillSummary();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  function switchRole(next) {
+    role = next;
+    RTW.qsa('[data-role]').forEach(function (c) {
+      var on = c.getAttribute('data-role') === role;
+      c.classList.toggle('is-active', on);
+      c.setAttribute('aria-pressed', on ? 'true' : 'false');
+    });
+    RTW.qsa('[data-role-panel]').forEach(function (p) {
+      p.hidden = p.getAttribute('data-role-panel') !== role;
+    });
+    RTW.qs('#roleNoteText').textContent = roleNotes[role];
+  }
+
+  RTW.qsa('[data-role]').forEach(function (card) {
+    card.addEventListener('click', function () { switchRole(card.getAttribute('data-role')); });
+  });
+
+  /* 密码可见 */
+  RTW.qsa('[data-pw-toggle]').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var input = btn.closest('.input-group').querySelector('input');
+      var show = input.type === 'password';
+      input.type = show ? 'text' : 'password';
+      btn.querySelector('use').setAttribute('href', show ? '#i-eye-off' : '#i-eye');
+    });
+  });
+
+  /* 验证码 */
+  RTW.qsa('[data-send-code]').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var phone = RTW.qs('#regPhone').value.replace(/\s+/g, '');
+      if (!/^1[3-9]\d{9}$/.test(phone)) {
+        RTW.toast('请先填写正确的手机号', 'error');
+        RTW.qs('#regPhone').classList.add('is-error');
+        return;
+      }
+      RTW.qs('#regPhone').classList.remove('is-error');
+      RTW.toast('验证码已发送（演示验证码 123456）', 'info');
+      var left = 60;
+      btn.disabled = true;
+      btn.textContent = left + 's 后重发';
+      var timer = setInterval(function () {
+        left -= 1;
+        if (left <= 0) {
+          clearInterval(timer);
+          btn.disabled = false;
+          btn.textContent = '重新获取';
+        } else {
+          btn.textContent = left + 's 后重发';
+        }
+      }, 1000);
+    });
+  });
+
+  function visibleRequired() {
+    return RTW.qsa('[data-step="2"] [data-required]').filter(function (el) {
+      return !el.closest('[hidden]');
+    });
+  }
+
+  function validateStep2() {
+    var missing = null;
+    visibleRequired().forEach(function (el) {
+      if (!String(el.value || '').trim()) {
+        el.classList.add('is-error');
+        if (!missing) missing = el;
+      } else {
+        el.classList.remove('is-error');
+      }
+    });
+    var phone = RTW.qs('#regPhone');
+    if (!/^1[3-9]\d{9}$/.test(phone.value.replace(/\s+/g, ''))) { phone.classList.add('is-error'); missing = missing || phone; }
+    var code = RTW.qs('#regCode');
+    if (!/^\d{6}$/.test(code.value.trim())) { code.classList.add('is-error'); missing = missing || code; }
+    var pw = RTW.qs('#regPassword');
+    var pw2 = RTW.qs('#regPassword2');
+    if (pw.value.length < 6) { pw.classList.add('is-error'); missing = missing || pw; }
+    if (pw.value !== pw2.value) { pw2.classList.add('is-error'); missing = missing || pw2; }
+    if (missing) {
+      RTW.qs('#regMsg2Text').textContent = '请补全标红的必填项；演示验证码为 123456，密码至少 6 位。';
+      RTW.qs('#regMsg2').classList.add('is-on');
+      missing.focus();
+      return false;
+    }
+    if (code.value.trim() !== '123456') {
+      RTW.qs('#regMsg2Text').textContent = '验证码不正确，演示环境请填写 123456。';
+      RTW.qs('#regMsg2').classList.add('is-on');
+      code.classList.add('is-error');
+      code.focus();
+      return false;
+    }
+    if (role === 'admin' && RTW.qs('#inviteCode').value.trim() !== 'RTW2026') {
+      RTW.qs('#regMsg2Text').textContent = '运营邀请码不正确，演示邀请码为 RTW2026。';
+      RTW.qs('#regMsg2').classList.add('is-on');
+      RTW.qs('#inviteCode').classList.add('is-error');
+      return false;
+    }
+    RTW.qs('#regMsg2').classList.remove('is-on');
+    return true;
+  }
+
+  function displayName() {
+    var el = RTW.qsa('[data-step="2"] [name="realName"]').filter(function (x) { return !x.closest('[hidden]'); })[0];
+    return el ? el.value.trim() : '';
+  }
+  function displayOrg() {
+    if (role === 'student') return RTW.qs('#college').value.trim() || RTW.qs('#school').value.trim();
+    if (role === 'mentor') return RTW.qs('#department').value.trim();
+    if (role === 'enterprise') return RTW.qs('#company').value.trim();
+    return '双创中心';
+  }
+
+  function fillSummary() {
+    RTW.qs('#sumRole').textContent = labels[role];
+    RTW.qs('#sumName').textContent = displayName() || '—';
+    RTW.qs('#sumOrg').textContent = displayOrg() || '—';
+    RTW.qs('#sumPhone').textContent = RTW.qs('#regPhone').value.trim() || '—';
+    RTW.qs('#sumStatus').textContent = role === 'enterprise' ? '资质审核中（1 个工作日）' : (role === 'admin' ? '邀请码已校验' : '实名认证后可用');
+  }
+
+  RTW.qsa('[data-next]').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      if (current === 1) { setStep(2); return; }
+      if (current === 2) {
+        if (validateStep2()) setStep(3);
+      }
+    });
+  });
+  RTW.qsa('[data-back]').forEach(function (btn) {
+    btn.addEventListener('click', function () { setStep(Math.max(1, current - 1)); });
+  });
+
+  RTW.qs('#regForm').addEventListener('submit', function (e) {
+    e.preventDefault();
+    if (!RTW.qs('#agree1').checked || !RTW.qs('#agree2').checked || !RTW.qs('#agree3').checked) {
+      RTW.qs('#regMsg3Text').textContent = '请先阅读并勾选全部协议。';
+      RTW.qs('#regMsg3').classList.add('is-on');
+      return;
+    }
+    var name = displayName();
+    var org = displayOrg();
+    var phone = RTW.qs('#regPhone').value.trim();
+    var sub = role === 'student' ? (org + ' · 学生') : (role === 'mentor' ? (org + ' · 校内导师') : (role === 'enterprise' ? org : '双创中心 · 平台运营'));
+    RTW.signIn(role, { name: name || '新用户', sub: sub, phone: phone, scope: org });
+
+    RTW.qs('#successPhone').textContent = phone;
+    RTW.qs('#successRole').textContent = labels[role];
+    RTW.qs('#successNext').textContent = role === 'enterprise' ? '上传营业执照 → 等待审核 → 发布任务' : '完善技能标签 → 浏览任务 → 提交认领';
+    RTW.qs('#successText').textContent = role === 'enterprise'
+      ? '企业账号已创建，资质审核将在 1 个工作日内完成。审核期间可先浏览任务市场、准备任务书。'
+      : '账号已创建。你可以立即进入工作台浏览任务市场，认领前需完成实名认证。';
+    RTW.qs('#successEnter').setAttribute('href', role === 'admin' ? 'admin.html' : 'workspace.html');
+
+    RTW.qs('#regFormWrap').style.display = 'none';
+    RTW.qs('#regSuccess').classList.add('is-on');
+    RTW.qsa('[data-step-pill]').forEach(function (p) { p.classList.remove('is-active'); p.classList.add('is-done'); });
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>任务详情 · 真题工场</title>
+<meta name="description" content="查看真实任务的任务书六要素、里程碑计划、出题方信息并提交认领。">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+<script src="assets/js/icons.js"></script>
+<div id="siteHeader"></div>
+
+<main class="detail-wrap">
+  <div class="container">
+    <div class="breadcrumb">
+      <a href="index.html">首页</a>
+      <svg class="ic" aria-hidden="true"><use href="#i-chevron-right"></use></svg>
+      <a href="tasks.html">任务市场</a>
+      <svg class="ic" aria-hidden="true"><use href="#i-chevron-right"></use></svg>
+      <span id="crumbDomain">任务详情</span>
+    </div>
+
+    <div class="detail-head">
+      <span class="line-badge line-A" id="detailLine">A 线 · 小组实践</span>
+      <h1 class="detail-title" id="detailTitle">任务载入中…</h1>
+      <div class="detail-org">
+        <span id="detailOrg"><svg class="ic" aria-hidden="true"><use href="#i-building"></use></svg> —</span>
+        <span><svg class="ic" aria-hidden="true"><use href="#i-map-pin"></use></svg> <span id="detailRegion">—</span></span>
+        <span><svg class="ic" aria-hidden="true"><use href="#i-clock"></use></svg> 更新于 <span id="detailUpdated">—</span></span>
+        <span class="verified"><svg class="ic" aria-hidden="true"><use href="#i-shield"></use></svg> 已通过双级审核</span>
+      </div>
+    </div>
+
+    <div class="detail-layout">
+      <div class="detail-main">
+        <div class="tabs" role="tablist" aria-label="任务详情">
+          <button class="tab is-active" type="button" role="tab" aria-selected="true" data-tab="brief">任务书</button>
+          <button class="tab" type="button" role="tab" aria-selected="false" data-tab="milestone">里程碑与结算</button>
+          <button class="tab" type="button" role="tab" aria-selected="false" data-tab="qa">答疑 <span class="count">2</span></button>
+          <button class="tab" type="button" role="tab" aria-selected="false" data-tab="org">出题方</button>
+        </div>
+
+        <!-- 任务书 -->
+        <section class="tab-panel is-active" data-panel="brief">
+          <div class="content-block">
+            <h2><span class="n">SUMMARY</span> 一句话理解这道题</h2>
+            <p id="detailSummary">—</p>
+          </div>
+
+          <div class="content-block">
+            <h2><span class="n">SIX ELEMENTS</span> 任务书六要素</h2>
+            <div class="six-grid" id="sixGrid"></div>
+          </div>
+
+          <div class="notice-box">
+            <svg class="ic" aria-hidden="true"><use href="#i-alert"></use></svg>
+            <span><b>需求冻结规则：</b>M1 需求评审通过后需求冻结，此后任何变更须由学生、企业、导师三方在线确认变更单，并同步调整工期与赏金。口头承诺不进入交付范围。</span>
+          </div>
+
+          <div class="content-block" style="margin-top:26px">
+            <h2><span class="n">DELIVERABLES</span> 交付清单</h2>
+            <div class="six-grid">
+              <div class="six-item"><div class="six-label"><b>01</b> 可运行系统</div><p>部署地址 + 演示账号 + 源码仓库（含 README 与部署脚本）。</p></div>
+              <div class="six-item"><div class="six-label"><b>02</b> 解决方案文档</div><p>按平台 8 章结构撰写，含需求、设计、测试、部署与运营方案。</p></div>
+              <div class="six-item"><div class="six-label"><b>03</b> 演示视频</div><p>8—10 分钟，覆盖核心流程与异常处理，MP4 格式上传。</p></div>
+              <div class="six-item"><div class="six-label"><b>04</b> 验收与过程材料</div><p>企业验收单、AI 使用记录表、Git 提交归因与团队互评。</p></div>
+            </div>
+          </div>
+        </section>
+
+        <!-- 里程碑 -->
+        <section class="tab-panel" data-panel="milestone">
+          <div class="content-block">
+            <h2><span class="n">MILESTONES</span> M0—M4 计划</h2>
+            <p style="margin-bottom:16px">赏金按节点释放，每期由导师与企业双确认。以下金额为示例拆分，立项时以三方确认的任务书为准。</p>
+            <div class="milestone-list" id="milestoneList"></div>
+          </div>
+          <div class="notice-box">
+            <svg class="ic" aria-hidden="true"><use href="#i-wallet"></use></svg>
+            <span>企业赏金已进入持牌机构监管账户。节点验收通过后 T+1 结算至学生账户；验收争议可发起运营仲裁，未交付部分原路退回企业。</span>
+          </div>
+          <div class="content-block" style="margin-top:26px">
+            <h2><span class="n">PAYMENT</span> 结算节奏</h2>
+            <div class="six-grid">
+              <div class="six-item"><div class="six-label"><b>M0—M1</b> 30%</div><p>立项与需求评审通过后释放，覆盖调研与设计阶段。</p></div>
+              <div class="six-item"><div class="six-label"><b>M2—M3</b> 60%</div><p>中期 MVP 与公测交付通过后释放，覆盖开发与联调阶段。</p></div>
+              <div class="six-item"><div class="six-label"><b>M4</b> 10%</div><p>答辩与企业验收完成后释放，作为质量尾款。</p></div>
+              <div class="six-item"><div class="six-label"><b>平台服务费</b> ¥0</div><p>校地公益期免收；学生提现免手续费。</p></div>
+            </div>
+          </div>
+        </section>
+
+        <!-- 答疑 -->
+        <section class="tab-panel" data-panel="qa">
+          <div class="content-block">
+            <h2><span class="n">Q &amp; A</span> 需求澄清</h2>
+            <div id="qaList">
+              <div class="qa-item">
+                <div class="qa-q"><span class="q">Q</span>农户端需要登记身份证号吗？</div>
+                <div class="qa-a"><span class="a">A</span><span>不需要。平台只记录户名、地块编号与产量等级；身份证与手机号由合作社线下留存，不进入系统。这也是数据脱敏承诺的一部分。</span></div>
+              </div>
+              <div class="qa-item">
+                <div class="qa-q"><span class="q">Q</span>必须使用云开发吗？团队想用自有服务器。</div>
+                <div class="qa-a"><span class="a">A</span><span>云开发是优先建议，不强制。若使用自有服务器，请在 M1 方案中说明备案、HTTPS 与运维安排，合作社可协助提供备案主体材料。</span></div>
+              </div>
+            </div>
+            <form class="qa-form" id="qaForm">
+              <input type="text" id="qaInput" placeholder="向出题方提问（演示环境将直接显示在页面）" aria-label="提问">
+              <button class="btn btn-ghost btn-sm" type="submit">提交问题</button>
+            </form>
+            <p class="field-hint" style="margin-top:8px">出题方承诺在 48 小时内答复；涉及需求边界的答复会同步给导师确认。</p>
+          </div>
+        </section>
+
+        <!-- 出题方 -->
+        <section class="tab-panel" data-panel="org">
+          <div class="content-block">
+            <h2><span class="n">ISSUER</span> 出题方信息</h2>
+            <div class="org-card" id="orgDetail"></div>
+          </div>
+          <div class="content-block">
+            <h2><span class="n">COOPERATION</span> 合作方式与承诺</h2>
+            <div class="six-grid">
+              <div class="six-item"><div class="six-label"><b>01</b> 对接人承诺</div><p>指定一名每周可投入 1 小时的需求对接人，两次失联将暂停出题资格。</p></div>
+              <div class="six-item"><div class="six-label"><b>02</b> 数据合规</div><p>附件须勾选脱敏承诺；敏感数据任务改为校内环境交付。</p></div>
+              <div class="six-item"><div class="six-label"><b>03</b> 验收义务</div><p>M2、M3、M4 节点须在 5 个工作日内给出书面验收意见。</p></div>
+              <div class="six-item"><div class="six-label"><b>04</b> 评价与信用</div><p>学生可反向评价企业配合度，低分任务将被降权或下架整改。</p></div>
+            </div>
+          </div>
+          <div class="notice-box">
+            <svg class="ic" aria-hidden="true"><use href="#i-shield"></use></svg>
+            <span>企业数据仅用于本任务交付，不得转作他用。平台已签署《任务发布与数据安全协议》，任务结束后 30 天内清理原始附件。</span>
+          </div>
+        </section>
+      </div>
+
+      <!-- 右侧认领卡 -->
+      <aside class="detail-aside">
+        <div class="claim-card">
+          <div class="escrow-badge">
+            <svg class="ic" aria-hidden="true"><use href="#i-lock"></use></svg>
+            企业赏金已托管 · 按里程碑释放
+          </div>
+          <div class="claim-top">
+            <div class="claim-price">
+              <small>企业托管赏金</small>
+              <b id="claimPrice">¥12,000</b>
+              <span id="claimLine">A 线 · 4—6 人组队</span>
+            </div>
+            <span class="status-pill green" id="claimStatus">认领中</span>
+          </div>
+          <div class="claim-rows">
+            <div class="claim-row"><span>项目周期</span><b id="claimCycle">10 周</b></div>
+            <div class="claim-row"><span>认领方式</span><b id="claimMode">组队认领</b></div>
+            <div class="claim-row"><span>已认领</span><b id="claimSlots">2 / 3 席</b></div>
+            <div class="claim-row"><span>发布时间</span><b id="claimPublished">2026-09-18</b></div>
+            <div class="claim-row"><span>预计截止</span><b>2026-11-02</b></div>
+          </div>
+          <div class="claim-actions">
+            <button class="btn btn-primary btn-block" type="button" id="claimBtn">
+              认领这道真题
+              <svg class="ic" aria-hidden="true"><use href="#i-arrow-right"></use></svg>
+            </button>
+            <div class="flex gap-8">
+              <button class="btn btn-ghost btn-sm" type="button" style="flex:1" data-bookmark="RT-2609-018" aria-pressed="false">
+                <svg class="ic" aria-hidden="true"><use href="#i-bookmark"></use></svg>
+                <span class="bm-label">收藏</span>
+              </button>
+              <button class="btn btn-ghost btn-sm" type="button" id="shareBtn" style="flex:1">
+                <svg class="ic" aria-hidden="true"><use href="#i-share"></use></svg>
+                分享
+              </button>
+            </div>
+          </div>
+          <p class="claim-note">
+            <svg class="ic" aria-hidden="true"><use href="#i-info"></use></svg>
+            提交后由导师在 48 小时内确认。确认前你仍可撤回，确认后进入 M0 立项。
+          </p>
+        </div>
+
+        <div class="org-card" id="sideOrg"></div>
+
+        <div class="side-note">
+          <h4><svg class="ic" style="width:14px;height:14px;color:var(--pine)" aria-hidden="true"><use href="#i-check-circle"></use></svg>认领前请确认</h4>
+          <p style="margin-top:6px">· 每周可稳定投入 8—10 小时<br>· 能参加 M1 需求评审与 M4 答辩<br>· 接受需求冻结与里程碑结算规则<br>· 同期未认领其他 B 线任务或 A 线团队席位</p>
+        </div>
+
+        <div class="side-note">
+          <h4>相似任务</h4>
+          <div class="similar-list" id="similarList"></div>
+        </div>
+      </aside>
+    </div>
+  </div>
+</main>
+
+<!-- 认领弹窗 -->
+<div class="modal" id="claimModal" aria-hidden="true">
+  <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="claimModalTitle">
+    <div class="modal-head">
+      <div>
+        <h2 id="claimModalTitle">认领这道真题</h2>
+        <p id="claimModalSub">确认认领方式并提交，导师将在 48 小时内审核。</p>
+      </div>
+      <button class="modal-close" type="button" data-modal-close aria-label="关闭">
+        <svg class="ic" aria-hidden="true"><use href="#i-close"></use></svg>
+      </button>
+    </div>
+    <div class="modal-body">
+      <div class="radio-cards" id="claimTypes"></div>
+      <div class="field" id="teamField">
+        <label class="label" for="teamName">团队名称 <span class="opt">组队认领时填写</span></label>
+        <input class="input" id="teamName" placeholder="例如：冬枣小分队">
+      </div>
+      <div class="field">
+        <label class="label" for="claimNote">给导师的一句话 <span class="opt">选填</span></label>
+        <textarea class="textarea" id="claimNote" style="min-height:80px" placeholder="简单说明你们的技能匹配、可投入时间或初步想法"></textarea>
+      </div>
+      <label class="check" style="margin-bottom:12px">
+        <input type="checkbox" id="claimAgree">
+        我已阅读完整任务书，理解 M1 后需求冻结、里程碑结算与企业验收规则。
+      </label>
+      <div class="modal-note">
+        <svg class="ic" aria-hidden="true"><use href="#i-shield"></use></svg>
+        演示环境：提交后不会真正占用席位，也不会通知导师。
+      </div>
+    </div>
+    <div class="modal-foot">
+      <button class="btn btn-ghost" type="button" data-modal-close>取消</button>
+      <button class="btn btn-primary" type="button" id="claimSubmit">提交认领</button>
+    </div>
+  </div>
+</div>
+
+<div id="siteFooter"></div>
+<script src="assets/js/data.js"></script>
+<script src="assets/js/app.js"></script>
+<script>
+(function () {
+  RTW.initChrome('tasks');
+  var task = RTW.findTask(RTW.param('id')) || window.RTW_DATA.tasks[0];
+  var claimedList = RTW.read('rtw.claims', []);
+  var already = claimedList.indexOf(task.id) > -1;
+  var full = task.claimed >= task.slots;
+
+  document.title = task.title + ' · 真题工场';
+
+  RTW.qs('#crumbDomain').textContent = task.domain;
+  RTW.qs('#detailLine').textContent = RTW.lineLabel(task.line);
+  RTW.qs('#detailLine').className = 'line-badge line-' + task.line;
+  RTW.qs('#detailTitle').textContent = task.title;
+  RTW.qs('#detailOrg').innerHTML = RTW.icon('building') + task.org;
+  RTW.qs('#detailRegion').textContent = task.region;
+  RTW.qs('#detailUpdated').textContent = task.updated;
+  RTW.qs('#detailSummary').textContent = task.summary;
+
+  /* 六要素 */
+  var six = [
+    { n: '01', label: '背景与痛点', text: task.pain },
+    { n: '02', label: '期望成果', text: task.goal },
+    { n: '03', label: '数据与资源', text: task.data },
+    { n: '04', label: '约束条件', text: task.limits },
+    { n: '05', label: '验收标准', text: task.accept, full: true },
+    { n: '06', label: '对接人', text: task.contact, full: true }
+  ];
+  RTW.qs('#sixGrid').innerHTML = six.map(function (s) {
+    return '<div class="six-item' + (s.full ? ' full' : '') + '">' +
+      '<div class="six-label"><b>' + s.n + '</b>' + s.label + '</div>' +
+      '<p>' + s.text + '</p></div>';
+  }).join('');
+
+  /* 里程碑 */
+  RTW.qs('#milestoneList').innerHTML = task.milestones.map(function (m) {
+    var statusLabel = m.status === 'done' ? '已完成' : (m.status === 'active' ? '进行中' : '待开始');
+    var tag = m.status === 'done' ? 'tag-pine' : (m.status === 'active' ? 'tag-amber' : '');
+    return '<div class="ms-row ' + m.status + '">' +
+      '<div class="ms-code"><span class="ms-dot">' + m.code + '</span></div>' +
+      '<div class="ms-body"><b>' + m.name + ' <span class="tag ' + tag + '">' + statusLabel + '</span></b>' +
+      '<p>' + m.desc + ' · 计划 ' + m.due + '</p></div>' +
+      '<div class="ms-money"><b>' + RTW.money(m.money) + '</b><small>' + m.amount + '% · ' + m.due + '</small></div>' +
+    '</div>';
+  }).join('');
+
+  /* 认领卡 */
+  RTW.qs('#claimPrice').textContent = RTW.money(task.budget);
+  RTW.qs('#claimLine').textContent = task.line === 'A' ? 'A 线 · ' + task.teamSize + '组队' : 'B 线 · 个人独立承接';
+  RTW.qs('#claimCycle').textContent = task.cycle;
+  RTW.qs('#claimMode').textContent = task.line === 'A' ? '组队认领' : '个人认领';
+  RTW.qs('#claimSlots').textContent = task.claimed + ' / ' + task.slots + ' 席';
+  RTW.qs('#claimPublished').textContent = task.published;
+  RTW.qs('#claimStatus').textContent = full ? '已满员' : RTW.statusText(task.status);
+  RTW.qs('#claimStatus').className = 'status-pill ' + (full ? 'amber' : 'green');
+  RTW.qs('[data-bookmark]').setAttribute('data-bookmark', task.id);
+
+  /* 出题方卡 */
+  var orgHTML = '<div class="org-head">' +
+    '<span class="org-logo">' + task.orgShort + '</span>' +
+    '<div><b>' + task.org + '</b><small>' + task.orgType + ' · ' + task.region + '</small></div>' +
+    '<span class="status-pill green" style="margin-left:auto">已认证</span></div>' +
+    '<p style="font-size:10.5px;line-height:1.8;color:var(--muted)">已发布 ' + (2 + (task.line === 'A' ? 1 : 0)) + ' 道任务，完成 ' + (1 + (task.line === 'B' ? 1 : 0)) + ' 次验收。企业信用良好，历史对接响应及时。</p>' +
+    '<div class="org-stats"><div><b>92</b><span>企业信用</span></div><div><b>48h</b><span>平均响应</span></div><div><b>100%</b><span>验收完成</span></div></div>';
+  RTW.qs('#sideOrg').innerHTML = orgHTML;
+  RTW.qs('#orgDetail').innerHTML = orgHTML + '<p style="margin-top:12px;font-size:11px;line-height:1.8;color:var(--muted)">出题方已签署《任务发布与数据安全协议》，并指定每周可投入 1 小时的对接人。平台运营已完成真实性核验。</p>';
+
+  /* 相似任务 */
+  var similar = window.RTW_DATA.tasks.filter(function (t) {
+    return t.id !== task.id && (t.domain === task.domain || t.line === task.line);
+  }).slice(0, 3);
+  RTW.qs('#similarList').innerHTML = similar.map(function (t) {
+    return '<a class="similar-item" href="task.html?id=' + t.id + '"><div><b>' + t.title + '</b><small>' + RTW.lineShort(t.line) + ' · ' + RTW.money(t.budget) + ' · ' + t.cycle + '</small></div>' + RTW.icon('arrow-up-right') + '</a>';
+  }).join('');
+  RTW.applyLinkPolicy();
+
+  /* 标签页 */
+  RTW.qsa('[data-tab]').forEach(function (tab) {
+    tab.addEventListener('click', function () {
+      var key = tab.getAttribute('data-tab');
+      RTW.qsa('[data-tab]').forEach(function (t) {
+        var on = t === tab;
+        t.classList.toggle('is-active', on);
+        t.setAttribute('aria-selected', on ? 'true' : 'false');
+      });
+      RTW.qsa('[data-panel]').forEach(function (p) {
+        p.classList.toggle('is-active', p.getAttribute('data-panel') === key);
+      });
+    });
+  });
+
+  /* 收藏 / 分享 */
+  RTW.qs('#shareBtn').addEventListener('click', function () {
+    var url = window.location.href;
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(url).then(function () { RTW.toast('任务链接已复制', 'success'); });
+    } else {
+      RTW.toast('任务链接：' + url, 'info');
+    }
+  });
+
+  /* 答疑 */
+  RTW.qs('#qaForm').addEventListener('submit', function (e) {
+    e.preventDefault();
+    var input = RTW.qs('#qaInput');
+    var value = input.value.trim();
+    if (!value) { RTW.toast('请先输入问题', 'error'); return; }
+    var item = document.createElement('div');
+    item.className = 'qa-item';
+    item.innerHTML = '<div class="qa-q"><span class="q">Q</span>' + RTW.esc(value) + '</div>' +
+      '<div class="qa-a"><span class="a">A</span><span>已收到，等待出题方回复（演示环境不会真正发送）。</span></div>';
+    RTW.qs('#qaList').appendChild(item);
+    input.value = '';
+    RTW.toast('问题已提交，出题方将在 48 小时内答复', 'success');
+  });
+
+  /* 认领弹窗 */
+  var typeWrap = RTW.qs('#claimTypes');
+  if (task.line === 'A') {
+    typeWrap.innerHTML = '<label class="radio-card is-selected"><input type="radio" name="claimType" value="team" checked>' +
+      '<span><b>A 线 · 组队认领</b><small>4—6 人团队，需填写团队名称；一人同期仅可占一个 A 线团队席位。</small></span></label>' +
+      '<label class="radio-card"><input type="radio" name="claimType" value="solo">' +
+      '<span><b>个人预研 · 后续组队</b><small>先以个人身份表达意向，由运营协助匹配团队。</small></span></label>';
+  } else {
+    typeWrap.innerHTML = '<label class="radio-card is-selected"><input type="radio" name="claimType" value="solo" checked>' +
+      '<span><b>B 线 · 个人认领</b><small>1 人独立承接，作为毕业设计题目；一人同期仅可认领 1 个 B 线任务。</small></span></label>';
+    RTW.qs('#teamField').hidden = true;
+  }
+  RTW.qs('#claimModalSub').textContent = task.id + ' · ' + (task.line === 'A' ? 'A 线 · 组队' : 'B 线 · 个人') + ' · 导师确认后进入 M0';
+
+  RTW.qsa('#claimTypes input').forEach(function (radio) {
+    radio.addEventListener('change', function () {
+      RTW.qsa('#claimTypes .radio-card').forEach(function (c) { c.classList.remove('is-selected'); });
+      radio.closest('.radio-card').classList.add('is-selected');
+    });
+  });
+
+  var claimBtn = RTW.qs('#claimBtn');
+  if (already) {
+    claimBtn.textContent = '已提交认领 · 等待导师确认';
+    claimBtn.disabled = true;
+    RTW.qs('#claimStatus').textContent = '待确认';
+  }
+  claimBtn.addEventListener('click', function () {
+    if (already) return;
+    RTW.openModal('claimModal');
+  });
+
+  RTW.qs('#claimSubmit').addEventListener('click', function () {
+    var agree = RTW.qs('#claimAgree');
+    if (!agree.checked) {
+      RTW.toast('请先勾选确认，理解需求冻结与验收规则', 'error');
+      return;
+    }
+    var team = RTW.qs('#teamName').value.trim();
+    var type = (RTW.qs('#claimTypes input:checked') || {}).value;
+    if (type === 'team' && !team) {
+      RTW.toast('组队认领请填写团队名称', 'error');
+      RTW.qs('#teamName').focus();
+      return;
+    }
+    var btn = RTW.qs('#claimSubmit');
+    btn.disabled = true;
+    btn.textContent = '提交中…';
+    setTimeout(function () {
+      var list = RTW.read('rtw.claims', []);
+      if (list.indexOf(task.id) === -1) list.push(task.id);
+      RTW.write('rtw.claims', list);
+      RTW.closeModal('claimModal');
+      RTW.toast('认领已提交，导师将在 48 小时内确认', 'success');
+      claimBtn.textContent = '已提交认领 · 等待导师确认';
+      claimBtn.disabled = true;
+      RTW.qs('#claimStatus').textContent = '待确认';
+      already = true;
+    }, 700);
+  });
+})();
+</script>
+</body>
+</html>
