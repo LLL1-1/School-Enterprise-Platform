@@ -3,7 +3,7 @@ const http = require('http');
 const fs = require('fs');
 const path = require('path');
 
-const root = __dirname;
+const root = path.join(__dirname, '..', 'public');
 const port = Number(process.env.PORT || 5173);
 const types = {
   '.html': 'text/html; charset=utf-8',
@@ -40,5 +40,5 @@ http.createServer((req, res) => {
     res.end(data);
   });
 }).listen(port, '127.0.0.1', () => {
-  console.log('真题工场预览：http://127.0.0.1:' + port);
+  console.log('真题工场前端预览：http://127.0.0.1:' + port);
 });

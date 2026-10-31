@@ -5,18 +5,31 @@
 
 纯静态前端原型，用于向导师演示平台定位、核心流程与支付收款功能。
 所有数据均为模拟数据，不会产生真实账号、交易或资金流转。
+前端统一放在 `public/`，后续后端将放在 `server/`，共用同一个仓库。
 
 ## 启动预览
 
 在项目根目录执行：
 
 ```powershell
-node server.js
+node scripts/serve-static.js
 ```
 
 浏览器打开：<http://127.0.0.1:5173>
 
-也可以直接双击 `index.html` 打开，但建议使用本地服务器，避免部分浏览器对本地文件限制。
+也可以直接双击 `public/index.html` 打开，但建议使用本地服务器，避免部分浏览器对本地文件限制。
+
+## 目录结构
+
+```text
+public/                 前端（Web 根目录）
+  index.html
+  assets/
+scripts/
+  serve-static.js       仅本地预览用的静态服务器
+server/                 预留：后续后端
+docs/internal/          内部资料（不提交）
+```
 
 ## 演示账号
 
@@ -49,6 +62,8 @@ node server.js
 
 ## 页面清单
 
+页面均位于 `public/`：
+
 - `index.html` 首页（三方关系图 + 四个入口）
 - `login.html` 登录
 - `register.html` 注册（三步向导）
@@ -60,10 +75,9 @@ node server.js
 - `payment.html` 资金中心（收银台、账单、结算、发票）
 - `admin.html` 运营后台
 
-## 当前边界
+## 后续后端
 
-- 登录、注册、认领、支付、发票、审核均在前端模拟；账号状态保存在浏览器 localStorage。
-- 审核页使用匿名演示数据，不包含真实学生身份；权限守卫仅用于演示，不代表后端安全。
-- 支付二维码、银行卡号、审核结果与数据看板均为演示数据。
-- 未接入后端、数据库、短信、文件存储与真实支付渠道。
+- 后端代码放在 `server/`，通过 `/api` 提供接口，并托管 `public/` 静态文件。
+- 前端将新增统一的 API 客户端，逐步替换 [data.js](public/assets/js/data.js) 和 localStorage 模拟数据。
 - 正式版需要补充：统一身份认证、RBAC 权限、任务与里程碑数据库、支付机构分账接口、文件上传与审计日志。
+- 当前前端权限守卫 [guard.js](public/assets/js/guard.js) 仅用于演示，真实权限必须由后端校验。

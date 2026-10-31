@@ -14,6 +14,16 @@ node_modules/
 .env.*
 !.env.example
 
+# 后续后端本地数据与上传
+server/uploads/
+server/data/
+uploads/
+data/
+*.sqlite
+*.sqlite3
+*.db
+coverage/
+
 # 系统与编辑器缓存
 *.log
 .DS_Store
